@@ -2,9 +2,9 @@
 
 # ASUS Ascent GX10 Benchmark Suite
 
-### 8 AI Benchmarks on the NVIDIA Grace Blackwell Superchip
+### 9 AI Benchmarks on the NVIDIA Grace Blackwell Superchip
 
-**Inference** · **Training** · **Efficiency** · **Image Generation** · **Video Generation** · **Voice**
+**Inference** · **Training** · **Efficiency** · **Image Generation** · **Video Generation** · **Voice** · **Coding**
 
 ---
 
@@ -55,6 +55,7 @@ NVIDIA GX10 Desktop AI Supercomputer
 | 06 | **Embedding Throughput** | 3,597 chunks/s GPU · 36x faster than CPU | [Details](#06--inference-embedding-throughput) |
 | 07 | **Image & Video Gen** | 8.7 images/min · video at 0.56 fps | [Details](#07--image--video-generation) |
 | 08 | **Voice STT & TTS** | TTS: 2,017 chars/s · STT: 1.6x realtime | [Details](#08--voice-stt--tts) |
+| 09 | **Coding LLM Webpage** | Qwen3-Coder 71 tok/s · full webpage in 62s | [Details](#09--coding-llm-webpage-generation) |
 
 ---
 
@@ -356,6 +357,49 @@ faster-whisper with CTranslate2 on CPU (int8). Malay language, beam size 5.
 
 ---
 
+## 09 — Coding LLM: Webpage Generation
+
+> Can a local coding LLM generate a complete, working interactive webpage? Three top coding models, one prompt, three runs each. **Qwen3-Coder produces a full 3D solar system in 62 seconds.**
+
+The prompt asks each model to build an interactive 3D solar system visualization — pure HTML/CSS/JS, no libraries — with orbiting planets, click-to-inspect info cards, speed controls, view toggles, and a starfield background.
+
+| Model | Params | VRAM | tok/s | Gen Time | Output |
+|-------|-------:|-----:|------:|---------:|-------:|
+| **Qwen3-Coder** | 30B | 18 GB | **71.1** | **62s** | 18.2 KB |
+| DeepCoder | 14B | 9 GB | 22.4 | 129s | 8.8 KB |
+| Devstral | 24B | 14 GB | 14.0 | 213s | 10.4 KB |
+
+**Key findings:**
+- Qwen3-Coder is **5x faster** than Devstral and generates the richest output (550+ lines, most features implemented)
+- All 9 runs (3 models x 3 each) produced valid, runnable HTML
+- Warm time-to-first-token under 250ms for all models
+- Even the largest model (30B, 18 GB) leaves **110 GB of headroom** in the GX10's unified memory
+
+<details>
+<summary>All runs (raw data)</summary>
+
+| Model | Run | tok/s | Gen Time | Tokens | HTML Size |
+|-------|----:|------:|---------:|-------:|----------:|
+| Qwen3-Coder:30B | 1 | 71.1 | 61.3s | 4,360 | 18,208 B |
+| Qwen3-Coder:30B | 2 | 72.4 | 46.8s | 3,393 | 13,359 B |
+| Qwen3-Coder:30B | 3 | 70.7 | 62.9s | 4,448 | 18,977 B |
+| Devstral:24B | 1 | 14.0 | 212.6s | 2,978 | 11,776 B |
+| Devstral:24B | 2 | 14.0 | 214.0s | 2,998 | 9,442 B |
+| Devstral:24B | 3 | 14.0 | 211.3s | 2,965 | 10,372 B |
+| DeepCoder:14B | 1 | 22.4 | 134.9s | 3,022 | 9,392 B |
+| DeepCoder:14B | 2 | 22.5 | 122.4s | 2,751 | 8,817 B |
+| DeepCoder:14B | 3 | 22.4 | 129.4s | 2,903 | 8,133 B |
+
+</details>
+
+<details>
+<summary>Interactive HTML report</summary>
+
+Download and open [`09-coding-llm-webpage/index.html`](09-coding-llm-webpage/index.html) for the full interactive report with charts and live previews of each model's generated webpage.
+</details>
+
+---
+
 ## Repository Structure
 
 ```
@@ -367,7 +411,8 @@ gx10-benchmarks/
 ├── 05-efficiency-token-per-watt/      Power monitoring · cost analysis
 ├── 06-inference-embedding/            CPU vs GPU · batch size sweep
 ├── 07-image-video-generation/         Z-Image-Turbo · Wan 2.2 T2V · samples
-└── 08-voice-stt-tts/                  Whisper STT · MMS-TTS · audio samples
+├── 08-voice-stt-tts/                  Whisper STT · MMS-TTS · audio samples
+└── 09-coding-llm-webpage/            3 coding LLMs · webpage generation · live outputs
 ```
 
 Each benchmark includes:

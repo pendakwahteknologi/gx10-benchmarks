@@ -1,0 +1,23 @@
+{
+    "model": "deepcoder:14b",
+    "run": 2,
+    "timestamp": "2026-04-13T15:26:52+08:00",
+    "metrics": {
+        "total_duration_sec": 123.73,
+        "model_load_sec": .10,
+        "prompt_eval_sec": .048,
+        "generation_sec": 122.38,
+        "ttft_sec": .157,
+        "tokens_generated": 2751,
+        "tokens_per_sec": 22.47,
+        "prompt_tokens": 367
+    },
+    "output": {
+        "html_size_bytes": 8817,
+        "html_lines": 253,
+        "has_doctype": 1,
+        "has_closing_html": 1,
+        "has_canvas": 0,
+        "has_script": 1
+    }
+}

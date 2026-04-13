@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmark 09: Coding LLM Webpage Generation | NVIDIA GX10</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0c0e14;
+    --surface: #141822;
+    --surface2: #1a1f2e;
+    --border: #252b3d;
+    --text: #e0e4ef;
+    --text-dim: #8890a6;
+    --accent: #6c8cff;
+    --accent2: #4ee1a0;
+    --accent3: #f7c948;
+    --qwen: #6c8cff;
+    --devstral: #f06292;
+    --deepcoder: #4ee1a0;
+  }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: 80px 0 60px;
+    text-align: center;
+    background: linear-gradient(180deg, #10132000, var(--bg)),
+                radial-gradient(ellipse at 50% 0%, #6c8cff18 0%, transparent 70%);
+  }
+  .hero-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 40%, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* Section */
+  section { padding: 60px 0; }
+  .section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .section-sub {
+    color: var(--text-dim);
+    margin-bottom: 32px;
+    font-size: 0.95rem;
+  }
+
+  /* Device specs bar */
+  .device-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 32px;
+  }
+  .device-chip {
+    padding: 8px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+  .device-chip strong { color: var(--text); }
+
+  /* Charts grid */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .chart-card h3 {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .chart-card canvas { width: 100% !important; }
+
+  /* Results table */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  thead { background: var(--surface2); }
+  th, td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  th { font-weight: 600; color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  td { font-variant-numeric: tabular-nums; }
+  tr:last-child td { border-bottom: none; }
+  .model-name { font-weight: 600; }
+  .model-qwen { color: var(--qwen); }
+  .model-devstral { color: var(--devstral); }
+  .model-deepcoder { color: var(--deepcoder); }
+  .winner { position: relative; }
+  .winner::after {
+    content: 'BEST';
+    font-size: 0.6rem;
+    font-weight: 700;
+    background: var(--accent2);
+    color: #0c0e14;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* Iframe showcase */
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 20px;
+  }
+  .showcase-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .showcase-header {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .showcase-header h3 { font-size: 1rem; font-weight: 600; }
+  .showcase-header .meta { font-size: 0.8rem; color: var(--text-dim); }
+  .showcase-card iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+    background: #000;
+  }
+  .showcase-actions {
+    padding: 10px 20px;
+    border-top: 1px solid var(--border);
+    text-align: right;
+  }
+  .showcase-actions a {
+    font-size: 0.82rem;
+    color: var(--accent);
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+  .showcase-actions a:hover {
+    background: var(--surface2);
+    text-decoration: none;
+  }
+
+  /* Takeaways */
+  .takeaways {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .takeaway-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .takeaway-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .takeaway-card p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* Prompt box */
+  .prompt-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .prompt-header {
+    padding: 14px 20px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .prompt-header span { font-weight: 600; font-size: 0.9rem; }
+  .prompt-header .file { font-size: 0.8rem; color: var(--text-dim); }
+  .prompt-body {
+    padding: 20px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.82rem;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    color: var(--text-dim);
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  /* Methodology */
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .method-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .method-item .label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .method-item .value {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+  footer strong { color: var(--text); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 600px) {
+    .showcase-grid { grid-template-columns: 1fr; }
+    .charts-grid { grid-template-columns: 1fr; }
+    th, td { padding: 10px 12px; font-size: 0.82rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-badge">Benchmark 09</div>
+    <h1>Coding LLM Webpage Generation</h1>
+    <p>Three local coding models generate a complex interactive 3D solar system from the same prompt. Measured on the NVIDIA GX10 (Grace Blackwell GB10) via Ollama.</p>
+    <div class="device-bar">
+      <div class="device-chip"><strong>NVIDIA GX10</strong> &mdash; Grace Blackwell</div>
+      <div class="device-chip"><strong>GB10 GPU</strong> &mdash; SM 12.1</div>
+      <div class="device-chip"><strong>122 GB</strong> Unified Memory</div>
+      <div class="device-chip"><strong>CUDA 13.0</strong> &mdash; Driver 580</div>
+      <div class="device-chip"><strong>Ollama</strong> Runtime</div>
+    </div>
+  </div>
+</header>
+
+<!-- Performance Charts -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Performance Comparison</h2>
+    <p class="section-sub">Median of 3 runs per model. Higher tok/s is better; lower generation time is better.</p>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>Generation Speed (tok/s) &uarr;</h3>
+        <canvas id="chartSpeed"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Generation Time (seconds) &darr;</h3>
+        <canvas id="chartTime"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Tokens Generated</h3>
+        <canvas id="chartTokens"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Output Size (KB)</h3>
+        <canvas id="chartSize"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Results Table -->
+<section style="padding-top:0">
+  <div class="container">
+    <h2 class="section-title">Full Results</h2>
+    <p class="section-sub">All metrics from the median run of each model.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Params</th>
+            <th>VRAM</th>
+            <th>Quant</th>
+            <th>Speed (tok/s)</th>
+            <th>Gen Time</th>
+            <th>Tokens</th>
+            <th>Output</th>
+            <th>TTFT (cold)</th>
+            <th>TTFT (warm)</th>
+            <th>Valid HTML</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="model-name model-qwen">Qwen3-Coder</td>
+            <td>30B</td>
+            <td>18 GB</td>
+            <td>Q4_K_M</td>
+            <td class="winner">71.08</td>
+            <td class="winner">61.33s</td>
+            <td class="winner">4,360</td>
+            <td class="winner">~18 KB / 550+ lines</td>
+            <td>4.3s</td>
+            <td>0.085s</td>
+            <td>3/3</td>
+          </tr>
+          <tr>
+            <td class="model-name model-deepcoder">DeepCoder</td>
+            <td>14B</td>
+            <td>9 GB</td>
+            <td>Q4_K_M</td>
+            <td>22.43</td>
+            <td>129.39s</td>
+            <td>2,903</td>
+            <td>~8.8 KB / 257 lines</td>
+            <td>6.6s</td>
+            <td>0.15s</td>
+            <td>3/3</td>
+          </tr>
+          <tr>
+            <td class="model-name model-devstral">Devstral</td>
+            <td>24B</td>
+            <td>14 GB</td>
+            <td>Q4_K_M</td>
+            <td>14.01</td>
+            <td>212.64s</td>
+            <td>2,978</td>
+            <td>~10 KB / 300 lines</td>
+            <td>10.9s</td>
+            <td>0.2s</td>
+            <td>3/3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Live Output Showcase -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Live Output Showcase</h2>
+    <p class="section-sub">Best run from each model, rendered live. Each model received the exact same prompt asking for an interactive 3D solar system.</p>
+    <div class="showcase-grid">
+      <div class="showcase-card">
+        <div class="showcase-header">
+          <h3 class="model-qwen">Qwen3-Coder:30B</h3>
+          <span class="meta">Run 3 &middot; 18 KB</span>
+        </div>
+        <iframe src="outputs/qwen3-coder_30b_run3.html" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Qwen3-Coder output"></iframe>
+        <div class="showcase-actions">
+          <a href="outputs/qwen3-coder_30b_run3.html" target="_blank">Open full page &#8599;</a>
+        </div>
+      </div>
+      <div class="showcase-card">
+        <div class="showcase-header">
+          <h3 class="model-devstral">Devstral:24B</h3>
+          <span class="meta">Run 1 &middot; 10 KB</span>
+        </div>
+        <iframe src="outputs/devstral_24b_run1.html" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Devstral output"></iframe>
+        <div class="showcase-actions">
+          <a href="outputs/devstral_24b_run1.html" target="_blank">Open full page &#8599;</a>
+        </div>
+      </div>
+      <div class="showcase-card">
+        <div class="showcase-header">
+          <h3 class="model-deepcoder">DeepCoder:14B</h3>
+          <span class="meta">Run 1 &middot; 8.8 KB</span>
+        </div>
+        <iframe src="outputs/deepcoder_14b_run1.html" loading="lazy" sandbox="allow-scripts allow-same-origin" title="DeepCoder output"></iframe>
+        <div class="showcase-actions">
+          <a href="outputs/deepcoder_14b_run1.html" target="_blank">Open full page &#8599;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Key Takeaways -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Key Takeaways</h2>
+    <p class="section-sub">What matters for on-device coding generation with the GX10.</p>
+    <div class="takeaways">
+      <div class="takeaway-card">
+        <h3 style="color:var(--qwen)">Qwen3-Coder dominates at 71 tok/s</h3>
+        <p>At 30B parameters, Qwen3-Coder is over 5x faster than Devstral and 3x faster than DeepCoder on the GB10 GPU. It also produces the richest output at 550+ lines and ~18 KB, completing the task in just over a minute.</p>
+      </div>
+      <div class="takeaway-card">
+        <h3 style="color:var(--deepcoder)">DeepCoder is the efficiency pick</h3>
+        <p>At 14B / 9 GB VRAM, DeepCoder uses the least memory while still delivering valid, working outputs. It achieves a solid 22 tok/s, making it a strong choice when running alongside other models or services.</p>
+      </div>
+      <div class="takeaway-card">
+        <h3 style="color:var(--devstral)">Devstral trades speed for canvas-based output</h3>
+        <p>Devstral's 14 tok/s is the slowest of the three, but 2 of its 3 runs produced canvas-based rendering (as opposed to pure CSS/HTML), showing a different approach to the same problem. The tradeoff is a 3.5-minute generation time.</p>
+      </div>
+      <div class="takeaway-card">
+        <h3>All three produce valid, working code</h3>
+        <p>Every run from every model produced structurally valid HTML with proper DOCTYPE and closing tags. All outputs are interactive and renderable in a browser, demonstrating that local coding LLMs on the GX10 are production-viable for single-file tasks.</p>
+      </div>
+      <div class="takeaway-card">
+        <h3>Warm TTFT under 200ms across the board</h3>
+        <p>Once loaded, all three models begin generating in under 200 milliseconds. Cold start ranges from 4.3s (Qwen3-Coder) to 10.9s (Devstral), reflecting model size and Ollama load time.</p>
+      </div>
+      <div class="takeaway-card">
+        <h3>122 GB unified memory = room for all three</h3>
+        <p>The combined VRAM footprint of all three models is 41 GB, well within the GX10's 122 GB unified memory. You could run all three simultaneously with plenty of headroom for embeddings, rerankers, and other services.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Prompt Used -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Prompt Used</h2>
+    <p class="section-sub">The exact same prompt was sent to all three models with no system prompt.</p>
+    <div class="prompt-box">
+      <div class="prompt-header">
+        <span>Benchmark Prompt</span>
+        <span class="file">prompt.txt</span>
+      </div>
+      <div class="prompt-body">Build a single HTML file (no external dependencies) that creates an interactive 3D solar system visualization. Requirements:
+
+1. SOLAR SYSTEM: Sun at center with at least 8 planets orbiting at different speeds and distances. Each planet should have accurate relative sizes and colors (Mercury gray, Venus yellow, Earth blue-green, Mars red, Jupiter orange-striped, Saturn with rings, Uranus cyan, Neptune blue).
+
+2. 3D EFFECT: Use CSS 3D transforms or canvas to create a perspective view of the orbital plane. The system should look three-dimensional, not flat.
+
+3. ANIMATIONS: Planets must orbit the sun continuously with smooth animation. Inner planets faster, outer planets slower. Include a subtle rotation on the sun (glowing effect).
+
+4. INTERACTIVITY:
+   - Click any planet to show an info card with the planet name, distance from sun, orbital period, and a fun fact
+   - Hover over planets to highlight them and show the name
+   - Add a speed control slider (0.5x to 5x)
+   - Add a pause/play button
+   - Add a toggle between top-down view and perspective view
+
+5. VISUAL POLISH:
+   - Dark space background with twinkling stars (animated)
+   - Orbital path lines (subtle, dashed)
+   - Glow effect on the sun
+   - Smooth transitions on all interactions
+   - Planet shadows/lighting effect
+
+6. RESPONSIVE: Must work on both desktop and mobile screens.
+
+7. UI PANEL: A sleek side panel showing all planets as a list, clicking any name should highlight that planet and show its info.
+
+Output ONLY the complete HTML file content, starting with &lt;!DOCTYPE html&gt; and ending with &lt;/html&gt;. No explanations before or after.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Methodology -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Methodology</h2>
+    <p class="section-sub">How the benchmark was conducted.</p>
+    <div class="method-grid">
+      <div class="method-item">
+        <div class="label">Runs per model</div>
+        <div class="value">3 runs</div>
+      </div>
+      <div class="method-item">
+        <div class="label">Reported metric</div>
+        <div class="value">Median of 3</div>
+      </div>
+      <div class="method-item">
+        <div class="label">Temperature</div>
+        <div class="value">0.7</div>
+      </div>
+      <div class="method-item">
+        <div class="label">Context length</div>
+        <div class="value">16,384 tokens</div>
+      </div>
+      <div class="method-item">
+        <div class="label">Model loading</div>
+        <div class="value">Pre-loaded before timing</div>
+      </div>
+      <div class="method-item">
+        <div class="label">Runtime</div>
+        <div class="value">Ollama (Q4_K_M)</div>
+      </div>
+      <div class="method-item">
+        <div class="label">System prompt</div>
+        <div class="value">None</div>
+      </div>
+      <div class="method-item">
+        <div class="label">Validation</div>
+        <div class="value">DOCTYPE + closing tag check</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p><strong>Benchmark 09: Coding LLM Webpage Generation</strong></p>
+    <p style="margin-top:6px">April 13, 2026 &middot; <strong>Pendakwah Teknologi</strong> &middot; <a href="https://gx10.pendakwah.tech">gx10.pendakwah.tech</a></p>
+  </div>
+</footer>
+
+<script>
+const models = ['Qwen3-Coder:30B', 'DeepCoder:14B', 'Devstral:24B'];
+const colors = ['#6c8cff', '#4ee1a0', '#f06292'];
+const colorsAlpha = ['#6c8cff44', '#4ee1a044', '#f0629244'];
+
+const defaults = {
+  responsive: true,
+  maintainAspectRatio: true,
+  plugins: {
+    legend: { display: false },
+    tooltip: {
+      backgroundColor: '#1a1f2e',
+      borderColor: '#252b3d',
+      borderWidth: 1,
+      titleColor: '#e0e4ef',
+      bodyColor: '#8890a6',
+      padding: 10,
+      cornerRadius: 8
+    }
+  },
+  scales: {
+    x: {
+      ticks: { color: '#8890a6', font: { size: 11 } },
+      grid: { display: false },
+      border: { display: false }
+    },
+    y: {
+      ticks: { color: '#8890a6', font: { size: 11 } },
+      grid: { color: '#252b3d22' },
+      border: { display: false }
+    }
+  }
+};
+
+function makeChart(id, data, label, unit) {
+  new Chart(document.getElementById(id), {
+    type: 'bar',
+    data: {
+      labels: models,
+      datasets: [{
+        data: data,
+        backgroundColor: colors,
+        borderColor: colors,
+        borderWidth: 1,
+        borderRadius: 6,
+        barPercentage: 0.6
+      }]
+    },
+    options: {
+      ...defaults,
+      plugins: {
+        ...defaults.plugins,
+        tooltip: {
+          ...defaults.plugins.tooltip,
+          callbacks: {
+            label: ctx => `${ctx.parsed.y} ${unit}`
+          }
+        }
+      }
+    }
+  });
+}
+
+makeChart('chartSpeed', [71.08, 22.43, 14.01], 'Speed', 'tok/s');
+makeChart('chartTime', [61.33, 129.39, 212.64], 'Time', 's');
+makeChart('chartTokens', [4360, 2903, 2978], 'Tokens', 'tokens');
+makeChart('chartSize', [18, 8.8, 10], 'Size', 'KB');
+</script>
+</body>
+</html>

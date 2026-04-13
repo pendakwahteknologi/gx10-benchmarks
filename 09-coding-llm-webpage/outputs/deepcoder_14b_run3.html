@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Solar System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #0b0b2c;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .solar-system-container {
+            width: 100vw;
+            height: 100vh;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sun {
+            width: 60px;
+            height: 60px;
+            background-color: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 50px #ff4500, inset 0 0 10px rgba(255, 215, 0, 0.5);
+            animation: sun-glow 2s ease-in-out infinite;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            transform-style: preserve-3d;
+        }
+
+        .orbit {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform-origin: 50% 50%;
+        }
+
+        .info-card {
+            position: fixed;
+            top: 20px;
+            right: -300px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: right 0.3s ease-in-out;
+            z-index: 100;
+        }
+
+        .info-card.active {
+            right: 20px;
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .speed-slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .toggle-view button {
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            padding: 5px 10px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: star-tinkle 2s infinite;
+        }
+
+        @keyframes sun-glow {
+            0%, 100% { box-shadow: 0 0 50px #ff4500; }
+            50% { box-shadow: 0 0 70px #ff6b00; }
+        }
+
+        @keyframes star-tinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .side-panel {
+            position: fixed;
+            right: -300px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px 0 0 10px;
+            transition: right 0.3s ease-in-out;
+        }
+
+        .planet-list {
+            list-style-type: none;
+            margin: 0;
+        }
+
+        .planet-item {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .planet-item:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="stars">
+        <!-- Twinkling stars -->
+        <div class="star" style="top: 10%; left: 10%"></div>
+        <div class="star" style="top: 20%; left: 85%"></div>
+        <div class="star" style="top: 65%; left: 30%"></div>
+        <!-- Add more stars if needed -->
+    </div>
+
+    <div class="controls">
+        <button id="playPause">▶</button>
+        <input type="range" id="speedCtrl" min="0.5" max="5" value="1" class="speed-slider">
+        <button id="toggleView">3D View</button>
+    </div>
+
+    <div class="side-panel" id="sidePanel">
+        <h2>Planets</h2>
+        <ul class="planet-list" id="planetList"></ul>
+    </div>
+
+    <div class="solar-system-container" id="solarSystem">
+        <div class="sun"></div>
+        <!-- Orbital paths -->
+        <div class="orbit" style="transform: scale(1.2)"></div>
+        <!-- Planets will be added here via JavaScript -->
+    </div>
+
+    <div class="info-card" id="infoCard">
+        <h3 id="planetName">-</h3>
+        <p>Distance: <span id="planetDistance">-</span></p>
+        <p>Orbital Period: <span id="planetPeriod">-</span></p>
+        <p><strong>Fun Fact:</strong> <span id="funFact">-</span></p>
+    </div>
+
+    <script>
+        const planets = [
+            { name: 'Mercury', color: '#A0522D', size: 10, distance: 70, period: 88 },
+            { name: 'Venus', color: '#FFB933', size: 15, distance: 100, period: 225 },
+            { name: 'Earth', color: '#4169E1', size: 16, distance: 140, period: 365 },
+            { name: 'Mars', color: '#CD5C5C', size: 12, distance: 180, period: 687 },
+            { name: 'Jupiter', color: '#DAA520', size: 30, distance: 230, period: 4333 },
+            { name: 'Saturn', color: '#F4A460', size: 25, distance: 310, period: 10759 },
+            { name: 'Uranus', color: '#87CEEB', size: 20, distance: 360, period: 30687 },
+            { name: 'Neptune', color: '#4682B4', size: 19, distance: 400, period: 60190 }
+        ];
+
+        const solarSystem = document.getElementById('solarSystem');
+        const planetList = document.getElementById('planetList');
+
+        planets.forEach(planet => {
+            // Create orbital paths
+            const orbit = document.createElement('div');
+            orbit.className = 'orbit';
+            orbit.style.transform = `scale(${planet.distance / 10})`;
+            solarSystem.appendChild(orbit);
+
+            // Create planet
+            const planetDiv = document.createElement('div');
+            planetDiv.className = 'planet';
+            planetDiv.style.width = `${planet.size}px`;
+            planetDiv.style.height = `${planet.size}px`;
+            planetDiv.style.backgroundColor = planet.color;
+            planetDiv.style.left = `${planet.distance - planet.size / 2}px`;
+            planetDiv.style.top = '50%';
+            planetDiv.style.transform = `translateY(-50%) rotate(${Math.random() * 360}deg)`;
+            planetDiv.style.animation = `orbit ${planet.period * 1.5}s linear infinite`;
+            solarSystem.appendChild(planetDiv);
+
+            // Add to side panel
+            const li = document.createElement('li');
+            li.className = 'planet-item';
+            li.textContent = planet.name;
+            li.addEventListener('click', () => selectPlanet(planet));
+            planetList.appendChild(li);
+        });
+
+        // Add animations
+        const styleSheet = document.styleSheets[document.styleSheets.length - 1];
+        planets.forEach((planet, index) => {
+            styleSheet.insertRule(`
+                @keyframes orbit${index} {
+                    to { transform: rotate(360deg); }
+                }
+                .planet:nth-child(${index + 2}) {
+                    animation: orbit${index} ${planets[index].period * 1.5}s linear infinite;
+                }
+            `, styleSheet.cssRules.length);
+        });
+
+        // Initialize interactive features
+        solarSystem.addEventListener('click', (e) => {
+            if (e.target.closest('.planet')) {
+                selectPlanet(e.target.closest('.planet'));
+            }
+        });
+
+        function selectPlanet(planetDiv) {
+            // Add logic to show info card and highlight planet
+        }
+
+        // Speed control and other interactive features go here
+    </script>
+</body>
+</html>

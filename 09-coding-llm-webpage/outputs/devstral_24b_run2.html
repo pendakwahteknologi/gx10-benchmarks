@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive 3D Solar System Visualization</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+    overflow: hidden;
+  }
+  canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+  #ui-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  #ui-panel h2 {
+    margin-top: 0;
+  }
+  .planet-name {
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  .planet-name:hover {
+    color: yellow;
+  }
+  #info-card {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    border-radius: 5px;
+    display: none;
+  }
+  #controls {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<div id="ui-panel">
+  <h2>Solar System</h2>
+  <ul>
+    <li class="planet-name" data-index="1">Mercury</li>
+    <li class="planet-name" data-index="2">Venus</li>
+    <li class="planet-name" data-index="3">Earth</li>
+    <li class="planet-name" data-index="4">Mars</li>
+    <li class="planet-name" data-index="5">Jupiter</li>
+    <li class="planet-name" data-index="6">Saturn</li>
+    <li class="planet-name" data-index="7">Uranus</li>
+    <li class="planet-name" data-index="8">Neptune</li>
+  </ul>
+</div>
+
+<div id="controls">
+  <button id="toggle-play-pause">Play</button>
+  <label for="speed-control">Speed: </label>
+  <input type="range" id="speed-control" min="0.5" max="5" step="0.1" value="1">
+  <button id="toggle-view">Perspective View</button>
+</div>
+
+<div id="info-card"></div>
+
+<canvas id="solarSystemCanvas"></canvas>
+
+<script>
+// Solar System Visualization
+const canvas = document.getElementById('solarSystemCanvas');
+const ctx = canvas.getContext('2d');
+const uiPanel = document.getElementById('ui-panel');
+const infoCard = document.getElementById('info-card');
+const togglePlayPauseButton = document.getElementById('toggle-play-pause');
+const speedControl = document.getElementById('speed-control');
+const toggleViewButton = document.getElementById('toggle-view');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const planetsData = [
+  {name: "Mercury", color: "#DADADA", size: 0.38, distance: 57.9, orbitalPeriod: 88, funFact: "Smallest planet in the solar system."},
+  {name: "Venus", color: "#F5DEB3", size: 0.949, distance: 108.2, orbitalPeriod: 225, funFact: "Hottest planet in our solar system."},
+  {name: "Earth", color: "#66CCFF", size: 1, distance: 149.6, orbitalPeriod: 365, funFact: "Only known planet to support life."},
+  {name: "Mars", color: "#FF8C00", size: 0.532, distance: 227.9, orbitalPeriod: 687, funFact: "Known as the Red Planet due to its rusty appearance."},
+  {name: "Jupiter", color: "#FFA500", size: 11.209, distance: 778.3, orbitalPeriod: 4333, funFact: "Largest planet in our solar system."},
+  {name: "Saturn", color: "#FFD700", size: 9.45, distance: 1427, orbitalPeriod: 10759, funFact: "Known for its stunning ring system."},
+  {name: "Uranus", color: "#66CCFF", size: 4.01, distance: 2871, orbitalPeriod: 30685, funFact: "Rotates on its side with an axial tilt of 98 degrees."},
+  {name: "Neptune", color: "#0000FF", size: 3.88, distance: 4497, orbitalPeriod: 60190, funFact: "Strongest winds in the solar system."}
+];
+
+let angle = 0;
+let isPaused = false;
+let speed = parseFloat(speedControl.value);
+let perspectiveView = true;
+
+const drawStarField = () => {
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < 200; i++) {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height;
+    const size = Math.random() * 3 + 1;
+    ctx.fillStyle = `rgba(255, 255, 255, ${Math.random()})`;
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+};
+
+const drawSun = () => {
+  const sunSize = 30;
+  const gradient = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, sunSize * 5);
+  gradient.addColorStop(0, 'rgba(255, 165, 0, 1)');
+  gradient.addColorStop(1, 'rgba(255, 69, 0, 0.4)');
+
+  ctx.save();
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  ctx.beginPath();
+  ctx.arc(0, 0, sunSize, 0, Math.PI * 2);
+  ctx.fillStyle = gradient;
+  ctx.fill();
+  ctx.restore();
+
+  // Rotate the Sun
+  angle += 0.01;
+};
+
+const drawPlanet = (planet, index) => {
+  const { name, color, size, distance } = planet;
+
+  let orbitDistance = distance * 2; // Scale factor for visualization
+
+  if (perspectiveView) {
+    ctx.save();
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.rotate(angle * ((index + 1) ** 0.5));
+    ctx.translate(orbitDistance, 0);
+
+    const planetSize = size * 8; // Scale factor for visualization
+
+    // Draw orbit path
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(0, 0, orbitDistance, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Draw planet
+    ctx.beginPath();
+    ctx.arc(0, 0, planetSize, 0, Math.PI * 2);
+
+    if (name === "Saturn" && index === 5) {
+      // Draw Saturn's rings
+      ctx.save();
+      ctx.translate(0, -planetSize / 3);
+      ctx.beginPath();
+      ctx.ellipse(0, 0, planetSize * 1.6, planetSize * 0.4, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 215, 0, 0.8)';
+      ctx.fill();
+      ctx.restore();
+    }
+
+    ctx.fillStyle = color;
+    ctx.fill();
+
+    if (index === highlightedPlanetIndex && !isPaused) {
+      ctx.strokeStyle = 'yellow';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+
+    ctx.restore();
+  } else { // Top-down view
+    ctx.save();
+    ctx.translate(canvas.width / 2 + orbitDistance * Math.cos(angle), canvas.height / 2 + orbitDistance * Math.sin(angle));
+
+    const planetSize = size * 8; // Scale factor for visualization
+
+    // Draw planet
+    ctx.beginPath();
+    ctx.arc(0, 0, planetSize, 0, Math.PI * 2);
+
+    if (name === "Saturn" && index === 5) {
+      // Draw Saturn's rings
+      ctx.save();
+      ctx.translate(0, -planetSize / 3);
+      ctx.beginPath();
+      ctx.ellipse(0, 0, planetSize * 1.6, planetSize * 0.4, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 215, 0, 0.8)';
+      ctx.fill();
+      ctx.restore();
+    }
+
+    ctx.fillStyle = color;
+    ctx.fill();
+
+    if (index === highlightedPlanetIndex && !isPaused) {
+      ctx.strokeStyle = 'yellow';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+
+    ctx.restore();
+  }
+};
+
+let highlightedPlanetIndex = null;
+
+uiPanel.querySelectorAll('.planet-name').forEach(planetElement => {
+  planetElement.addEventListener('click', () => {
+    const index = parseInt(planetElement.getAttribute('data-index'), 10) - 1;
+    showInfoCard(planetsData[index]);
+    highlightPlanet(index);
+  });
+});
+
+canvas.addEventListener('click', (event) => {
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  for (let i = planetsData.length - 1; i >= 0; i--) {
+    const planet = planetsData[i];
+    const { distance } = planet;
+
+    let orbitDistance = distance * 2; // Scale factor
+
+    if (perspectiveView) {
+      ctx.save();
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate(angle * ((i + 1) ** 0.5));
+      ctx.translate(orbitDistance, 0);
+
+      const planetSize = planet.size * 8; // Scale factor
+
+      if (Math.hypot(x - canvas.width / 2 - orbitDistance, y - canvas.height / 2) <= planetSize + 10) {
+        showInfoCard(planet);
+        highlightPlanet(i);
+        ctx.restore();
+        return;
+      }
+
+      ctx.restore();
+    } else { // Top-down view
+      const radius = distance * 2; // Scale factor
+
+      if (Math.hypot(x - canvas.width / 2, y - canvas.height / 2) <= radius + planet.size * 8 + 10) {
+        showInfoCard(planet);
+        highlightPlanet(i);
+        return;
+      }
+    }
+  }
+});
+
+const showInfoCard = (planet) => {
+  infoCard.innerHTML = `
+    <h3>${planet.name}</h3>
+    <p>Distance from Sun: ${planet.distance} million km</p>
+    <p>Orbital Period: ${planet.orbitalPeriod} days</p>
+    <p>Fun Fact: ${planet.funFact}</p>
+  `;
+  infoCard.style.display = 'block';
+};
+
+const hideInfoCard = () => {
+  infoCard.style.display = 'none';
+};
+
+const highlightPlanet = (index) => {
+  highlightedPlanetIndex = index;
+};
+
+togglePlayPauseButton.addEventListener('click', () => {
+  isPaused = !isPaused;
+  togglePlayPauseButton.textContent = isPaused ? "Play" : "Pause";
+});
+
+speedControl.addEventListener('input', () => {
+  speed = parseFloat(speedControl.value);
+});
+
+toggleViewButton.addEventListener('click', () => {
+  perspectiveView = !perspectiveView;
+  toggleViewButton.textContent = perspectiveView ? "Perspective View" : "Top-Down View";
+});
+
+const animate = () => {
+  if (!isPaused) {
+    drawStarField();
+    drawSun();
+
+    planetsData.forEach((planet, index) => {
+      drawPlanet(planet, index);
+    });
+
+    angle += 0.01 * speed;
+  }
+
+  requestAnimationFrame(animate);
+};
+
+animate();
+
+// Resize canvas on window resize
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+</script>
+
+</body>
+</html>

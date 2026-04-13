@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Solar System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            perspective: 1000px;
+        }
+
+        #solarSystem {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            transform-style: preserve-3d;
+        }
+
+        #stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 5s) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        #sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ffd200, #ff8c00, #ff4500);
+            border-radius: 50%;
+            box-shadow: 0 0 50px #ff4500, 0 0 100px #ff8c00;
+            z-index: 10;
+            animation: sunGlow 3s infinite alternate;
+        }
+
+        @keyframes sunGlow {
+            0% { box-shadow: 0 0 50px #ff4500, 0 0 100px #ff8c00; }
+            100% { box-shadow: 0 0 70px #ff4500, 0 0 140px #ff8c00; }
+        }
+
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform-style: preserve-3d;
+        }
+
+        .planet {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .planet:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+            z-index: 5;
+        }
+
+        .planet-info {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            width: 200px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .planet-info.visible {
+            opacity: 1;
+        }
+
+        .planet-info h3 {
+            margin-bottom: 10px;
+            color: #ffd200;
+        }
+
+        .planet-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        #controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        #controls button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #controls button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        #controls input {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        #planetList {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            max-height: 80vh;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+            z-index: 100;
+        }
+
+        #planetList h2 {
+            margin-bottom: 10px;
+            color: #ffd200;
+        }
+
+        #planetList ul {
+            list-style: none;
+        }
+
+        #planetList li {
+            padding: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border-radius: 5px;
+        }
+
+        #planetList li:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        #planetList li.highlight {
+            background: rgba(255, 204, 0, 0.2);
+            border-left: 3px solid #ffd200;
+        }
+
+        .planet-name {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .planet:hover .planet-name {
+            opacity: 1;
+        }
+
+        .ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) rotateX(75deg);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            #controls {
+                top: 10px;
+                right: 10px;
+                padding: 10px;
+            }
+            
+            #planetList {
+                left: 10px;
+                top: 10px;
+                padding: 10px;
+            }
+            
+            .planet-info {
+                width: 150px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="solarSystem">
+        <div id="stars"></div>
+        <div id="sun"></div>
+        
+        <div class="orbit" id="orbit1"></div>
+        <div class="planet" id="mercury" style="width: 8px; height: 8px; background: #8c7853;"></div>
+        
+        <div class="orbit" id="orbit2"></div>
+        <div class="planet" id="venus" style="width: 12px; height: 12px; background: #ffcc00;"></div>
+        
+        <div class="orbit" id="orbit3"></div>
+        <div class="planet" id="earth" style="width: 14px; height: 14px; background: #6b93d6;"></div>
+        
+        <div class="orbit" id="orbit4"></div>
+        <div class="planet" id="mars" style="width: 10px; height: 10px; background: #cd5c5c;"></div>
+        
+        <div class="orbit" id="orbit5"></div>
+        <div class="planet" id="jupiter" style="width: 30px; height: 30px; background: #d8ca9d;"></div>
+        
+        <div class="orbit" id="orbit6"></div>
+        <div class="planet" id="saturn" style="width: 25px; height: 25px; background: #e3e0c0;"></div>
+        
+        <div class="orbit" id="orbit7"></div>
+        <div class="planet" id="uranus" style="width: 18px; height: 18px; background: #4fd0e7;"></div>
+        
+        <div class="orbit" id="orbit8"></div>
+        <div class="planet" id="neptune" style="width: 17px; height: 17px; background: #4b70dd;"></div>
+        
+        <div class="planet-info" id="planetInfo"></div>
+        
+        <div id="controls">
+            <button id="pauseBtn">Pause</button>
+            <button id="viewBtn">Perspective</button>
+            <input type="range" id="speedControl" min="0.5" max="5" step="0.1" value="1">
+            <label for="speedControl">Speed: <span id="speedValue">1x</span></label>
+        </div>
+        
+        <div id="planetList">
+            <h2>Planets</h2>
+            <ul>
+                <li data-planet="mercury">Mercury</li>
+                <li data-planet="venus">Venus</li>
+                <li data-planet="earth">Earth</li>
+                <li data-planet="mars">Mars</li>
+                <li data-planet="jupiter">Jupiter</li>
+                <li data-planet="saturn">Saturn</li>
+                <li data-planet="uranus">Uranus</li>
+                <li data-planet="neptune">Neptune</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create stars
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.setProperty('--duration', `${Math.random() * 5 + 3}s`);
+                starsContainer.appendChild(star);
+            }
+
+            // Planet data
+            const planets = {
+                mercury: {
+                    name: "Mercury",
+                    distance: "57.9 million km",
+                    period: "88 Earth days",
+                    fact: "Mercury is the smallest planet and closest to the Sun.",
+                    size: 8,
+                    orbitRadius: 80,
+                    speed: 4.15,
+                    color: "#8c7853"
+                },
+                venus: {
+                    name: "Venus",
+                    distance: "108.2 million km",
+                    period: "225 Earth days",
+                    fact: "Venus is the hottest planet with a thick, toxic atmosphere.",
+                    size: 12,
+                    orbitRadius: 110,
+                    speed: 1.62,
+                    color: "#ffcc00"
+                },
+                earth: {
+                    name: "Earth",
+                    distance: "149.6 million km",
+                    period: "365.25 Earth days",
+                    fact: "Earth is the only planet known to support life.",
+                    size: 14,
+                    orbitRadius: 150,
+                    speed: 1,
+                    color: "#6b93d6"
+                },
+                mars: {
+                    name: "Mars",
+                    distance: "227.9 million km",
+                    period: "687 Earth days",
+                    fact: "Mars has the largest volcano in the solar system.",
+                    size: 10,
+                    orbitRadius: 190,
+                    speed: 0.53,
+                    color: "#cd5c5c"
+                },
+                jupiter: {
+                    name: "Jupiter",
+                    distance: "778.5 million km",
+                    period: "12 Earth years",
+                    fact: "Jupiter is a gas giant with a Great Red Spot storm.",
+                    size: 30,
+                    orbitRadius: 250,
+                    speed: 0.084,
+                    color: "#d8ca9d"
+                },
+                saturn: {
+                    name: "Saturn",
+                    distance: "1.43 billion km",
+                    period: "29 Earth years",
+                    fact: "Saturn has the most extensive ring system in the solar system.",
+                    size: 25,
+                    orbitRadius: 320,
+                    speed: 0.034,
+                    color: "#e3e0c0"
+                },
+                uranus: {
+                    name: "Uranus",
+                    distance: "2.87 billion km",
+                    period: "84 Earth years",
+                    fact: "Uranus rotates on its side with an extreme axial tilt.",
+                    size: 18,
+                    orbitRadius: 380,
+                    speed: 0.012,
+                    color: "#4fd0e7"
+                },
+                neptune: {
+                    name: "Neptune",
+                    distance: "4.50 billion km",
+                    period: "165 Earth years",
+                    fact: "Neptune has the strongest winds in the solar system.",
+                    size: 17,
+                    orbitRadius: 430,
+                    speed: 0.006,
+                    color: "#4b70dd"
+                }
+            };
+
+            // Create orbits and planets
+            Object.keys(planets).forEach(planetId => {
+                const planet = planets[planetId];
+                const orbit = document.getElementById(`orbit${planetId.charAt(0)}`);
+                orbit.style.width = `${planet.orbitRadius * 2}px`;
+                orbit.style.height = `${planet.orbitRadius * 2}px`;
+                
+                const planetElement = document.getElementById(planetId);
+                planetElement.style.width = `${planet.size}px`;
+                planetElement.style.height = `${planet.size}px`;
+                planetElement.style.background = planet.color;
+                
+                // Add ring for Saturn
+                if (planetId === 'saturn') {
+                    const ring = document.createElement('div');
+                    ring.classList.add('ring');
+                    ring.style.width = `${planet.size * 2.5}px`;
+                    ring.style.height = `${planet.size * 2.5}px`;
+                    planetElement.appendChild(ring);
+                }
+                
+                // Add planet name
+                const nameElement = document.createElement('div');
+                nameElement.classList.add('planet-name');
+                nameElement.textContent = planet.name;
+                planetElement.appendChild(nameElement);
+            });
+
+            // Animation variables
+            let animationSpeed = 1;
+            let isPaused = false;
+            let isPerspective = true;
+            let animationId;
+
+            // Animation function
+            function animate() {
+                if (isPaused) return;
+                
+                const now = Date.now() / 1000;
+                Object.keys(planets).forEach(planetId => {
+                    const planet = planets[planetId];
+                    const planetElement = document.getElementById(planetId);
+                    const orbit = document.getElementById(`orbit${planetId.charAt(0)}`);
+                    
+                    // Calculate position
+                    const angle = now * planet.speed * animationSpeed;
+                    const x = Math.cos(angle) * planet.orbitRadius;
+                    const y = Math.sin(angle) * planet.orbitRadius;
+                    
+                    planetElement.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+                    
+                    // Add slight tilt for perspective
+                    if (isPerspective) {
+                        orbit.style.transform = `translate(-50%, -50%) rotateX(75deg)`;
+                    } else {
+                        orbit.style.transform = `translate(-50%, -50%)`;
+                    }
+                });
+                
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Start animation
+            animate();
+
+            // Event listeners
+            document.getElementById('pauseBtn').addEventListener('click', () => {
+                isPaused = !isPaused;
+                document.getElementById('pauseBtn').textContent = isPaused ? 'Play' : 'Pause';
+                if (!isPaused) animate();
+            });
+
+            document.getElementById('viewBtn').addEventListener('click', () => {
+                isPerspective = !isPerspective;
+                document.getElementById('viewBtn').textContent = isPerspective ? 'Perspective' : 'Top-down';
+            });
+
+            document.getElementById('speedControl').addEventListener('input', (e) => {
+                animationSpeed = parseFloat(e.target.value);
+                document.getElementById('speedValue').textContent = `${animationSpeed.toFixed(1)}x`;
+            });
+
+            // Planet info interaction
+            Object.keys(planets).forEach(planetId => {
+                const planetElement = document.getElementById(planetId);
+                const planetInfo = document.getElementById('planetInfo');
+                
+                planetElement.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const planet = planets[planetId];
+                    planetInfo.innerHTML = `
+                        <h3>${planet.name}</h3>
+                        <p>Distance: ${planet.distance}</p>
+                        <p>Period: ${planet.period}</p>
+                        <p>${planet.fact}</p>
+                    `;
+                    planetInfo.classList.add('visible');
+                    
+                    // Position info box
+                    const rect = planetElement.getBoundingClientRect();
+                    planetInfo.style.left = `${rect.left}px`;
+                    planetInfo.style.top = `${rect.top - 100}px`;
+                });
+                
+                planetElement.addEventListener('mouseleave', () => {
+                    planetInfo.classList.remove('visible');
+                });
+            });
+
+            // Planet list interaction
+            document.querySelectorAll('#planetList li').forEach(item => {
+                item.addEventListener('click', () => {
+                    const planetId = item.getAttribute('data-planet');
+                    const planetElement = document.getElementById(planetId);
+                    
+                    // Highlight planet
+                    document.querySelectorAll('#planetList li').forEach(el => el.classList.remove('highlight'));
+                    item.classList.add('highlight');
+                    
+                    // Show info
+                    const planet = planets[planetId];
+                    const planetInfo = document.getElementById('planetInfo');
+                    planetInfo.innerHTML = `
+                        <h3>${planet.name}</h3>
+                        <p>Distance: ${planet.distance}</p>
+                        <p>Period: ${planet.period}</p>
+                        <p>${planet.fact}</p>
+                    `;
+                    planetInfo.classList.add('visible');
+                    
+                    // Position info box
+                    const rect = planetElement.getBoundingClientRect();
+                    planetInfo.style.left = `${rect.left}px`;
+                    planetInfo.style.top = `${rect.top - 100}px`;
+                });
+            });
+
+            // Close info when clicking elsewhere
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.planet') && !e.target.closest('#planetInfo') && !e.target.closest('#planetList')) {
+                    document.getElementById('planetInfo').classList.remove('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

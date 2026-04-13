@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System Visualization</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background-color: #0b0b2e;
+            display: flex;
+            overflow-x: hidden;
+            perspective: 1000px;
+            font-family: Arial, sans-serif;
+        }
+
+        .solar-system {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            transform-style: preserve-3d;
+        }
+
+        #sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: radial-gradient(#ffd700, #ff8c00);
+            box-shadow: 0 0 50px #ff8c00;
+        }
+
+        .planet {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .info-card {
+            position: fixed;
+            top: 20px;
+            right: -300px;
+            background: rgba(25, 25, 40, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            transition: all 0.3s ease;
+            backface-visibility: hidden;
+        }
+
+        .ui-panel {
+            position: fixed;
+            left: -300px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(25, 25, 40, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            width: 200px;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        @keyframes orbit {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="solar-system">
+        <div id="sun"></div>
+        
+        <!-- Orbits -->
+        <div class="orbit" style="transform: scale(0.5)"></div>
+        <div class="orbit" style="transform: scale(0.7)"></div>
+        <div class="orbit" style="transform: scale(1)"></div>
+        <div class="orbit" style="transform: scale(1.4)"></div>
+        <div class="orbit" style="transform: scale(2)"></div>
+        <div class="orbit" style="transform: scale(3)"></div>
+        <div class="orbit" style="transform: scale(4)"></div>
+        <div class="orbit" style="transform: scale(5)"></div>
+
+        <!-- Planets -->
+        <div class="planet" id="mercury"></div>
+        <div class="planet" id="venus"></div>
+        <div class="planet" id="earth"></div>
+        <div class="planet" id="mars"></div>
+        <div class="planet" id="jupiter"></div>
+        <div class="planet" id="saturn"></div>
+        <div class="planet" id="uranus"></div>
+        <div class="planet" id="neptune"></div>
+
+        <!-- Info Cards -->
+        <div class="info-card" id="mercury-info">...</div>
+        <div class="info-card" id="venus-info">...</div>
+        <div class="info-card" id="earth-info">...</div>
+        <div class="info-card" id="mars-info">...</div>
+        <div class="info-card" id="jupiter-info">...</div>
+        <div class="info-card" id="saturn-info">...</div>
+        <div class="info-card" id="uranus-info">...</div>
+        <div class="info-card" id="neptune-info">...</div>
+
+        <!-- UI Panel -->
+        <div class="ui-panel">
+            <h2>Planets</h2>
+            <ul id="planet-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        const planetData = [
+            { id: 'mercury', color: '#A0522D', size: 0.1 },
+            { id: 'venus', color: '#FFB90F', size: 0.13 },
+            { id: 'earth', color: '#4169E1', size: 0.17 },
+            { id: 'mars', color: '#CD5022', size: 0.15 },
+            { id: 'jupiter', color: '#DAA520', size: 0.34 },
+            { id: 'saturn', color: '#F4A460', size: 0.38 },
+            { id: 'uranus', color: '#87CEEB', size: 0.3 },
+            { id: 'neptune', color: '#1E90FF', size: 0.29 }
+        ];
+
+        // Initialize planets
+        planetData.forEach(planet => {
+            const elem = document.createElement('div');
+            elem.className = `planet`;
+            elem.id = planet.id;
+            elem.style.backgroundColor = planet.color;
+            elem.style.width = `${planet.size * 100}%`;
+            elem.style.height = `${planet.size * 100}%`;
+            elem.style.left = '55%';
+            document.querySelector('.solar-system').appendChild(elem);
+        });
+
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.style.position = 'absolute';
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.width = '3px';
+            star.style.height = '3px';
+            star.style.backgroundColor = 'white';
+            star.style.borderRadius = '50%';
+            star.style.opacity = Math.random();
+            star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite`;
+            starsContainer.appendChild(star);
+        }
+
+        // Add animation
+        document.documentElement.style.animation = 'rotate 10000s linear infinite';
+        document.body.style.transformStyle = 'preserve-3d';
+
+        // Interactive controls
+        const playPause = document.createElement('button');
+        playPause.innerHTML = '⏸️';
+        playPause.addEventListener('click', () => {
+            if (document.documentElement.style.animation === 'none') {
+                document.documentElement.style.animation = 'rotate 10000s linear infinite';
+            } else {
+                document.documentElement.style.animation = 'none';
+            }
+        });
+
+        const speedControl = document.createElement('input');
+        speedControl.type = 'range';
+        speedControl.min = '0.5';
+        speedControl.max = '5';
+        speedControl.value = '1';
+        speedControl.addEventListener('change', (e) => {
+            document.documentElement.style.animationDuration = `${parseFloat(e.target.value) * 10}s`;
+        });
+
+        const controls = document.createElement('div');
+        controls.appendChild(playPause);
+        controls.appendChild(speedControl);
+        document.body.appendChild(controls);
+
+        // Initialize UI panel
+        const planetList = document.getElementById('planet-list');
+        planetData.forEach(planet => {
+            const li = document.createElement('li');
+            li.textContent = planet.id.charAt(0).toUpperCase() + planet.id.slice(1);
+            li.addEventListener('click', () => showPlanetInfo(planet.id));
+            planetList.appendChild(li);
+        });
+
+        // Show/hide info cards
+        function showPlanetInfo(id) {
+            const card = document.getElementById(`${id}-info`);
+            card.style.right = '20px';
+            // Add actual info content here
+        }
+
+        // Add click and hover effects
+        document.querySelectorAll('.planet').forEach(planet => {
+            planet.addEventListener('click', () => showPlanetInfo(planet.id));
+            planet.addEventListener('mouseover', () => {
+                planet.style.transform = 'scale(1.2)';
+                planet.style.transition = 'all 0.3s ease';
+            });
+            planet.addEventListener('mouseout', () => {
+                planet.style.transform = '';
+            });
+        });
+
+        // Add perspective toggle
+        const perspectiveToggle = document.createElement('button');
+        perspectiveToggle.innerHTML = '👁️';
+        perspectiveToggle.addEventListener('click', () => {
+            document.querySelector('.solar-system').style.transformStyle = 
+                document.querySelector('.solar-system').style.transformStyle === 'preserve-3d' ? 
+                'flat' : 'preserve-3d';
+        });
+        controls.appendChild(perspectiveToggle);
+    </script>
+</body>
+</html>
