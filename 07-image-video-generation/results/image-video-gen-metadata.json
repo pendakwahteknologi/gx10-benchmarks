@@ -1,0 +1,96 @@
+{
+  "benchmark": "07-efficiency-image-generation",
+  "title": "Image & Video Generation Speed",
+  "timestamp": "20260412_220525",
+  "system": {
+    "hostname": "gx10-bea6",
+    "os": "Ubuntu 24.04.4 LTS",
+    "kernel": "6.17.0-1014-nvidia",
+    "arch": "aarch64",
+    "cpu_model": "Cortex-X925",
+    "cpu_cores": 20,
+    "ram_total_gb": 121.6
+  },
+  "gpu": {
+    "name": "NVIDIA GB10",
+    "driver": "580.142",
+    "cuda_version": "12.1"
+  },
+  "comfyui": {
+    "version": "0.18.1",
+    "python": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+    "pytorch": "2.11.0+cu128"
+  },
+  "models": {
+    "image": {
+      "name": "Z-Image-Turbo",
+      "file": "z_image_turbo_bf16.safetensors",
+      "precision": "bf16",
+      "text_encoder": "qwen_3_4b.safetensors",
+      "vae": "ae.safetensors",
+      "sampler": "res_multistep",
+      "default_steps": 4
+    },
+    "video": {
+      "name": "Wan 2.2 T2V 14B",
+      "files": [
+        "wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors",
+        "wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors"
+      ],
+      "precision": "fp8",
+      "lora": "LightX2V 4-step (v1.1)",
+      "text_encoder": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "vae": "wan_2.1_vae.safetensors",
+      "sampler": "euler",
+      "total_steps": 4
+    }
+  },
+  "image_tests": [
+    {
+      "name": "z_turbo_512x512_4steps",
+      "width": 512,
+      "height": 512,
+      "steps": 4
+    },
+    {
+      "name": "z_turbo_768x768_4steps",
+      "width": 768,
+      "height": 768,
+      "steps": 4
+    },
+    {
+      "name": "z_turbo_1024x1024_4steps",
+      "width": 1024,
+      "height": 1024,
+      "steps": 4
+    },
+    {
+      "name": "z_turbo_1280x1280_4steps",
+      "width": 1280,
+      "height": 1280,
+      "steps": 4
+    },
+    {
+      "name": "z_turbo_1024x1024_8steps",
+      "width": 1024,
+      "height": 1024,
+      "steps": 8
+    }
+  ],
+  "video_tests": [
+    {
+      "name": "wan22_480x480_17f",
+      "width": 480,
+      "height": 480,
+      "frames": 17
+    },
+    {
+      "name": "wan22_640x640_33f",
+      "width": 640,
+      "height": 640,
+      "frames": 33
+    }
+  ],
+  "n_reps_image": 3,
+  "n_reps_video": 2
+}

@@ -1,0 +1,14 @@
+{
+  "hostname": "gx10-bea6",
+  "os": "Linux 6.17.0-1014-nvidia",
+  "os_version": "#14-Ubuntu SMP PREEMPT_DYNAMIC Tue Mar 17 19:01:40 UTC 2026",
+  "architecture": "aarch64",
+  "python_version": "3.12.3",
+  "cpu_model": "Cortex-X925 + Cortex-A725",
+  "cpu_cores": 20,
+  "ram_gb": 121.6,
+  "pytorch_version": "2.11.0+cu130",
+  "cuda_available": true,
+  "cuda_version": "13.0",
+  "cudnn_version": "91900"
+}

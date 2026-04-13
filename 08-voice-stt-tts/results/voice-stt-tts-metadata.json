@@ -1,0 +1,80 @@
+{
+  "benchmark": "08-voice-stt-tts",
+  "title": "Voice STT & TTS Performance",
+  "timestamp": "20260413_011735",
+  "system": {
+    "hostname": "gx10-bea6",
+    "os": "Ubuntu 24.04.4 LTS",
+    "kernel": "6.17.0-1014-nvidia",
+    "arch": "aarch64",
+    "cpu_cores": 20,
+    "ram_total_gb": 121.6
+  },
+  "gpu": {
+    "name": "NVIDIA GB10",
+    "driver": "580.142",
+    "cuda_version": "13.0"
+  },
+  "models": {
+    "stt": {
+      "name": "Whisper large-v3",
+      "engine": "faster-whisper (CTranslate2)",
+      "device": "cpu",
+      "compute_type": "int8",
+      "language": "ms",
+      "beam_size": 5,
+      "load_time_s": 3.15
+    },
+    "tts": {
+      "name": "MMS-TTS Malay (facebook/mms-tts-zlm)",
+      "engine": "HuggingFace Transformers (VitsModel)",
+      "sample_rate": 16000,
+      "load_time_s": 2.74
+    }
+  },
+  "stt_tests": [
+    {
+      "name": "stt_5s",
+      "duration_s": 5
+    },
+    {
+      "name": "stt_15s",
+      "duration_s": 15
+    },
+    {
+      "name": "stt_30s",
+      "duration_s": 30
+    },
+    {
+      "name": "stt_60s",
+      "duration_s": 60
+    },
+    {
+      "name": "stt_120s",
+      "duration_s": 120
+    },
+    {
+      "name": "stt_300s",
+      "duration_s": 300
+    }
+  ],
+  "tts_tests": [
+    {
+      "name": "tts_short",
+      "chars": 25
+    },
+    {
+      "name": "tts_medium",
+      "chars": 234
+    },
+    {
+      "name": "tts_long",
+      "chars": 558
+    },
+    {
+      "name": "tts_very_long",
+      "chars": 1199
+    }
+  ],
+  "n_reps": 3
+}

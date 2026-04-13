@@ -1,0 +1,30 @@
+# Model files (too large for git)
+*.safetensors
+*.bin
+*.gguf
+*.ggml
+*.pt
+*.pth
+*.onnx
+models/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Training checkpoints
+checkpoint-*/
+wandb/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large audio (keep only samples)
+stt_input_*.wav
+
+# Temp
+*.tmp
+*.log.bak

@@ -1,0 +1,24 @@
+============================================================
+BENCHMARK SUMMARY
+============================================================
+Machine:              gx10
+Mode:                 fullft
+Model:                meta-llama/Llama-3.1-8B-Instruct
+Dataset:              databricks/databricks-dolly-15k
+Status:               success
+
+Steps completed:      500 / 500
+Total time:           18350.8s (305.8m)
+Avg step time:        36.4482s
+Median step time:     36.4537s
+P95 step time:        36.5715s
+Peak GPU memory:      93.59 GB
+Final loss:           1.2897
+Tokens/sec:           150.7
+Samples/sec:          0.11
+
+Batch size:           4 x 8 = 32
+Sequence length:      1024
+Seed:                 42
+
+============================================================

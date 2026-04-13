@@ -1,0 +1,83 @@
+[01:17:35] ============================================================
+[01:17:35]   GX10 Benchmark #08: Voice STT & TTS
+[01:17:35]   Reps per config: 3
+[01:17:35] ============================================================
+[01:17:35] 
+[01:17:35] [Phase 0] Loading TTS model (facebook/mms-tts-zlm)...
+[01:17:39]   TTS model loaded in 2.74s
+[01:17:39] [Phase 0] Loading Whisper large-v3...
+[01:17:39]   Note: CTranslate2 has no CUDA support, using CPU (int8)
+[01:17:42]   Whisper loaded in 3.15s
+[01:17:42] 
+[01:17:42] ============================================================
+[01:17:42] [Phase 1] TTS Benchmark — MMS-TTS Malay
+[01:17:42] ============================================================
+[01:17:42] 
+  Test: tts_short (25 chars)
+[01:17:43]     Run 1: 0.536s → 2.26s audio (47 chars/s, RTF=0.238)
+[01:17:43]     Run 2: 0.106s → 2.35s audio (235 chars/s, RTF=0.045)
+[01:17:43]     Run 3: 0.022s → 2.26s audio (1153 chars/s, RTF=0.010)
+[01:17:43] 
+  Test: tts_medium (234 chars)
+[01:17:44]     Run 1: 0.274s → 16.10s audio (856 chars/s, RTF=0.017)
+[01:17:44]     Run 2: 0.138s → 16.05s audio (1695 chars/s, RTF=0.009)
+[01:17:44]     Run 3: 0.135s → 15.74s audio (1735 chars/s, RTF=0.009)
+[01:17:44] 
+  Test: tts_long (558 chars)
+[01:17:45]     Run 1: 0.316s → 38.42s audio (1766 chars/s, RTF=0.008)
+[01:17:45]     Run 2: 0.278s → 37.66s audio (2010 chars/s, RTF=0.007)
+[01:17:45]     Run 3: 0.284s → 38.91s audio (1965 chars/s, RTF=0.007)
+[01:17:45] 
+  Test: tts_very_long (1199 chars)
+[01:17:46]     Run 1: 0.596s → 76.69s audio (2010 chars/s, RTF=0.008)
+[01:17:47]     Run 2: 0.596s → 78.06s audio (2010 chars/s, RTF=0.008)
+[01:17:47]     Run 3: 0.591s → 77.74s audio (2029 chars/s, RTF=0.008)
+[01:17:47] 
+[01:17:47] ============================================================
+[01:17:47] [Phase 2] STT Benchmark — Whisper large-v3
+[01:17:47] ============================================================
+[01:17:47] 
+  Generating 5s test audio...
+[01:17:47]     Generated 3.6s audio → stt_input_5s.wav
+[01:17:56]     Run 1: 8.34s for 3.6s audio (RTF=2.298, 0.4x realtime)
+[01:18:04]     Run 2: 7.80s for 3.6s audio (RTF=2.150, 0.5x realtime)
+[01:18:11]     Run 3: 7.24s for 3.6s audio (RTF=1.995, 0.5x realtime)
+[01:18:11] 
+  Generating 15s test audio...
+[01:18:11]     Generated 10.9s audio → stt_input_15s.wav
+[01:18:20]     Run 1: 9.13s for 10.9s audio (RTF=0.839, 1.2x realtime)
+[01:18:31]     Run 2: 10.48s for 10.9s audio (RTF=0.963, 1.0x realtime)
+[01:18:42]     Run 3: 10.75s for 10.9s audio (RTF=0.988, 1.0x realtime)
+[01:18:42] 
+  Generating 30s test audio...
+[01:18:42]     Generated 21.8s audio → stt_input_30s.wav
+[01:18:58]     Run 1: 15.92s for 21.8s audio (RTF=0.731, 1.4x realtime)
+[01:19:11]     Run 2: 12.97s for 21.8s audio (RTF=0.596, 1.7x realtime)
+[01:19:26]     Run 3: 14.89s for 21.8s audio (RTF=0.684, 1.5x realtime)
+[01:19:26] 
+  Generating 60s test audio...
+[01:19:27]     Generated 43.5s audio → stt_input_60s.wav
+[01:19:54]     Run 1: 27.46s for 43.5s audio (RTF=0.631, 1.6x realtime)
+[01:20:21]     Run 2: 27.09s for 43.5s audio (RTF=0.622, 1.6x realtime)
+[01:20:47]     Run 3: 25.66s for 43.5s audio (RTF=0.589, 1.7x realtime)
+[01:20:47] 
+  Generating 120s test audio...
+[01:20:48]     Generated 87.1s audio → stt_input_120s.wav
+[01:21:45]     Run 1: 57.03s for 87.1s audio (RTF=0.655, 1.5x realtime)
+[01:22:44]     Run 2: 58.96s for 87.1s audio (RTF=0.677, 1.5x realtime)
+[01:23:40]     Run 3: 55.87s for 87.1s audio (RTF=0.642, 1.6x realtime)
+[01:23:40] 
+  Generating 300s test audio...
+[01:23:43]     Generated 217.7s audio → stt_input_300s.wav
+[01:29:20]     Run 1: 337.01s for 217.7s audio (RTF=1.548, 0.6x realtime)
+[01:35:47]     Run 2: 387.69s for 217.7s audio (RTF=1.781, 0.6x realtime)
+[01:41:42]     Run 3: 354.83s for 217.7s audio (RTF=1.630, 0.6x realtime)
+[01:41:42] 
+[01:41:42] ============================================================
+[01:41:42] [Phase 3] Writing results...
+[01:41:42] ============================================================
+[01:41:42]   Results: results_20260413_011735.csv
+[01:41:42]   Summary: summary_20260413_011735.csv
+[01:41:42]   Metadata: metadata_20260413_011735.json
+[01:41:42] 
+[01:41:42] Benchmark complete!

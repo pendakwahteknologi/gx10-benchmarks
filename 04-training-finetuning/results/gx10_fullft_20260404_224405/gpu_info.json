@@ -1,0 +1,17 @@
+{
+  "gpu_count": 1,
+  "gpus": [
+    {
+      "index": 0,
+      "name": "NVIDIA GB10",
+      "total_memory_gb": 121.6,
+      "multi_processor_count": 48,
+      "compute_capability": "12.1"
+    }
+  ],
+  "architecture": "Blackwell",
+  "addressing_mode": "ATS",
+  "c2c_mode": "Enabled",
+  "nvcc_version": "Cuda compilation tools, release 13.0, V13.0.88",
+  "driver_version": "580.142"
+}

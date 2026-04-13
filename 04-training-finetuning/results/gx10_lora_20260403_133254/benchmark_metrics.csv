@@ -1,0 +1,6 @@
+step,loss,learning_rate,step_time_sec,gpu_memory_mb,tokens_processed,is_warmup
+1,2.156,1.81e-04,36.365,89371.4,6064,True
+2,2.129,1.31e-04,33.8546,89475.4,4634,False
+3,2.0318,6.91e-05,33.9578,89475.4,4186,False
+4,2.1174,1.91e-05,33.9644,89475.4,5988,False
+5,1.9394,0.00e+00,33.8593,89475.4,2795,False

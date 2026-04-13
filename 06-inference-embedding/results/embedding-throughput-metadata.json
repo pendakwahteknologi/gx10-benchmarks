@@ -1,0 +1,54 @@
+{
+  "benchmark": "06-inference-embedding",
+  "title": "Embedding Throughput",
+  "timestamp": "20260412_211752",
+  "n_reps": 3,
+  "system": {
+    "hostname": "gx10-bea6",
+    "os": "Ubuntu 24.04.4 LTS",
+    "kernel": "6.17.0-1014-nvidia",
+    "arch": "aarch64",
+    "cpu_model": "Cortex-X925",
+    "cpu_cores": 20,
+    "ram_total_gb": 121.6
+  },
+  "gpu": {
+    "name": "NVIDIA GB10",
+    "driver": "580.142",
+    "cuda_version": "13.0",
+    "compute_capability": "12.1",
+    "memory_total_mb": "[N/A]"
+  },
+  "model": {
+    "name": "mesolitica/mistral-embedding-191m-8k-contrastive",
+    "parameters": "191M",
+    "embedding_dim": 768,
+    "max_seq_length": 8192,
+    "language": "Bahasa Melayu"
+  },
+  "test_params": {
+    "chunk_counts": [
+      100,
+      500,
+      1000,
+      5000
+    ],
+    "batch_sizes": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "devices": [
+      "cuda",
+      "cpu"
+    ],
+    "cpu_max_chunks": 1000,
+    "cpu_max_batch": 64
+  },
+  "software": {
+    "python": "3.12.3",
+    "torch": "2.11.0+cu130",
+    "sentence_transformers": "5.4.0"
+  }
+}

@@ -1,0 +1,76 @@
+============================================
+  GX10 Benchmark: Can It Run X?
+  Sun Apr 12 02:24:07 PM +08 2026
+============================================
+
+
+--- Testing qwen2.5:1.5b (1.5B) ---
+  Already installed
+  Warming up...
+  Running benchmark...
+  Results: 173.25 tok/s | TTFT: 11.8ms | 256 tokens | 1.734337s total | GPU: 51C
+
+--- Testing qwen2.5:3b (3B) ---
+  Already installed
+  Warming up...
+  Running benchmark...
+  Results: 93.49 tok/s | TTFT: 18.9ms | 256 tokens | 2.985592s total | GPU: 53C
+
+--- Testing qwen2.5:7b (7B) ---
+  Pulling qwen2.5:7b...
+verifying sha256 digest [K
+writing manifest [K
+success [K[?25h[?2026l
+  Warming up...
+  Running benchmark...
+  Results: 43.2 tok/s | TTFT: 34.7ms | 256 tokens | 6.219097s total | GPU: 51C
+
+--- Testing qwen2.5:14b (14B) ---
+  Pulling qwen2.5:14b...
+verifying sha256 digest [K
+writing manifest [K
+success [K[?25h[?2026l
+  Warming up...
+  Running benchmark...
+  Results: 22.24 tok/s | TTFT: 64.6ms | 256 tokens | 11.862176s total | GPU: 50C
+
+--- Testing gemma4:latest (27B) ---
+  Already installed
+  Warming up...
+  Running benchmark...
+  Results: 55.03 tok/s | TTFT: 30.1ms | 256 tokens | 5.001626s total | GPU: 55C
+
+--- Testing qwen2.5:32b (32B) ---
+  Pulling qwen2.5:32b...
+verifying sha256 digest [K
+writing manifest [K
+success [K[?25h[?2026l
+  Warming up...
+  Running benchmark...
+  Results: 10.0 tok/s | TTFT: 134.1ms | 256 tokens | 26.011029s total | GPU: 53C
+
+--- Testing qwen2.5:72b (72B) ---
+  Pulling qwen2.5:72b...
+verifying sha256 digest [K
+writing manifest [K
+success [K[?25h[?2026l
+  Warming up...
+  Running benchmark...
+  Results: 4.24 tok/s | TTFT: 296.0ms | 256 tokens | 61.242510s total | GPU: 59C
+
+============================================
+  Benchmark Complete!
+  Results: /home/gx10/GX10-Benchmarks/inference/01_model_size_scaling/results_20260412_142407.csv
+============================================
+
+SUMMARY:
+
+MODEL                     SIZE     TOK/S      TTFT(ms)     GPU(C)    
+------------------------- -------- ---------- ------------ ----------
+qwen2.5:1.5b              1.5B     173.25     11.8         51        
+qwen2.5:3b                3B       93.49      18.9         53        
+qwen2.5:7b                7B       43.2       34.7         51        
+qwen2.5:14b               14B      22.24      64.6         50        
+gemma4:latest             27B      55.03      30.1         55        
+qwen2.5:32b               32B      10.0       134.1        53        
+qwen2.5:72b               72B      4.24       296.0        59        

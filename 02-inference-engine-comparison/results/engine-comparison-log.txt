@@ -1,0 +1,46 @@
+============================================
+  GX10 Benchmark: Serving Engine Comparison
+  Model: Qwen2.5-7B on all engines
+  Sun Apr 12 03:00:24 PM +08 2026
+============================================
+
+=== ENGINE 1: OLLAMA ===
+  Run 1/3...
+    tok/s: 43.63 | TTFT: 33.7ms | Total: 6.16s | GPU: 53C
+  Run 2/3...
+    tok/s: 43.68 | TTFT: 24.6ms | Total: 6.17s | GPU: 54C
+  Run 3/3...
+    tok/s: 43.71 | TTFT: 24.4ms | Total: 6.13s | GPU: 55C
+
+=== ENGINE 2: vLLM ===
+  Starting vLLM container...
+......................  vLLM ready
+  Run 1/3...
+    tok/s: 12.43 | Total: 20.59s | Tokens: 256 | GPU: 59C
+  Run 2/3...
+    tok/s: 12.59 | Total: 20.34s | Tokens: 256 | GPU: 62C
+  Run 3/3...
+    tok/s: 12.6 | Total: 20.32s | Tokens: 256 | GPU: 63C
+
+=== ENGINE 3: llama.cpp ===
+  Running llama-bench with Qwen2.5-7B...
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"6de97b9","1","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-2049f5674b1e92b4464e5729975c9689fcfbf0b0e4443ccf10b5339f370f9a54","qwen2 14B Q4_K - Medium","8982142976","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","0","auto","0.00","none","1","0","0","0","0","0","256","0","2026-04-12T07:04:10Z","11631938756","10217259","22.008380","0.019334"
+    Token generation: "0.019334" tok/s | GPU: 60C
+    Prompt processing: "22.660707" tok/s
+
+============================================
+  Benchmark Complete!
+  Results: /home/gx10/GX10-Benchmarks/inference/02_serving_engine_comparison/results_20260412_150024.csv
+============================================
+
+SUMMARY:
+engine,test,tok_s,ttft_ms,total_time_s,tokens,gpu_temp
+ollama,single_run1,43.63,33.7,6.16,256,53
+ollama,single_run2,43.68,24.6,6.17,256,54
+ollama,single_run3,43.71,24.4,6.13,256,55
+vllm,single_run1,12.43,0,20.59,256,59
+vllm,single_run2,12.59,0,20.34,256,62
+vllm,single_run3,12.6,0,20.32,256,63
+llama.cpp,tg_bench,"0.019334",0,0,256,60
+llama.cpp,pp_bench,"22.660707",0,0,512,60

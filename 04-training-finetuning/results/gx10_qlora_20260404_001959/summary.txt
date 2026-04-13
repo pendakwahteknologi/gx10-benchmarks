@@ -1,0 +1,24 @@
+============================================================
+BENCHMARK SUMMARY
+============================================================
+Machine:              gx10
+Mode:                 qlora
+Model:                meta-llama/Llama-3.1-8B-Instruct
+Dataset:              databricks/databricks-dolly-15k
+Status:               success
+
+Steps completed:      500 / 500
+Total time:           33230.7s (553.8m)
+Avg step time:        66.2115s
+Median step time:     66.1967s
+P95 step time:        66.3613s
+Peak GPU memory:      12.45 GB
+Final loss:           1.6082
+Tokens/sec:           83.0
+Samples/sec:          0.03
+
+Batch size:           2 x 16 = 32
+Sequence length:      1024
+Seed:                 42
+
+============================================================

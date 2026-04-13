@@ -1,0 +1,340 @@
+nohup: ignoring input
+
+╭─────────────────────────────────── CUDA Fine-Tuning Benchmark ───────────────────────────────────╮
+│                                                                                                  │
+│  Machine:      gx10                                                                              │
+│  GPU:          NVIDIA GB10 (122 GB)                                                              │
+│  Mode:         QLoRA                                                                             │
+│  Model:        meta-llama/Llama-3.1-8B-Instruct                                                  │
+│  Dataset:      databricks/databricks-dolly-15k                                                   │
+│  Steps:        500                                                                               │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+                                   Run Configuration                                   
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                      ┃ Value                                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ mode                           │ qlora                                              │
+│ model_name                     │ meta-llama/Llama-3.1-8B-Instruct                   │
+│ max_steps                      │ 500                                                │
+│ seq_len                        │ 1024                                               │
+│ micro_batch_size               │ 2                                                  │
+│ gradient_accumulation_steps    │ 16                                                 │
+│ learning_rate                  │ 0.0002                                             │
+│ dtype                          │ bfloat16                                           │
+│ attn_implementation            │ sdpa                                               │
+│ seed                           │ 42                                                 │
+│ gradient_checkpointing         │ True                                               │
+│ lora_r                         │ 16                                                 │
+│ lora_alpha                     │ 32                                                 │
+│ lora_dropout                   │ 0.05                                               │
+│ qlora_bits                     │ 4                                                  │
+│ qlora_quant_type               │ nf4                                                │
+└────────────────────────────────┴────────────────────────────────────────────────────┘
+
+
+──────────────────────────────────────── System Information ────────────────────────────────────────
+
+  Hostname:  gx10-bea6
+  OS:        Linux 6.17.0-1014-nvidia
+  CPU:       Cortex-X925 + Cortex-A725
+  RAM:       121.6 GB
+  PyTorch:   2.11.0+cu130
+  CUDA:      13.0
+  C2C Mode:  Enabled
+
+
+─────────────────────────────────────── Dataset Preparation ────────────────────────────────────────
+
+  Dataset:     databricks/databricks-dolly-15k
+  Train:       13,509 samples
+  Validation:  750 samples
+  Test:        752 samples
+
+
+─────────────────── Loading Model QLoRA mode - meta-llama/Llama-3.1-8B-Instruct ────────────────────
+
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:06<32:17,  6.68s/it]Loading weights:   1%|          | 2/291 [00:13<32:22,  6.72s/it]Loading weights:   1%|▏         | 4/291 [00:14<13:06,  2.74s/it]Loading weights:   2%|▏         | 5/291 [00:14<10:07,  2.13s/it]Loading weights:   2%|▏         | 6/291 [00:15<08:05,  1.70s/it]Loading weights:   4%|▍         | 13/291 [00:16<02:20,  1.98it/s]Loading weights:   5%|▍         | 14/291 [00:17<02:29,  1.86it/s]Loading weights:   5%|▌         | 15/291 [00:17<02:37,  1.75it/s]Loading weights:   6%|▌         | 18/291 [00:18<01:42,  2.67it/s]Loading weights:   7%|▋         | 19/291 [00:18<01:34,  2.87it/s]Loading weights:   8%|▊         | 22/291 [00:19<01:24,  3.17it/s]Loading weights:   8%|▊         | 23/291 [00:20<01:43,  2.59it/s]Loading weights:   8%|▊         | 24/291 [00:20<02:01,  2.20it/s]Loading weights:  11%|█         | 31/291 [00:21<01:00,  4.30it/s]Loading weights:  11%|█         | 32/291 [00:22<01:15,  3.41it/s]Loading weights:  11%|█▏        | 33/291 [00:23<01:32,  2.79it/s]Loading weights:  12%|█▏        | 36/291 [00:23<01:05,  3.90it/s]Loading weights:  13%|█▎        | 37/291 [00:23<01:03,  4.02it/s]Loading weights:  14%|█▎        | 40/291 [00:24<01:04,  3.91it/s]Loading weights:  14%|█▍        | 41/291 [00:25<01:24,  2.97it/s]Loading weights:  14%|█▍        | 42/291 [00:25<01:43,  2.41it/s]Loading weights:  15%|█▌        | 45/291 [00:26<01:06,  3.68it/s]Loading weights:  16%|█▌        | 46/291 [00:26<01:04,  3.80it/s]Loading weights:  17%|█▋        | 49/291 [00:27<01:04,  3.73it/s]Loading weights:  17%|█▋        | 50/291 [00:27<01:24,  2.85it/s]Loading weights:  18%|█▊        | 51/291 [00:28<01:43,  2.32it/s]Loading weights:  19%|█▊        | 54/291 [00:28<01:05,  3.61it/s]Loading weights:  19%|█▉        | 55/291 [00:29<01:03,  3.74it/s]Loading weights:  20%|█▉        | 58/291 [00:30<01:02,  3.71it/s]Loading weights:  20%|██        | 59/291 [00:30<01:22,  2.82it/s]Loading weights:  21%|██        | 60/291 [00:31<01:40,  2.30it/s]Loading weights:  23%|██▎       | 67/291 [00:32<00:50,  4.44it/s]Loading weights:  23%|██▎       | 68/291 [00:33<01:04,  3.44it/s]Loading weights:  24%|██▎       | 69/291 [00:33<01:19,  2.80it/s]Loading weights:  25%|██▍       | 72/291 [00:34<00:55,  3.94it/s]Loading weights:  25%|██▌       | 73/291 [00:34<00:53,  4.04it/s]Loading weights:  26%|██▌       | 76/291 [00:35<00:54,  3.92it/s]Loading weights:  26%|██▋       | 77/291 [00:35<01:11,  2.98it/s]Loading weights:  27%|██▋       | 78/291 [00:36<01:27,  2.43it/s]Loading weights:  28%|██▊       | 81/291 [00:36<00:56,  3.72it/s]Loading weights:  28%|██▊       | 82/291 [00:37<00:54,  3.85it/s]Loading weights:  29%|██▉       | 85/291 [00:37<00:54,  3.79it/s]Loading weights:  30%|██▉       | 86/291 [00:38<01:10,  2.90it/s]Loading weights:  30%|██▉       | 87/291 [00:39<01:26,  2.36it/s]Loading weights:  31%|███       | 90/291 [00:39<00:54,  3.68it/s]Loading weights:  31%|███▏      | 91/291 [00:39<00:52,  3.82it/s]Loading weights:  32%|███▏      | 94/291 [00:40<00:52,  3.78it/s]Loading weights:  33%|███▎      | 95/291 [00:41<01:08,  2.86it/s]Loading weights:  33%|███▎      | 96/291 [00:42<01:23,  2.33it/s]Loading weights:  35%|███▌      | 103/291 [00:43<00:41,  4.54it/s]Loading weights:  36%|███▌      | 104/291 [00:43<00:52,  3.53it/s]Loading weights:  36%|███▌      | 105/291 [00:44<01:05,  2.86it/s]Loading weights:  37%|███▋      | 108/291 [00:44<00:45,  4.01it/s]Loading weights:  37%|███▋      | 109/291 [00:45<00:44,  4.08it/s]Loading weights:  38%|███▊      | 112/291 [00:45<00:45,  3.94it/s]Loading weights:  39%|███▉      | 113/291 [00:46<00:59,  3.01it/s]Loading weights:  39%|███▉      | 114/291 [00:47<01:12,  2.44it/s]Loading weights:  42%|████▏     | 121/291 [00:48<00:37,  4.59it/s]Loading weights:  42%|████▏     | 122/291 [00:48<00:47,  3.57it/s]Loading weights:  42%|████▏     | 123/291 [00:49<00:58,  2.88it/s]Loading weights:  43%|████▎     | 126/291 [00:49<00:41,  4.01it/s]Loading weights:  44%|████▎     | 127/291 [00:50<00:39,  4.10it/s]Loading weights:  45%|████▍     | 130/291 [00:50<00:40,  3.96it/s]Loading weights:  45%|████▌     | 131/291 [00:51<00:53,  3.01it/s]Loading weights:  45%|████▌     | 132/291 [00:52<01:05,  2.44it/s]Loading weights:  46%|████▋     | 135/291 [00:52<00:41,  3.73it/s]Loading weights:  47%|████▋     | 136/291 [00:52<00:40,  3.86it/s]Loading weights:  48%|████▊     | 139/291 [00:53<00:40,  3.79it/s]Loading weights:  48%|████▊     | 140/291 [00:54<00:52,  2.89it/s]Loading weights:  48%|████▊     | 141/291 [00:55<01:03,  2.35it/s]Loading weights:  49%|████▉     | 144/291 [00:55<00:40,  3.66it/s]Loading weights:  50%|████▉     | 145/291 [00:55<00:38,  3.80it/s]Loading weights:  51%|█████     | 148/291 [00:56<00:38,  3.75it/s]Loading weights:  51%|█████     | 149/291 [00:57<00:50,  2.83it/s]Loading weights:  52%|█████▏    | 150/291 [00:58<01:01,  2.30it/s]Loading weights:  54%|█████▍    | 157/291 [00:58<00:30,  4.46it/s]Loading weights:  54%|█████▍    | 158/291 [00:59<00:38,  3.45it/s]Loading weights:  55%|█████▍    | 159/291 [01:00<00:47,  2.80it/s]Loading weights:  56%|█████▌    | 162/291 [01:00<00:32,  3.93it/s]Loading weights:  56%|█████▌    | 163/291 [01:00<00:31,  4.02it/s]Loading weights:  57%|█████▋    | 166/291 [01:01<00:32,  3.88it/s]Loading weights:  57%|█████▋    | 167/291 [01:02<00:41,  2.98it/s]Loading weights:  58%|█████▊    | 168/291 [01:03<00:50,  2.42it/s]Loading weights:  59%|█████▉    | 171/291 [01:03<00:32,  3.70it/s]Loading weights:  59%|█████▉    | 172/291 [01:03<00:31,  3.83it/s]Loading weights:  60%|██████    | 175/291 [01:04<00:30,  3.76it/s]Loading weights:  60%|██████    | 176/291 [01:05<00:40,  2.86it/s]Loading weights:  61%|██████    | 177/291 [01:06<00:49,  2.32it/s]Loading weights:  62%|██████▏   | 180/291 [01:06<00:30,  3.63it/s]Loading weights:  62%|██████▏   | 181/291 [01:06<00:29,  3.77it/s]Loading weights:  63%|██████▎   | 184/291 [01:07<00:28,  3.73it/s]Loading weights:  64%|██████▎   | 185/291 [01:08<00:37,  2.85it/s]Loading weights:  64%|██████▍   | 186/291 [01:08<00:45,  2.32it/s]Loading weights:  65%|██████▍   | 189/291 [01:09<00:27,  3.64it/s]Loading weights:  65%|██████▌   | 190/291 [01:09<00:26,  3.79it/s]Loading weights:  66%|██████▋   | 193/291 [01:10<00:26,  3.75it/s]Loading weights:  67%|██████▋   | 194/291 [01:10<00:34,  2.85it/s]Loading weights:  67%|██████▋   | 195/291 [01:11<00:41,  2.32it/s]Loading weights:  68%|██████▊   | 198/291 [01:11<00:25,  3.63it/s]Loading weights:  68%|██████▊   | 199/291 [01:12<00:24,  3.77it/s]Loading weights:  69%|██████▉   | 202/291 [01:12<00:23,  3.73it/s]Loading weights:  70%|██████▉   | 203/291 [01:13<00:30,  2.86it/s]Loading weights:  70%|███████   | 204/291 [01:14<00:37,  2.32it/s]Loading weights:  73%|███████▎  | 211/291 [01:15<00:17,  4.50it/s]Loading weights:  73%|███████▎  | 212/291 [01:16<00:22,  3.48it/s]Loading weights:  73%|███████▎  | 213/291 [01:16<00:27,  2.81it/s]Loading weights:  74%|███████▍  | 216/291 [01:17<00:19,  3.93it/s]Loading weights:  75%|███████▍  | 217/291 [01:17<00:18,  4.03it/s]Loading weights:  76%|███████▌  | 220/291 [01:18<00:18,  3.90it/s]Loading weights:  76%|███████▌  | 221/291 [01:18<00:23,  2.99it/s]Loading weights:  76%|███████▋  | 222/291 [01:19<00:28,  2.42it/s]Loading weights:  77%|███████▋  | 225/291 [01:19<00:17,  3.72it/s]Loading weights:  78%|███████▊  | 226/291 [01:20<00:16,  3.85it/s]Loading weights:  79%|███████▊  | 229/291 [01:20<00:16,  3.78it/s]Loading weights:  79%|███████▉  | 230/291 [01:21<00:21,  2.87it/s]Loading weights:  79%|███████▉  | 231/291 [01:22<00:25,  2.34it/s]Loading weights:  80%|████████  | 234/291 [01:22<00:15,  3.67it/s]Loading weights:  81%|████████  | 235/291 [01:22<00:14,  3.81it/s]Loading weights:  82%|████████▏ | 238/291 [01:23<00:14,  3.77it/s]Loading weights:  82%|████████▏ | 239/291 [01:24<00:18,  2.88it/s]Loading weights:  82%|████████▏ | 240/291 [01:25<00:21,  2.34it/s]Loading weights:  85%|████████▍ | 247/291 [01:26<00:09,  4.53it/s]Loading weights:  85%|████████▌ | 248/291 [01:26<00:12,  3.52it/s]Loading weights:  86%|████████▌ | 249/291 [01:27<00:14,  2.83it/s]Loading weights:  87%|████████▋ | 252/291 [01:27<00:09,  3.98it/s]Loading weights:  87%|████████▋ | 253/291 [01:28<00:09,  4.07it/s]Loading weights:  88%|████████▊ | 256/291 [01:28<00:08,  3.92it/s]Loading weights:  88%|████████▊ | 257/291 [01:29<00:11,  2.97it/s]Loading weights:  89%|████████▊ | 258/291 [01:30<00:13,  2.40it/s]Loading weights:  90%|████████▉ | 261/291 [01:30<00:08,  3.68it/s]Loading weights:  90%|█████████ | 262/291 [01:30<00:07,  3.81it/s]Loading weights:  91%|█████████ | 265/291 [01:31<00:06,  3.76it/s]Loading weights:  91%|█████████▏| 266/291 [01:32<00:08,  2.86it/s]Loading weights:  92%|█████████▏| 267/291 [01:33<00:10,  2.32it/s]Loading weights:  93%|█████████▎| 270/291 [01:33<00:05,  3.62it/s]Loading weights:  93%|█████████▎| 271/291 [01:33<00:05,  3.75it/s]Loading weights:  94%|█████████▍| 274/291 [01:34<00:04,  3.73it/s]Loading weights:  95%|█████████▍| 275/291 [01:35<00:05,  2.86it/s]Loading weights:  95%|█████████▍| 276/291 [01:35<00:06,  2.35it/s]Loading weights:  96%|█████████▌| 279/291 [01:36<00:03,  3.66it/s]Loading weights:  96%|█████████▌| 280/291 [01:36<00:02,  3.80it/s]Loading weights:  97%|█████████▋| 283/291 [01:37<00:02,  3.73it/s]Loading weights:  98%|█████████▊| 284/291 [01:38<00:02,  2.83it/s]Loading weights:  98%|█████████▊| 285/291 [01:38<00:02,  2.31it/s]Loading weights:  99%|█████████▉| 288/291 [01:39<00:00,  3.60it/s]Loading weights:  99%|█████████▉| 289/291 [01:39<00:00,  3.75it/s]Loading weights: 100%|██████████| 291/291 [01:39<00:00,  2.93it/s]
+  Quantization:         4-bit nf4
+  Double quantization:  True
+  Total parameters:     8,043,892,736
+  Trainable parameters: 13,631,488 (0.17%)
+  LoRA rank:            16
+  LoRA alpha:           32
+
+
+────────────────────────────────────────── Preparing Data ──────────────────────────────────────────
+
+  Train samples: 13,509
+  Val samples:   750
+
+─────────────────────────────────────── Setting Up Optimizer ───────────────────────────────────────
+
+  Optimizer:        AdamW
+  LR schedule:      cosine
+  Warmup steps:     25
+  Max steps:        500
+  Timing warmup:    3 steps (excluded from metrics)
+
+
+─────────────────────────────────────── Training Steps 1-500 ───────────────────────────────────────
+
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+  Step     1/500 (  0.2%) (warmup)  Loss: 2.2608  LR: 8.00e-06  Step: 67.38s  Elapsed: 1m 07s  ETA: 
+9h 20m 22s  GPU: 12.3/122GB
+  Step    10/500 (  2.0%)  Loss: 2.0856  LR: 8.00e-05  Step: 66.29s  Elapsed: 11m 03s  ETA: 9h 00m 
+37s  GPU: 12.4/122GB  Tok/s: 86  Samp/s: 0.0
+  Step    20/500 (  4.0%)  Loss: 1.8438  LR: 1.60e-04  Step: 66.28s  Elapsed: 22m 06s  ETA: 8h 50m 
+14s  GPU: 12.4/122GB  Tok/s: 83  Samp/s: 0.0
+  Step    30/500 (  6.0%)  Loss: 1.9139  LR: 2.00e-04  Step: 67.54s  Elapsed: 33m 12s  ETA: 8h 39m 
+54s  GPU: 12.4/122GB  Tok/s: 81  Samp/s: 0.0
+  Step    40/500 (  8.0%)  Loss: 1.8526  LR: 2.00e-04  Step: 66.34s  Elapsed: 44m 16s  ETA: 8h 28m 
+54s  GPU: 12.4/122GB  Tok/s: 82  Samp/s: 0.0
+  Step    50/500 ( 10.0%)  Loss: 1.8487  LR: 1.99e-04  Step: 66.09s  Elapsed: 55m 17s  ETA: 8h 17m 
+29s  GPU: 12.4/122GB  Tok/s: 81  Samp/s: 0.0
+  Step    60/500 ( 12.0%)  Loss: 1.7596  LR: 1.97e-04  Step: 66.12s  Elapsed: 1h 06m 19s  ETA: 8h 
+06m 17s  GPU: 12.4/122GB  Tok/s: 82  Samp/s: 0.0
+  Step    70/500 ( 14.0%)  Loss: 1.7647  LR: 1.96e-04  Step: 66.09s  Elapsed: 1h 17m 21s  ETA: 7h 
+55m 02s  GPU: 12.4/122GB  Tok/s: 82  Samp/s: 0.0
+  Step    80/500 ( 16.0%)  Loss: 1.6587  LR: 1.93e-04  Step: 66.16s  Elapsed: 1h 28m 22s  ETA: 7h 
+43m 51s  GPU: 12.4/122GB  Tok/s: 83  Samp/s: 0.0
+  Step    90/500 ( 18.0%)  Loss: 1.7319  LR: 1.91e-04  Step: 66.10s  Elapsed: 1h 39m 23s  ETA: 7h 
+32m 42s  GPU: 12.4/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   100/500 ( 20.0%)  Loss: 1.8151  LR: 1.88e-04  Step: 66.13s  Elapsed: 1h 50m 24s  ETA: 7h 
+21m 33s  GPU: 12.4/122GB  Tok/s: 83  Samp/s: 0.0
+  Eval @ step 100  Val Loss: 1.8230
+[04/04/26 02:12:34] INFO     Validation @ step 100: val_loss=1.8230                                 
+  Step   110/500 ( 22.0%)  Loss: 1.6957  LR: 1.85e-04  Step: 66.00s  Elapsed: 2h 01m 50s  ETA: 7h 
+10m 25s  GPU: 12.5/122GB  Tok/s: 82  Samp/s: 0.0
+  Step   120/500 ( 24.0%)  Loss: 1.8310  LR: 1.81e-04  Step: 66.15s  Elapsed: 2h 12m 51s  ETA: 6h 
+59m 20s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   130/500 ( 26.0%)  Loss: 1.7302  LR: 1.77e-04  Step: 66.16s  Elapsed: 2h 23m 52s  ETA: 6h 
+48m 15s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   140/500 ( 28.0%)  Loss: 1.6992  LR: 1.72e-04  Step: 66.12s  Elapsed: 2h 34m 53s  ETA: 6h 
+37m 10s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   150/500 ( 30.0%)  Loss: 1.6024  LR: 1.68e-04  Step: 66.09s  Elapsed: 2h 45m 55s  ETA: 6h 
+26m 07s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   160/500 ( 32.0%)  Loss: 1.6647  LR: 1.63e-04  Step: 66.25s  Elapsed: 2h 56m 56s  ETA: 6h 
+15m 04s  GPU: 12.5/122GB  Tok/s: 84  Samp/s: 0.0
+  Step   170/500 ( 34.0%)  Loss: 1.7106  LR: 1.57e-04  Step: 66.20s  Elapsed: 3h 07m 58s  ETA: 6h 
+04m 02s  GPU: 12.5/122GB  Tok/s: 84  Samp/s: 0.0
+  Step   180/500 ( 36.0%)  Loss: 1.6954  LR: 1.52e-04  Step: 66.15s  Elapsed: 3h 18m 59s  ETA: 5h 
+52m 59s  GPU: 12.5/122GB  Tok/s: 84  Samp/s: 0.0
+  Step   190/500 ( 38.0%)  Loss: 1.5582  LR: 1.46e-04  Step: 66.13s  Elapsed: 3h 30m 01s  ETA: 5h 
+41m 57s  GPU: 12.5/122GB  Tok/s: 84  Samp/s: 0.0
+  Step   200/500 ( 40.0%)  Loss: 1.8558  LR: 1.40e-04  Step: 66.10s  Elapsed: 3h 41m 02s  ETA: 5h 
+30m 54s  GPU: 12.5/122GB  Tok/s: 84  Samp/s: 0.0
+  Eval @ step 200  Val Loss: 1.8065
+[04/04/26 04:03:12] INFO     Validation @ step 200: val_loss=1.8065                                 
+  Step   210/500 ( 42.0%)  Loss: 1.5005  LR: 1.34e-04  Step: 66.12s  Elapsed: 3h 52m 28s  ETA: 5h 
+19m 52s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   220/500 ( 44.0%)  Loss: 1.5626  LR: 1.28e-04  Step: 66.12s  Elapsed: 4h 03m 30s  ETA: 5h 
+08m 50s  GPU: 12.5/122GB  Tok/s: 84  Samp/s: 0.0
+  Step   230/500 ( 46.0%)  Loss: 1.7027  LR: 1.21e-04  Step: 66.15s  Elapsed: 4h 14m 31s  ETA: 4h 
+57m 47s  GPU: 12.5/122GB  Tok/s: 84  Samp/s: 0.0
+  Step   240/500 ( 48.0%)  Loss: 1.6742  LR: 1.15e-04  Step: 66.16s  Elapsed: 4h 25m 33s  ETA: 4h 
+46m 45s  GPU: 12.5/122GB  Tok/s: 84  Samp/s: 0.0
+  Step   250/500 ( 50.0%)  Loss: 1.6915  LR: 1.08e-04  Step: 66.15s  Elapsed: 4h 36m 34s  ETA: 4h 
+35m 43s  GPU: 12.5/122GB  Tok/s: 84  Samp/s: 0.0
+  Step   260/500 ( 52.0%)  Loss: 1.5794  LR: 1.02e-04  Step: 66.25s  Elapsed: 4h 47m 36s  ETA: 4h 
+24m 42s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   270/500 ( 54.0%)  Loss: 1.6127  LR: 9.50e-05  Step: 66.14s  Elapsed: 4h 58m 38s  ETA: 4h 
+13m 40s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   280/500 ( 56.0%)  Loss: 1.7639  LR: 8.85e-05  Step: 66.18s  Elapsed: 5h 09m 40s  ETA: 4h 
+02m 39s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   290/500 ( 58.0%)  Loss: 1.5541  LR: 8.19e-05  Step: 66.30s  Elapsed: 5h 20m 43s  ETA: 3h 
+51m 38s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   300/500 ( 60.0%)  Loss: 1.5818  LR: 7.55e-05  Step: 66.26s  Elapsed: 5h 31m 45s  ETA: 3h 
+40m 36s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Eval @ step 300  Val Loss: 1.7939
+[04/04/26 05:53:56] INFO     Validation @ step 300: val_loss=1.7939                                 
+  Step   310/500 ( 62.0%)  Loss: 1.6303  LR: 6.91e-05  Step: 66.30s  Elapsed: 5h 43m 13s  ETA: 3h 
+29m 35s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   320/500 ( 64.0%)  Loss: 1.8100  LR: 6.29e-05  Step: 66.24s  Elapsed: 5h 54m 16s  ETA: 3h 
+18m 33s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   330/500 ( 66.0%)  Loss: 1.7169  LR: 5.68e-05  Step: 66.20s  Elapsed: 6h 05m 18s  ETA: 3h 
+07m 32s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   340/500 ( 68.0%)  Loss: 1.5007  LR: 5.10e-05  Step: 66.19s  Elapsed: 6h 16m 20s  ETA: 2h 
+56m 30s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   350/500 ( 70.0%)  Loss: 1.6945  LR: 4.53e-05  Step: 66.21s  Elapsed: 6h 27m 23s  ETA: 2h 
+45m 29s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   360/500 ( 72.0%)  Loss: 1.6815  LR: 3.99e-05  Step: 66.17s  Elapsed: 6h 38m 25s  ETA: 2h 
+34m 27s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   370/500 ( 74.0%)  Loss: 1.6556  LR: 3.47e-05  Step: 66.25s  Elapsed: 6h 49m 28s  ETA: 2h 
+23m 25s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   380/500 ( 76.0%)  Loss: 1.5701  LR: 2.99e-05  Step: 66.29s  Elapsed: 7h 00m 31s  ETA: 2h 
+12m 23s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   390/500 ( 78.0%)  Loss: 1.8439  LR: 2.53e-05  Step: 66.27s  Elapsed: 7h 11m 33s  ETA: 2h 
+01m 21s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   400/500 ( 80.0%)  Loss: 1.6347  LR: 2.11e-05  Step: 66.26s  Elapsed: 7h 22m 36s  ETA: 1h 
+50m 20s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Eval @ step 400  Val Loss: 1.7912
+[04/04/26 07:44:46] INFO     Validation @ step 400: val_loss=1.7912                                 
+  Step   410/500 ( 82.0%)  Loss: 1.5629  LR: 1.72e-05  Step: 66.22s  Elapsed: 7h 34m 03s  ETA: 1h 
+39m 18s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   420/500 ( 84.0%)  Loss: 1.5815  LR: 1.37e-05  Step: 66.23s  Elapsed: 7h 45m 05s  ETA: 1h 
+28m 16s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   430/500 ( 86.0%)  Loss: 1.7342  LR: 1.05e-05  Step: 66.28s  Elapsed: 7h 56m 08s  ETA: 1h 
+17m 14s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   440/500 ( 88.0%)  Loss: 1.5423  LR: 7.77e-06  Step: 66.27s  Elapsed: 8h 07m 11s  ETA: 1h 
+06m 12s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   450/500 ( 90.0%)  Loss: 1.5554  LR: 5.42e-06  Step: 66.16s  Elapsed: 8h 18m 13s  ETA: 55m 
+10s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   460/500 ( 92.0%)  Loss: 1.7890  LR: 3.48e-06  Step: 66.18s  Elapsed: 8h 29m 16s  ETA: 44m 
+08s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   470/500 ( 94.0%)  Loss: 1.6156  LR: 1.96e-06  Step: 66.18s  Elapsed: 8h 40m 19s  ETA: 33m 
+06s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   480/500 ( 96.0%)  Loss: 1.5966  LR: 8.74e-07  Step: 66.32s  Elapsed: 8h 51m 21s  ETA: 22m 
+04s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   490/500 ( 98.0%)  Loss: 1.4679  LR: 2.19e-07  Step: 66.18s  Elapsed: 9h 02m 23s  ETA: 11m 
+02s  GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Step   500/500 (100.0%)  Loss: 1.6082  LR: 0.00e+00  Step: 66.26s  Elapsed: 9h 13m 26s  ETA: --:--
+GPU: 12.5/122GB  Tok/s: 83  Samp/s: 0.0
+  Eval @ step 500  Val Loss: 1.7905
+[04/04/26 09:35:36] INFO     Validation @ step 500: val_loss=1.7905                                 
+
+                             Final Benchmark Results                             
+┌─────────────────────────────┬─────────────────────────────────────────────────┐
+│  Machine                    │  gx10                                           │
+│  Mode                       │  qlora                                          │
+│  Status                     │  success                                        │
+│  Steps Completed            │  500 / 500                                      │
+│  Total Time                 │  9h 13m 50s                                     │
+│  Avg Step Time              │  66.2115s                                       │
+│  Median Step Time           │  66.1967s                                       │
+│  P95 Step Time              │  66.3613s                                       │
+│  Peak GPU Memory            │  12.45 GB                                       │
+│  Final Loss                 │  1.6082                                         │
+│  Tokens/sec                 │  83.0                                           │
+│  Samples/sec                │  0.03                                           │
+└─────────────────────────────┴─────────────────────────────────────────────────┘
+
+
+──────────────────────────── Evaluation Pipeline Baseline vs Fine-Tuned ────────────────────────────
+
+Loading baseline model for comparison...
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:08<40:35,  8.40s/it]Loading weights:   1%|          | 2/291 [00:16<39:58,  8.30s/it]Loading weights:   1%|▏         | 4/291 [00:17<16:13,  3.39s/it]Loading weights:   2%|▏         | 5/291 [00:19<13:53,  2.92s/it]Loading weights:   3%|▎         | 8/291 [00:26<11:59,  2.54s/it]Loading weights:  11%|█         | 32/291 [00:27<01:36,  2.68it/s]Loading weights:  11%|█▏        | 33/291 [01:23<13:25,  3.12s/it]Loading weights:  66%|██████▋   | 193/291 [01:54<00:42,  2.32it/s]Loading weights: 100%|██████████| 291/291 [01:54<00:00,  2.55it/s]
+  Loaded 80 preset questions
+
+───────────────────────────────── Inference: baseline 80 questions ─────────────────────────────────
+
+   1/80 (1%) latency: 18.76s
+   10/80 (12%) latency: 18.60s
+   20/80 (25%) latency: 18.62s
+   30/80 (38%) latency: 18.67s
+   40/80 (50%) latency: 18.59s
+   50/80 (62%) latency: 18.59s
+   60/80 (75%) latency: 4.04s
+   70/80 (88%) latency: 18.60s
+   80/80 (100%) latency: 18.83s
+  Loaded 80 preset questions
+
+──────────────────────────────── Inference: finetuned 80 questions ─────────────────────────────────
+
+   1/80 (1%) latency: 10.81s
+   10/80 (12%) latency: 10.72s
+   20/80 (25%) latency: 10.75s
+   30/80 (38%) latency: 10.95s
+   40/80 (50%) latency: 10.72s
+   50/80 (62%) latency: 10.73s
+   60/80 (75%) latency: 11.18s
+   70/80 (88%) latency: 10.73s
+   80/80 (100%) latency: 12.09s
+
+                 Evaluation: Baseline vs Fine-Tuned                  
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Metric               ┃     Baseline ┃   Fine-tuned ┃        Delta ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ rouge_l              │       0.1554 │       0.1538 │      -0.0016 │
+│ bleu                 │       0.0393 │       0.0429 │      +0.0036 │
+│ exact_match          │       0.0000 │       0.0000 │      +0.0000 │
+│ normalized_match     │       0.5358 │       0.5512 │      +0.0154 │
+│ prediction_length    │     188.1625 │     201.0000 │     +12.8375 │
+│ latency_sec          │      17.9842 │      11.0924 │      -6.8918 │
+└──────────────────────┴──────────────┴──────────────┴──────────────┘
+
+Sample Comparisons:
+
+╭─────────────────────────────────────────── Sample 00 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: Give me three recipes from different cuisines that I can make with potatoes and        │
+│ chicken                                                                                          │
+│ Reference: You could make potato dumplings in a chicken broth, which comes from German cuisine.  │
+│ Another recipe is mashed potatoes and fried chicken from the Amer                                │
+│ Baseline: Here are three recipes from different cuisines that you can make with potatoes and     │
+│ chicken:                                                                                         │
+│                                                                                                  │
+│ **Recipe 1: Chicken and Potato Tagine (Moroccan)**                                               │
+│                                                                                                  │
+│ Ingre                                                                                            │
+│ Fine-tuned: 1. Chicken Tikka Masala: This is a popular Indian dish that is made with marinated   │
+│ chicken cooked in a creamy tomato sauce and served with basmati ric                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 01 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: Give me multiple modes of transport to get to Australia                                │
+│ Reference: Fly by plane, take a boat or cruise ship, swim, paddle board, kayak, sail             │
+│ Baseline: Here are multiple modes of transport to get to Australia:                              │
+│                                                                                                  │
+│ 1. **By Air**: You can fly to Australia from most major airports around the world. Major ai      │
+│ Fine-tuned: You can get to Australia by plane, boat or by foot. The most common mode of          │
+│ transport is by plane. You can fly from most major cities around the world                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 02 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: What are the primary ingredients and spices that go into Greek cooking?                │
+│ Reference: 1) Salt                                                                               │
+│ 2) Pepper                                                                                        │
+│ 3) Extra virgin olive oil                                                                        │
+│ 4) Fresh oregano                                                                                 │
+│ 5) Lemon juice                                                                                   │
+│ 6) Garlic                                                                                        │
+│                                                                                                  │
+│ Technique matters; however, the addition of these six ingredien                                  │
+│ Baseline: Greek cooking is known for its rich flavors and aromas, which are often achieved       │
+│ through the use of specific ingredients and spices. Some of the prima                            │
+│ Fine-tuned: Greek cooking is known for its use of olive oil, garlic, lemon juice, and oregano.   │
+│ These ingredients are commonly used in combination with other ingr                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 03 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: What medicinal plants should I grow in my Mid-Atlantic garden?                         │
+│ Reference: Echinacea                                                                             │
+│ Elder                                                                                            │
+│ Bee balm                                                                                         │
+│ Lemon balm                                                                                       │
+│ Mullein                                                                                          │
+│ Burdock                                                                                          │
+│ Yarrow                                                                                           │
+│ Wood Betony                                                                                      │
+│ Baseline: The Mid-Atlantic region has a temperate climate with warm summers and cold winters.    │
+│ When selecting medicinal plants to grow in your garden, consider t                               │
+│ Fine-tuned: The Mid-Atlantic region of the United States has a temperate climate with warm       │
+│ summers and cold winters.  The region is divided into two sub-regions:                           │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 04 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: What are some ways I could cheer up my friend that just got dumped?                    │
+│ Reference: Im sorry your friend recently got dumped.  I would ask them if they want to talk      │
+│ about it, or be distracted from it.  If they want to talk about it, I                            │
+│ Baseline: Oh no, that's tough! Here are some ideas to help cheer up your friend:                 │
+│                                                                                                  │
+│ 1.  **Listen and validate their feelings**: Allow them to express their emotio                   │
+│ Fine-tuned: Here are some ways you could cheer up your friend that just got dumped:              │
+│ 1. Listen to them and let them talk about their feelings                                         │
+│ 2. Give them a hug                                                                               │
+│ 3.                                                                                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+╭──────────────────────────────────────────── SUCCESS ─────────────────────────────────────────────╮
+│                                                                                                  │
+│  Benchmark completed successfully!                                                               │
+│                                                                                                  │
+│  Results saved to: ./results/gx10_qlora_20260404_001959                                          │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[04/04/26 10:16:19] INFO     Benchmark complete: status=success                                     
+                             run_dir=./results/gx10_qlora_20260404_001959                           
+INFO:benchmark:Benchmark complete: status=success run_dir=./results/gx10_qlora_20260404_001959

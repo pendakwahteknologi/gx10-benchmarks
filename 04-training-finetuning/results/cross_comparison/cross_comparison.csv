@@ -1,0 +1,448 @@
+id,category,instruction,reference,baseline_prediction,baseline_rouge_l,baseline_bleu,lora_prediction,lora_rouge_l,lora_bleu,qlora_prediction,qlora_rouge_l,qlora_bleu,full_fine-tune_prediction,full_fine-tune_rouge_l,full_fine-tune_bleu,best_mode
+0,brainstorming,Give me three recipes from different cuisines that I can make with potatoes and chicken,"You could make potato dumplings in a chicken broth, which comes from German cuisine. Another recipe is mashed potatoes and fried chicken from the American South. You could also try making a Thai curry","Here are three recipes from different cuisines that you can make with potatoes and chicken:
+
+**Recipe 1: Chicken and Potato Tagine (Moroccan)**
+
+Ingredients:
+
+* 1 1/2 pounds boneless, skinless chicken",0.1244,0.0055,1. Chicken Tikka Masala: This is a popular Indian dish that is made with chicken cooked in a creamy tomato sauce and served with basmati rice and naan bread. You can also add potatoes to the dish by b,0.1102,0.0082,1. Chicken Tikka Masala: This is a popular Indian dish that is made with marinated chicken cooked in a creamy tomato sauce and served with basmati rice and naan bread. You can also add potatoes to the,0.1290,0.0080,"Here are three recipes from different cuisines that you can make with potatoes and chicken:
+
+1. Chicken Tikka Masala: This is a popular Indian dish made with marinated chicken cooked in a creamy tomat",0.1365,0.0084,Full Fine-Tune
+1,brainstorming,Give me multiple modes of transport to get to Australia,"Fly by plane, take a boat or cruise ship, swim, paddle board, kayak, sail","Here are multiple modes of transport to get to Australia:
+
+1. **By Air**: You can fly to Australia from most major airports around the world. Major airlines such as Qantas, Virgin Australia, and Singa",0.0636,0.0031,"You can get to Australia by plane, boat, or even a hot air balloon.  You can also get there by swimming, but that would take a long time.  You can also get there by walking, but that would take a long",0.0439,0.0026,"You can get to Australia by plane, boat or by foot. The most common mode of transport is by plane. You can fly from most major cities around the world to Australia. The flight duration is around 20 ho",0.0511,0.0029,"You can get to Australia by plane, boat, or even a hot air balloon. You can also get there by swimming, but that would take a long time. You can also get there by walking, but that would take a long t",0.0413,0.0025,QLoRA
+2,brainstorming,What are the primary ingredients and spices that go into Greek cooking?,"1) Salt
+2) Pepper
+3) Extra virgin olive oil
+4) Fresh oregano
+5) Lemon juice
+6) Garlic
+
+Technique matters; however, the addition of these six ingredients to any dish will give it a Greek cuisine flavor","Greek cooking is known for its rich flavors and aromas, which are often achieved through the use of specific ingredients and spices. Some of the primary ingredients and spices that go into Greek cooki",0.0944,0.0035,"Greek cooking is known for its use of olive oil, garlic, lemon juice, and oregano.  These ingredients are often combined with tomatoes, onions, and feta cheese.  Greek cooking is also known for its us",0.0786,0.0029,"Greek cooking is known for its use of olive oil, garlic, lemon juice, and oregano.  These ingredients are commonly used in combination with other ingredients such as tomatoes, onions, and feta cheese.",0.0684,0.0028,"Greek cooking is known for its use of olive oil, garlic, lemon juice, and oregano.  These ingredients are used in a variety of dishes, including salads, soups, and main courses.  Greek cooking also of",0.1202,0.0036,Full Fine-Tune
+3,brainstorming,What medicinal plants should I grow in my Mid-Atlantic garden?,"Echinacea
+Elder
+Bee balm
+Lemon balm
+Mullein
+Burdock
+Yarrow
+Wood Betony","The Mid-Atlantic region has a temperate climate with warm summers and cold winters. When selecting medicinal plants to grow in your garden, consider the following factors:
+
+1.  **Hardiness**: Choose p",0.0112,0.0012,The Mid-Atlantic region of the United States has a temperate climate with cold winters and warm summers.  The region is divided into two sub-regions: the Mid-Atlantic Coastal Plain and the Mid-Atlanti,0.0000,0.0000,The Mid-Atlantic region of the United States has a temperate climate with warm summers and cold winters.  The region is divided into two sub-regions: the Mid-Atlantic and the Mid-Atlantic Coastal Plai,0.0000,0.0000,The Mid-Atlantic region of the United States has a temperate climate with four distinct seasons.  The region is characterized by hot summers and cold winters.  The region is also characterized by a wi,0.0104,0.0010,Full Fine-Tune
+4,brainstorming,What are some ways I could cheer up my friend that just got dumped?,"Im sorry your friend recently got dumped.  I would ask them if they want to talk about it, or be distracted from it.  If they want to talk about it, I would find a quiet place and a warm beverage and ","Oh no, that's tough! Here are some ideas to help cheer up your friend:
+
+1.  **Listen and validate their feelings**: Allow them to express their emotions without judgment. Sometimes, people just need s",0.1637,0.0104,"There are many ways to cheer up a friend that just got dumped. Here are a few ideas:
+1. Listen to them and let them talk about their feelings. Sometimes people just need someone to listen to them and ",0.1294,0.0043,"Here are some ways you could cheer up your friend that just got dumped:
+1. Listen to them and let them talk about their feelings
+2. Give them a hug
+3. Give them a gift
+4. Take them out for a fun activ",0.1246,0.0047,"There are many ways you could cheer up your friend that just got dumped. You could go out for a drink, go for a walk, go to the movies, go to a comedy club, go to a sporting event, go to a concert, go",0.0680,0.0034,LoRA
+5,brainstorming,How do you motivate and focus a team to exceed expectations during a terrible economic downturn?,"Set a goal, vision, create plans to execute, don’t over complicate it. Win as a team and lose as team.","Motivating and focusing a team to exceed expectations during a terrible economic downturn requires a combination of leadership, communication, and strategic planning. Here are some steps to achieve th",0.0793,0.0027,"During a terrible economic downturn, it is easy to lose focus and become demotivated.  Here are some tips to help you motivate and focus your team to exceed expectations:
+
+1.  **Communicate the vision",0.0631,0.0015,"During a terrible economic downturn, it is easy to lose focus and become demotivated.  Here are some tips to help you motivate and focus your team:
+
+1.  Communicate the vision and mission of the compa",0.0611,0.0025,"During a terrible economic downturn, it is easy to lose focus and become demotivated.  However, it is during these times that you need to be more focused and motivated than ever.  Here are some tips t",0.0581,0.0013,LoRA
+6,brainstorming,What is success,"Satisfaction levels define the success, success defined for one person may not be true for other","Success is a subjective concept that can be defined and measured in various ways depending on the context, culture, and individual perspectives. Here are some possible definitions and aspects of succe",0.0829,0.0015,"Success is a subjective term and can be defined in many ways. It can be defined as achieving a goal or objective, or it can be defined as achieving a certain level of happiness or fulfillment. Success",0.0800,0.0026,"Success is a term used to describe the achievement of a goal or the accomplishment of a task. It can also refer to the state of being successful, which is often associated with a high level of achieve",0.0418,0.0012,Success is a feeling of accomplishment and pride. It is a feeling of satisfaction and happiness. It is a feeling of pride and accomplishment. It is a feeling of pride and satisfaction. It is a feeling,0.0082,0.0009,LoRA
+7,brainstorming,"What are some items you can put on a bookshelf, other than books, to make it nice looking.","Peppering a bookshelf with items other than books can be aesthetically pleasing. Some ideas for items to add to a bookshelf include small containers or boxes to hold small items, pictures in picture f","Here are some items you can put on a bookshelf to make it nice looking:
+
+1.  **Decorative objects**: Vases, sculptures, or figurines can add a touch of elegance and personality to your bookshelf.
+2.  ",0.1429,0.0052,"Some items you can put on a bookshelf, other than books, to make it nice looking are decorative objects, such as vases, sculptures, or figurines. You can also put framed photos, artwork, or other pers",0.1434,0.0052,"Some items you can put on a bookshelf, other than books, to make it nice looking are: 
+- Decorative objects
+- Artwork
+- Plants
+- Pictures
+- Vases
+- Figurines
+- Statues
+- Ornaments
+- Collectibles
+- Mem",0.1169,0.0037,"Some items you can put on a bookshelf, other than books, to make it nice looking are decorative objects, such as vases, sculptures, or figurines. You can also put other items on a bookshelf, such as f",0.1473,0.0043,Full Fine-Tune
+8,brainstorming,What are the measurements needed to fit pants?,"The main three measurements for pants are the waist, the length, and the inseam. There any many other measurements associated with pant fittings, including hip circumference, thigh circumference, knee","To fit pants, you will need to take the following measurements:
+
+1.  Waist: Measure around the narrowest part of your natural waistline, usually just above the belly button.
+2.  Hip: Measure around th",0.0965,0.0030,"To fit pants, you need to know your waist size, inseam, and pant length. The waist size is the circumference of your waist. The inseam is the length of your leg from the crotch to the bottom of your l",0.0934,0.0026,"To fit pants, you need to know your waist size, inseam, and pant length.  The waist size is the circumference of your waist.  The inseam is the length of your leg from the crotch to the bottom of your",0.0932,0.0026,"The measurements needed to fit pants are waist, inseam, and outseam. The waist is the circumference of the waistline. The inseam is the length of the inseam. The outseam is the length of the outseam. ",0.1156,0.0036,Full Fine-Tune
+9,brainstorming,Who is the most popular president ever in the USA?,The most popular president ever in the USA is Franklin D. Roosevelt. He was president from 1933 to 1945 and is remembered for his New Deal programs that helped to improve the economy and the lives of ,The most popular president ever in the USA is George Washington. He is the first president of the United States and is widely regarded as one of the founding fathers of the country. He is often referr,0.1723,0.0493,The most popular president in the USA is George Washington. He was the first president of the United States and is considered one of the founding fathers of the country. He is widely regarded as one o,0.1845,0.0429,"The most popular president ever in the USA is George Washington. He was the first president of the United States and served two terms from 1789 to 1797. He is often referred to as the ""Father of the C",0.2007,0.0507,"The most popular president in the USA is George Washington. He was the first president of the United States and is considered the ""Father of the Country"". He was a military leader during the American ",0.1571,0.0409,QLoRA
+10,classification,"Which of the following are noble gases: helium, sodium, neon, oxygen, argon, hydrogen, calcium, magnesium, lithium, boron, krypton, nitrogen, xenon, aluminium, radon.","The noble gases are - helium, neon, argon, krypton, xenon, radon.","The noble gases are: helium, neon, argon, krypton, xenon, radon.
+
+### Explanation:
+The noble gases are a group of elements that are chemically inert and are located in the far right column of the peri",0.1227,0.0437,"The noble gases are: helium, neon, argon, krypton, xenon, radon. The others are not noble gases. Sodium, oxygen, nitrogen, calcium, magnesium, lithium, boron, aluminium, and hydrogen are all metals or",0.0976,0.0318,"The noble gases are: helium, neon, argon, krypton, xenon, radon. The others are not noble gases. Sodium, oxygen, nitrogen, calcium, magnesium, lithium, boron, aluminium are all metals. Hydrogen is a n",0.1504,0.0469,"The noble gases are: helium, neon, argon, krypton, xenon, radon. The rest are not noble gases. Noble gases are a group of elements in the periodic table that are chemically inert. They are also known ",0.1070,0.0351,QLoRA
+11,classification,"Identify which instrument is string or percussion: Pellet drum, Rajao","Rajao is string, Pellet drum is percussion","The instrument Pellet drum is percussion, and the instrument Rajao is string.  The Pellet drum is a type of drum, and the Rajao is a type of stringed instrument.  The Pellet drum is played by striking",0.0722,0.0142,"Rajao is string, Pellet drum is percussion.  Rajao is a stringed instrument from the island of Timor, Indonesia.  It is a long-necked lute with a round body and a long neck.  The body is made from a s",0.0680,0.0222,"Rajao is string, Pellet drum is percussion. Rajao is a stringed instrument from the Philippines. Pellet drum is a percussion instrument from the Philippines. It is a drum with a small pellet that is s",0.0622,0.0209,"Rajao is string, Pellet drum is percussion.  Rajao is a string instrument from Brazil.  Pellet drum is a percussion instrument from Brazil.  It is a drum with a wooden shell and a skin head.  It is us",0.0651,0.0219,LoRA
+12,classification,"I dont think I should pursue higher education. From the following, what are some pros and cons of getting a masters education?
+
+degree to show mastery of a subject
+Takes money
+Hard work is required
+Lo","Pros:
+skill development
+respect in society
+degree to show mastery of a subject
+Set you up for lifelong success
+
+Cons:
+Takes money
+Hard work is required
+Time away from family
+Losing out on entrepreneur","The pros of getting a master's education are:
+- degree to show mastery of a subject
+- skill development
+- Set you up for lifelong success
+- respect in society
+
+The cons of getting a master's education",0.3038,0.1201,"Pros of getting a masters education:
+- degree to show mastery of a subject
+- skill development
+- Set you up for lifelong success
+- respect in society
+
+Cons of getting a masters education:
+- Takes mone",0.2357,0.1097,"Pros of getting a masters education include:
+- degree to show mastery of a subject
+- skill development
+- Set you up for lifelong success
+- respect in society
+
+Cons of getting a masters education inclu",0.2431,0.1152,"Pros:
+- degree to show mastery of a subject
+- skill development
+- Set you up for lifelong success
+- respect in society
+
+Cons:
+- Takes money
+- Hard work is required
+- Losing out on entrepreneurial oppo",0.2470,0.1151,Full Fine-Tune
+13,classification,"Classify each method of communication as ""verbal"" or ""written"": e-mail, phone call, slack chat, zoom meeting, text, post mail","E-mail: Written
+Phone Call: Verbal
+Slack Chat: Written
+Zoom Meeting: Verbal
+Text: Written
+Post Mail: Written","Here are the classifications for each method of communication:
+
+*   e-mail: written
+*   phone call: verbal
+*   slack chat: written
+*   zoom meeting: verbal
+*   text: written
+*   post mail: written
+
+##",0.1596,0.0147,"Verbal: phone call, zoom meeting, text
+Written: e-mail, slack chat, post mail.  Slack is a written communication method, but it is also a chat, so it is also verbal.  Zoom is a written communication m",0.1176,0.0015,"e-mail: written
+phone call: verbal
+slack chat: written
+zoom meeting: verbal
+text: written
+post mail: written
+
+Note: Verbal communication is typically face to face or over the phone. Written communicat",0.1485,0.0693,"e-mail: written
+phone call: verbal
+slack chat: written
+zoom meeting: verbal
+text: written
+post mail: written
+
+Note: This is a subjective classification. Some people may consider phone calls and zoom m",0.1581,0.0747,Full Fine-Tune
+14,classification,"Tell me which of these is a Country, a City, a River, or a Mountain: New York, Nile, Amazon, Kilimanjaro, USA, Spain, Italy, Rome, Prague, Zurich, France, San Francisco, K2, Buenos Aires, Brazil, Moun","New York - City
+Nile - River
+Amazon - River
+Kilimanjaro - Mountain
+USA - Country
+Spain - Country
+Italy - Country
+Rome - City
+Prague - City
+Zurich - City
+France - Country
+San Francisco - City
+K2 - Moun","- New York: City
+- Nile: River
+- Amazon: River
+- Kilimanjaro: Mountain
+- USA: Country
+- Spain: Country
+- Italy: Country
+- Rome: City
+- Prague: City
+- Zurich: City
+- France: Country
+- San Francisco: Ci",0.3670,0.0023,"New York: City
+Nile: River
+Amazon: River
+Kilimanjaro: Mountain
+USA: Country
+Spain: Country
+Italy: Country
+Rome: City
+Prague: City
+Zurich: City
+France: Country
+San Francisco: City
+K2: Mountain
+Buenos A",0.3704,0.0058,"New York: City
+Nile: River
+Amazon: River
+Kilimanjaro: Mountain
+USA: Country
+Spain: Country
+Italy: Country
+Rome: City
+Prague: City
+Zurich: City
+France: Country
+San Francisco: City
+K2: Mountain
+Buenos A",0.3902,0.0071,"New York: City
+Nile: River
+Amazon: River
+Kilimanjaro: Mountain
+USA: Country
+Spain: Country
+Italy: Country
+Rome: City
+Prague: City
+Zurich: City
+France: Country
+San Francisco: City
+K2: Mountain
+Buenos A",0.3604,0.0055,QLoRA
+15,classification,"Identify which car manufacturer is Japanese or American: RAM, Toyota Motor Corporation","RAM is American, Toyota Motor Corporation is Japanese","The car manufacturer that is Japanese is: Toyota Motor Corporation
+The car manufacturer that is American is: RAM (owned by Fiat Chrysler Automobiles, which is an American company)  ### Note:
+RAM is an",0.0766,0.0063,"RAM is American, Toyota Motor Corporation is Japanese.  RAM is a brand of Stellantis, a multinational corporation that was formed in 2021 by the merger of Fiat Chrysler Automobiles (FCA) and the Frenc",0.0800,0.0302,"Toyota Motor Corporation is Japanese, RAM is American. RAM is a brand of trucks and vans owned by Stellantis, formerly known as Fiat Chrysler Automobiles. Toyota Motor Corporation is a Japanese multin",0.0737,0.0138,"RAM is American, Toyota Motor Corporation is Japanese.  RAM is a subsidiary of Stellantis, which is a multinational corporation that owns Chrysler, Dodge, Jeep, and RAM.  Toyota Motor Corporation is a",0.0762,0.0271,LoRA
+16,classification,"Classify the following as either red wines or white wines: Cabernet Sauvignon, Pinot Blanc, Riesling, Chardonnay, Pinot Grigio, Sauvignon Blanc, Merlot, Syrah, Shiraz","Red wines: Cabernet Sauvignon, Merlot, Syrah, Shiraz
+White wines: Pinot Blanc, Riesling, Chardonnay, Pinot Grigio, Sauvignon Blanc","Red wines: Cabernet Sauvignon, Merlot, Syrah, Shiraz
+White wines: Pinot Blanc, Riesling, Chardonnay, Pinot Grigio, Sauvignon Blanc
+
+### Explanation:
+The classification is based on the color of the gra",0.1726,0.0861,"Cabernet Sauvignon: Red
+Pinot Blanc: White
+Riesling: White
+Chardonnay: White
+Pinot Grigio: White
+Sauvignon Blanc: White
+Merlot: Red
+Syrah: Red
+Shiraz: Red
+
+Note: Shiraz is the same grape as Syrah. The",0.1146,0.0031,"Red wines: Cabernet Sauvignon, Merlot, Syrah, Shiraz
+White wines: Pinot Blanc, Riesling, Chardonnay, Pinot Grigio, Sauvignon Blanc
+Note: Shiraz and Syrah are the same wine, just referred to by differe",0.1692,0.0866,"Red wines: Cabernet Sauvignon, Merlot, Syrah, Shiraz
+White wines: Pinot Blanc, Riesling, Chardonnay, Pinot Grigio, Sauvignon Blanc
+Note: Shiraz and Syrah are the same grape variety, but the name is us",0.1753,0.0881,Full Fine-Tune
+17,classification,"Tell me whether these are pasta types or pizza types: macaroni, rigatoni, margherita, pepperoni, orzo, spaghetti, stuffed crust, Hawaiian","Pasta: macaroni, rigatoni, orzo, spaghetti
+Pizza: margherita, pepperoni, stuffed crust, Hawaiian","Here are the classifications:
+
+* macaroni: pasta
+* rigatoni: pasta
+* margherita: pizza
+* pepperoni: pizza
+* orzo: pasta
+* spaghetti: pasta
+* stuffed crust: pizza
+* Hawaiian: pizza
+
+Let me know if you ",0.1111,0.0017,"Macaroni, rigatoni, orzo, and spaghetti are pasta types. Margherita, pepperoni, and stuffed crust are pizza types. Hawaiian is a pizza type. It is a pizza with ham and pineapple. It is a popular pizza",0.0783,0.0057,"Pasta types: macaroni, rigatoni, orzo, spaghetti
+Pizza types: margherita, pepperoni, stuffed crust, Hawaiian. Note that Hawaiian pizza is a type of pizza, but it is also a type of pasta. Hawaiian is a",0.1196,0.0266,"Macaroni, rigatoni, orzo, and spaghetti are all pasta types. Margherita, pepperoni, and stuffed crust are all pizza types. Hawaiian is a pizza type, but it is also a pasta type. Hawaiian is a type of ",0.0853,0.0063,QLoRA
+18,classification,Which is a species of fish? Steelhead or Metalhead,Steelhead,"Steelhead is a species of fish. Metalhead is a colloquialism for a trout that has been caught and released multiple times, often resulting in a deformed or disfigured appearance. It is not a recognize",0.0099,0.0009,Steelhead is a species of fish. Metalhead is not a species of fish. Metalhead is a term used to describe a fan of the San Jose Sharks. It is also a term used to describe a fan of the San Francisco 49e,0.0088,0.0008,Steelhead is a species of fish. Metalhead is not a species of fish. Metalhead is a term used to describe a person who is a fan of heavy metal music. It is also a term used to describe a person who is ,0.0083,0.0007,Steelhead is a species of fish. Metalhead is a fictional character in the X-Men comics. He is a mutant with the ability to control and manipulate metal. He is a member of the X-Men and has fought alon,0.0086,0.0008,LoRA
+19,classification,"Categorize the below types of animals based on whether they are domestic or non-domestic
+dog, cat, badgers, cougars","domestic : dog, cat
+non-domestic : badgers, cougars","Domestic: dog, cat
+Non-domestic: badgers, cougars
+
+### Explanation:
+Domestic animals are those that are commonly kept as pets or used for work, and are often bred in captivity. Non-domestic animals ar",0.0667,0.0030,"Domestic: dog, cat
+Non-domestic: badgers, cougars
+
+Note: Domestic animals are animals that are commonly kept as pets or used for work. Non-domestic animals are animals that are not commonly kept as pe",0.0648,0.0030,"Domestic: dog, cat
+Non-domestic: badgers, cougars
+Note: Domestic animals are animals that are commonly kept as pets or used for work. Non-domestic animals are animals that are not commonly kept as pet",0.0631,0.0029,"Domestic: dog, cat
+Non-domestic: badgers, cougars
+Note: Domestic animals are animals that are kept by humans for companionship, food, or other purposes. Non-domestic animals are animals that are not k",0.0636,0.0029,LoRA
+20,closed_qa,"What is an ""El Niño"" weather pattern?","El Niño (/ɛl ˈniːnjoʊ/ el NEEN-yoh, Spanish: [el ˈniɲo]; lit. 'The Boy') is the warm phase of the El Niño–Southern Oscillation (ENSO) and is associated with a band of warm ocean water that develops in","El Niño is a weather pattern characterized by a band of warm ocean water in the central and east-central equatorial Pacific, accompanied by high air pressure in the western Pacific and low air pressur",0.1871,0.0915,El Niño is a weather pattern that occurs when the ocean water in the Pacific Ocean warms up. This warming of the ocean water is associated with a band of warm ocean water that develops in the central ,0.2292,0.1120,"El Niño is a weather pattern that occurs when the Pacific Ocean warms up.  This warming up of the Pacific Ocean causes a shift in the jet stream, which in turn causes a shift in the weather patterns a",0.3165,0.1368,El Niño is a weather pattern that occurs when the ocean water in the Pacific Ocean warms up.  This warming of the ocean water causes changes in the weather patterns around the world.  The warming of t,0.1869,0.0056,QLoRA
+21,closed_qa,"Given that preserving human brains for more than a century is fairly uncommon, what do you think was the motivation for preserving Guiteau's brain?","One reason for preserving the brain may have been to study structural abnormalities that could have explained Guiteau's violent behavior. Alternatively, because Guiteau was well-known and infamous, hi","The motivation for preserving Guiteau's brain was likely to study the brain of a person who had committed a heinous crime, such as murder, in order to gain insight into the workings of the human mind ",0.1487,0.0203,"Guiteau's brain was preserved for more than a century, which is fairly uncommon.  The motivation for preserving Guiteau's brain was likely to study the brain of a person who was convicted of murder.  ",0.1355,0.0057,Guiteau's brain was preserved because he was the assassin of President James A. Garfield.  Guiteau was convicted of Garfield's murder and executed by hanging one year after the shooting.  Guiteau's br,0.1205,0.0043,The motivation for preserving Guiteau's brain was likely to study the brain of a person who had committed a violent crime.  Guiteau was convicted of murdering President Garfield and was executed by ha,0.1439,0.0250,Full Fine-Tune
+22,closed_qa,How was art used for manipulative purpose in racial discuss in the 20th century?,"In the 19th to 20th century, Europeans commonly use artworks to portray prejudice towards Middle Eastern and Asian people.","Artwork was used for manipulative purposes in racial discussions in the 20th century by portraying racialized groups in a way that reinforced stereotypes and prejudices. For example, Eugène Delacroix'",0.0756,0.0024,Artwork was used to instill prejudice in the Western populations through sexualizing and manipulating images. One of the most prominent examples of Orientalist work in art is a piece by Eugène Delacro,0.0776,0.0035,Artwork was used to instill prejudice in the Western populations through sexualizing and manipulating images. One of the most prominent examples of Orientalist work in art is a piece by Eugène Delacro,0.0779,0.0035,"In the 20th century, art was used to manipulate racial discussions. For example, Eugène Delacroix's painting Women of Algiers in their Apartment, created in 1834, portrayed three women resting in a ha",0.0885,0.0040,Full Fine-Tune
+23,closed_qa,"Given this paragraph, what were the regional release dates for Viva Piñata: Party Animals?","Viva Piñata: Party Animals was released for the Xbox 360 gaming console on October 30, 2007 in North America, November 15, 2007 in Australia, November 16, 2007 in Europe, and December 6, 2007 in Japan","The regional release dates for Viva Piñata: Party Animals were October 30, 2007, in North America, November 15, 2007, in Australia, November 16, 2007, in Europe, and December 6, 2007, in Japan.  The y",0.3315,0.0873,"October 30, 2007, in North America, November 15 in Australia, November 16 in Europe, and December 6 in Japan.  The game was released on October 30, 2007, in North America, November 15 in Australia, No",0.2687,0.0442,"The game was released on October 30, 2007, in North America, November 15 in Australia, November 16 in Europe, and December 6 in Japan.  The game was released on October 30, 2007, in North America, Nov",0.2660,0.0437,"The game was released on October 30, 2007, in North America, November 15 in Australia, November 16 in Europe, and December 6 in Japan. The game was released on October 30, 2007, in North America, Nove",0.2596,0.0424,LoRA
+24,closed_qa,When was Rhual constructed?,Rhual was constructed in 1634 by Evan Edwards.,Rhual was constructed in 1634.  The north wing of the current building was most likely incorporated from an older medieval house.  The east and south entrances were created in the 19th century.  The h,0.0821,0.0142,"Rhual was constructed in 1634. The house has since been built upon further, and the east and south entrances were created in the 19th century. The present building was constructed in 1634 by Evan Edwa",0.0731,0.0257,"Rhual was constructed in 1634. It was built by Evan Edwards, a member of a well established Flintshire family which traced its descent from the Welsh king Hywel Dda. He most likely incorporated an old",0.0717,0.0252,"Rhual was constructed in 1634. It was built by Evan Edwards, a member of a well established Flintshire family which traced its descent from the Welsh king Hywel Dda. He most likely incorporated an old",0.0708,0.0249,LoRA
+25,closed_qa,What new economies developed because of the anti-slave treaties?,"Instead of exporting slaves, Africa began exporting palm oil, cocoa, timber, and gold.","The new economies that developed because of the anti-slave treaties were the palm oil, cocoa, timber, and gold trade. These economies formed the bedrock of West Africa's modern export trade.  The Asan",0.0744,0.0189,"The decline of the Atlantic slave trade in the 1820s caused dramatic economic shifts in local polities. The gradual decline of slave-trading, prompted by a lack of demand for slaves in the New World, ",0.0853,0.0055,"The anti-slave treaties led to the development of new economies in West Africa. The Asante Confederacy, the Kingdom of Dahomey, and the Oyo Empire all adapted to the shift in different ways. The Asant",0.0755,0.0063,"The anti-slave treaties led to the development of ""legitimate commerce"" in the form of palm oil, cocoa, timber and gold. This was the bedrock of West Africa's modern export trade. The Oyo Empire, unab",0.0891,0.0062,Full Fine-Tune
+26,closed_qa,"Given a reference text about Michał Rozenfeld, tell me what he did before the war and where he's buried.",Michał Rozenfeld studied psychology before being sent to the Warsaw Ghetto during the war. He is buried at the Jewish Cemetery on Okopowa Street in Warsaw.,"Michał Rozenfeld studied psychology before the war. He is buried in a mass grave in the Jewish cemetery on Okopowa Street in Warsaw.  ### Instruction:
+Given a reference text about Michał Rozenfeld, te",0.1791,0.0959,"Before the war, Michał Rozenfeld studied psychology with, among others, Tadeusz Kotarbiński. After the outbreak of World War II, Rozenfeld was sent to the Warsaw Ghetto, where he worked as a teacher. ",0.2029,0.0631,"Before the war, Michał Rozenfeld studied psychology with Tadeusz Kotarbiński. After the war broke out, he was sent to the Warsaw Ghetto, where he worked as a teacher. He belonged to the Polish Workers",0.1991,0.0636,"Before the war, Michał Rozenfeld studied psychology. He is buried in a mass grave of the People's Guard partisans in the Jewish cemetery on Okopowa Street in Warsaw. He was posthumously awarded the Si",0.1395,0.0605,LoRA
+27,closed_qa,Where did peanut butter and jelly sandwiches originate?,"In 1901, the Boston Cooking School Magazine published the first known reference for a peanut butter and jelly sandwich. This magazine article called for ""three very thin layers of bread and two of fil","The first known reference for a peanut butter and jelly sandwich appeared in the Boston Cooking School Magazine in 1901. It called for ""three very thin layers of bread and two of filling, one of peanu",0.2930,0.1725,"The first known reference for a peanut butter and jelly sandwich appeared in the Boston Cooking School Magazine in 1901; it called for ""three very thin layers of bread and two of filling, one of peanu",0.2920,0.1689,"The first known reference for a peanut butter and jelly sandwich appeared in the Boston Cooking School Magazine in 1901; it called for ""three very thin layers of bread and two of filling, one of peanu",0.2952,0.1712,"The first known reference for a peanut butter and jelly sandwich appeared in the Boston Cooking School Magazine in 1901. It called for ""three very thin layers of bread and two of filling, one of peanu",0.2878,0.1659,QLoRA
+28,closed_qa,"Given a reference text about Mussa Azzan Zungu, tell me his current position.",Mussa Azzan Zungu's current position is Deputy Speaker of Tanzania National Assembly.,Mussa Azzan Zungu is the current Deputy Speaker of Tanzania National Assembly.,0.8000,0.4962,Deputy Speaker of Tanzania National Assembly. He's also current Member of Parliament for Ilala constituency since 2005. He has continued to retain the parliamentary seat in 2010 & 2015. He was appoint,0.0569,0.0239,Deputy Speaker of Tanzania National Assembly. He's also current Member of Parliament for Ilala constituency since 2005. He has continued to retain the parliamentary seat in 2010 & 2015. He was appoint,0.0569,0.0239,Mussa Azzan Zungu is the current Deputy Speaker of Tanzania National Assembly. He was appointed to this position after the resignation of the former Speaker Job Ndugai. He was elected to become the cu,0.0939,0.0271,Full Fine-Tune
+29,closed_qa,"Based on this questio about Kingdom Hearts, what company published it?",Square Enix,"Square Enix.  Square Enix is the company that published Kingdom Hearts.  Square Enix was originally called Square, but it was renamed in 2003.  Square Enix is a Japanese video game developer and publi",0.0191,0.0018,"Square Enix (originally by Square) published Kingdom Hearts. It is a collaboration between Square Enix and The Walt Disney Company and is under the leadership of Nomura, a longtime Square Enix employe",0.0200,0.0020,Square Enix published Kingdom Hearts.  It was originally published by Square.  Square Enix is a Japanese company.  The game was developed by Square Enix.  The game was also developed by Square.  The g,0.0211,0.0020,"Kingdom Hearts was published by Square Enix. It is a collaboration between Square Enix and The Walt Disney Company. It is under the leadership of Nomura, a longtime Square Enix employee. It is a fanta",0.0196,0.0019,QLoRA
+30,creative_writing,Why do I have a belly button?,"When we were a baby we were connected to our mother through an umbilical cord that provided food, water and nutrients to help us grow. The belly button is the spot where the cord was once attached fro","You have a belly button because when you were a baby, you were inside your mother's womb. The umbilical cord, which is a special cord that connects you to your mother's placenta, was attached to your ",0.1920,0.0236,You have a belly button because you were once connected to your mother via the umbilical cord.  The umbilical cord is a tube that connects the mother's placenta to the baby's belly.  The placenta is a,0.1818,0.0229,You have a belly button because you were once a fetus inside your mother's womb.  The umbilical cord was attached to your navel and provided you with the necessary nutrients to grow.  When you were bo,0.1447,0.0287,You have a belly button because you were once a fetus inside your mother's womb.  The umbilical cord was the lifeline that kept you alive and nourished while you were growing inside your mother's womb,0.1132,0.0195,LoRA
+31,creative_writing,What are the best day trips near San Francisco?,"The San Francisco Bay Area has a number of amazing day trips offering a variety of options.  The wine country is less than an hour away.  Santa Cruz, Monterey & Big Sur are all great escapes to the co","San Francisco is a great base for exploring the surrounding region, with plenty of exciting day trip options within a few hours' drive. Here are some of the best day trips near San Francisco:
+
+1.  **M",0.1423,0.0102,"There are many great day trips near San Francisco.  Some of the most popular include:
+- Muir Woods:  A beautiful redwood forest just north of San Francisco.  It is a great place to hike and enjoy natu",0.1355,0.0077,"There are many great day trips near San Francisco.  Some of the most popular day trips include:
+- Muir Woods and Sausalito
+- Napa Valley
+- Sonoma
+- Santa Cruz
+- Monterey
+- Big Sur
+- Lake Tahoe
+- Yosem",0.1058,0.0040,"There are many great day trips near San Francisco.  The most popular are Muir Woods, Sausalito, and Napa Valley.  Muir Woods is a beautiful redwood forest that is only 30 minutes from San Francisco.  ",0.1344,0.0093,LoRA
+32,creative_writing,What is the best food?,"We all need food to survive. For many people, food is more than a necessity for survival. Food is a lifestyle. Food is art. For these foodies, let us consider, what is the best food. In this author's ","The best food is subjective and can vary greatly depending on personal preferences, cultural background, and dietary needs. Some people may prefer sweet treats like chocolate or ice cream, while other",0.1587,0.0071,"The best food is the one that you enjoy the most.  If you like pizza, then pizza is the best food.  If you like sushi, then sushi is the best food.  If you like tacos, then tacos are the best food.  T",0.2000,0.0626,"The best food is the one that you enjoy the most.  It could be a burger, pizza, sushi, or any other food that you like.  The best food is the one that you enjoy the most.  It could be a burger, pizza,",0.1733,0.0064,"The best food is the food that you enjoy the most.  It could be a hamburger, pizza, or a salad.  It could be a meal that you have at a restaurant or a meal that you cook at home.  It could be a meal t",0.1737,0.0068,LoRA
+33,creative_writing,Imagine you are the last person on Earth. Write a diary entry describing your thoughts and feelings.,"December 25, 2061
+
+Dear Diary:
+
+Looks like this is it. My last day as the last human (that I know of) on this stupid planet. I mean, it could NOT be my last day, because who knows how and when I'll di","**March 15, 2023**
+
+I can barely believe it's been three months since the world ended. It feels like an eternity since I've seen another human being. I'm starting to lose track of time. The days blend",0.1148,0.0008,"I am the last person on Earth. I am sitting in my living room, surrounded by the remnants of a civilization that once thrived. I am filled with a mix of emotions - sadness, loneliness, and a sense of ",0.1346,0.0013,I am the last person on Earth. I am alone. I am scared. I am sad. I am angry. I am confused. I am lost. I am alone. I am scared. I am sad. I am angry. I am confused. I am lost. I am alone. I am scared,0.0514,0.0004,I am the last person on Earth. I am alone. I am scared. I am sad. I am lonely. I am confused. I am angry. I am frustrated. I am tired. I am hungry. I am thirsty. I am cold. I am hot. I am tired. I am ,0.0514,0.0004,LoRA
+34,creative_writing,Write about something you hate.,"I hate motorized scooters. I live in London and over the last few years, they have become extremely popular for people getting around the city. Most people are okay on them, but there are far too many","I hate it when people don't recycle. It's so frustrating to see people carelessly throwing away plastic bottles, cans, and paper without even thinking about the impact it has on the environment. Recyc",0.1069,0.0041,I hate when people don't listen to me. I hate when people don't respect my time. I hate when people don't respect my space. I hate when people don't respect my feelings. I hate when people don't respe,0.0489,0.0025,I hate the smell of onions.  I hate the smell of onions because it makes me feel sick.  I hate the smell of onions because it makes me feel sick.  I hate the smell of onions because it makes me feel s,0.0696,0.0026,I hate when people are late. I hate when people are late because it makes me feel like I am not important. I hate when people are late because it makes me feel like I am not important because it makes,0.0576,0.0026,QLoRA
+35,creative_writing,"Describe what your ideal pet cat would look like, and what you would name it.","My ideal cat would be a long haired ginger Maine Coon, with a beautifully fluffy coat that would be super soft to pet and bright green eyes. I would name him Rory, because that is a name that means Re","My ideal pet cat would be a sleek and agile feline with a shimmering silver coat and piercing emerald green eyes. It would have a slender yet muscular build, with a short, smooth coat that requires mi",0.2000,0.0254,"My ideal pet cat would be a black cat with a white patch on its nose. It would be named ""Midnight"". It would be a very playful cat, and would love to play with a ball of yarn. It would be very affecti",0.1589,0.0305,My ideal pet cat would be a grey and white cat with a fluffy coat. It would have a small nose and big eyes. It would be a female cat and I would name it Luna. I would like it to be a playful cat that ,0.2082,0.0286,"My ideal pet cat would be a black cat with bright green eyes. I would name it ""Midnight"" because it would be black and have bright green eyes. I would name it ""Midnight"" because it would be black and ",0.1708,0.0459,QLoRA
+36,creative_writing,Draft an e-mail to a resort inquiring about information regarding a vow renewal celebration for my wife and me.,"Hi Jane,
+
+I am reaching out to obtain information about hosting a vow renewal celebration at your resort. You were listed as an event POC on the resort's website, please connect me with another collea","Subject: Inquiry for Vow Renewal Celebration Information
+
+Dear [Resort Name] Team,
+
+I am reaching out to inquire about the possibility of hosting a vow renewal celebration at your resort. My wife and ",0.2292,0.1088,"Dear [Resort Name],
+
+I am writing to inquire about information regarding a vow renewal celebration for my wife and me. We are looking for a resort that can accommodate 20-30 guests and has a private c",0.1830,0.0254,"Dear [Resort Name],
+
+I am writing to inquire about information regarding a vow renewal celebration for my wife and me. We are interested in celebrating our anniversary at your resort and would like to",0.2273,0.0494,"Dear [Resort],
+I am writing to inquire about your resort for a vow renewal celebration for my wife and me. We are looking for a resort that can accommodate 50 guests and has a private beach. We would ",0.2152,0.0627,QLoRA
+37,creative_writing,Should I pursue a PhD in STEM?,"Whether or not to pursue a PhD will depend on a number of factors. These days, many professions require more and more certification and proof of education. However, a PhD is usually only require in th","Pursuing a PhD in STEM (Science, Technology, Engineering, and Mathematics) can be a rewarding and challenging experience, but it's essential to carefully consider your motivations, goals, and circumst",0.1896,0.0126,Pursuing a PhD in STEM is a significant investment of time and resources.  It is not a decision to be taken lightly.  If you are passionate about research and want to contribute to the advancement of ,0.2227,0.0673,"Pursuing a PhD in STEM is a significant undertaking that requires a lot of time, money, and dedication. It is not for everyone. If you are passionate about research and want to contribute to the scien",0.2056,0.0626,"Pursuing a PhD in STEM is a great way to develop your skills in research and critical thinking. It can also be a great way to develop your skills in communication and collaboration. However, it is not",0.1867,0.0441,LoRA
+38,creative_writing,Why did the cow jump over the moon?,"The cow wanted to jump to the moon because it had run out of milk for its calf. The calf was crying day and night because of how hungry it was. The mother cow looked up at the night sky, saw the milky","The cow jumped over the moon because it was a dream. The question is a reference to the traditional English nursery rhyme ""Hey Diddle Diddle,"" which features a cow jumping over the moon. The rhyme is ",0.1883,0.0403,The cow jumped over the moon because it was a dream.  The cow was not actually jumping over the moon.  The cow was just dreaming about jumping over the moon.  The cow was dreaming about jumping over t,0.2312,0.0329,The cow jumped over the moon because it was a dream.  The cow was dreaming about jumping over the moon.  The cow was dreaming about jumping over the moon because it was a dream.  The cow was dreaming ,0.2312,0.0329,The cow jumped over the moon because it was a dream.  The dream was a dream of a dream.  The dream of a dream was a dream of a dream of a dream.  The dream of a dream of a dream was a dream of a dream,0.1071,0.0190,LoRA
+39,creative_writing,What are the pros and cons of outdoor and indoor soccer?,"Outdoor soccer is more appealing as we are out in nature. 
+The outdoor field is bigger
+Outdoor soccer is most popular
+Major soccer tournaments worldwide are played outdoors, including the World Cup
+
+I","Outdoor soccer has several pros and cons. On the one hand, playing soccer outdoors can be beneficial for players as it allows them to develop their skills in a more natural environment, which can help",0.1683,0.0138,"Outdoor soccer is a more natural game, with a more natural ball, and a more natural playing surface. The ball is made of leather, and the playing surface is grass. The game is played in the open air, ",0.1895,0.0130,Outdoor soccer is played on a grass field and is typically played in the spring and fall. The pros of outdoor soccer are that the field is larger and the game is more physically demanding. The cons of,0.2069,0.0167,"Outdoor soccer is a great way to get exercise and enjoy the outdoors. It is also a great way to get a workout. However, it can be very hot and humid in the summer, and cold and wet in the winter. It c",0.1778,0.0133,QLoRA
+40,general_qa,"What is the difference between UI design, UX design and Product design?","While all of these types of design are related, there are several key differences. UI design focuses on the actual visual design of an experience and the look and feel of the controls. UX design is al","UI (User Interface) design focuses on the visual aspects of a product, such as the layout, color scheme, typography, and overall aesthetic. It's concerned with how the product looks and feels, making ",0.2092,0.0245,"UI design is the process of creating the visual elements of a product, such as the layout, colors, typography, and graphics. It is focused on creating a visually appealing and user-friendly interface.",0.2000,0.0110,"UI design is the process of creating the visual elements of a product, such as the layout, colors, typography, and imagery. UX design is the process of creating the user experience of a product, such ",0.2020,0.0112,"UI design is the process of creating the visual elements of a product, such as the layout, colors, typography, and imagery. It is focused on making the product look visually appealing and user-friendl",0.2138,0.0111,Full Fine-Tune
+41,general_qa,How do I get in shape?,"In order to get in good physical shape, you need to take multiple aspects of physical health into account. Some keys components that influence one's physical health are diet, exercising, and recovery.","Getting in shape requires a combination of regular exercise, a balanced diet, and sufficient rest. Here are some steps you can follow:
+
+1.  **Set your goals**: Define what ""in shape"" means to you. Do ",0.1484,0.0041,"There are many ways to get in shape.  The most important thing is to find something you enjoy and stick to it.  You can start by going for a walk or jog.  You can also try running, swimming, or biking",0.1524,0.0087,"To get in shape, you need to exercise regularly.  You can start by doing some light cardio, such as jogging or cycling, and then move on to strength training.  You can also try high-intensity interval",0.1588,0.0253,"Getting in shape is a great goal to have.  It can be challenging, but it is also rewarding.  The first step is to set a goal.  What do you want to achieve?  Do you want to lose weight?  Do you want to",0.1337,0.0035,QLoRA
+42,general_qa,Why do humans play sports?,Humans play sports for a variety of reasons but one reason is to have fun.   Playing sports is also a good form of exercise which helps humans stay in shape.  Not everyone enjoys playing sports but fo,"Humans play sports for a variety of reasons. Some of the most common reasons include:
+
+*   **Physical Health:** Sports can help improve physical fitness, coordination, and overall health. Regular exer",0.1721,0.0373,Humans play sports for a variety of reasons.  Some people play sports to stay active and healthy.  Some people play sports to compete against others.  Some people play sports to have fun.  Some people,0.1313,0.0354,Humans play sports for a variety of reasons.  Some people play sports for the physical benefits of exercise.  Others play sports for the social benefits of being part of a team.  Some people play spor,0.1245,0.0285,Humans play sports for a variety of reasons.  Some people play sports for the love of the game.  Others play sports to stay healthy.  Some people play sports to be part of a team.  Some people play sp,0.1149,0.0301,LoRA
+43,general_qa,Are you going for a walk today?,"After these last rainy days, I'm definitely going for a walk today! With this sunny weather, staying at home would be a shame!","Yes, I am. I'm going to the park. It's a beautiful day outside. The sun is shining and the birds are singing. I love walking in the park. It's so peaceful and relaxing. I get to enjoy nature and clear",0.0750,0.0138,"Yes, I am going for a walk today. I am going to walk to the park and then to the grocery store. I will also walk to the library. I will walk to the library to return a book that I have been reading. I",0.0528,0.0098,"Yes, I am going for a walk today. I am going to walk to the park and then to the grocery store. I am going to buy some fresh fruit and vegetables. I am going to walk back home and then I am going to m",0.0615,0.0104,I am going for a walk today. I am going to walk around the block. I am going to walk around the block because I want to get some exercise. I am going to walk around the block because I want to get som,0.0455,0.0093,QLoRA
+44,general_qa,Who is the greatest guitarist of all time?,"Music tastes differ greatly so it's difficult to come up with a definitive answer on who the best guitarist is. Some one once asked Jimmy Hendrix, arguably one of the greatest guitarist of all time, w","This is a subjective question, and opinions on the greatest guitarist of all time vary widely depending on personal taste, musical genre, and cultural context. However, some of the most commonly cited",0.1115,0.0240,The greatest guitarist of all time is Jimi Hendrix. He was a master of the electric guitar and was able to create a wide range of sounds and effects. He was also a skilled songwriter and was able to c,0.1812,0.0390,Jimi Hendrix is widely regarded as the greatest guitarist of all time.  He revolutionized the way people play the guitar and his playing style is still studied by guitarists today.  He was a true inno,0.1710,0.0448,"Jimi Hendrix is widely regarded as the greatest guitarist of all time.  He was a pioneer of the electric guitar and his playing style was revolutionary.  He was known for his use of feedback, distorti",0.1444,0.0495,LoRA
+45,general_qa,Is karaoke fun?,"It depends.  Some people like karaoke, and some don't.  You might enjoy karaoke if, for example, you have an outgoing personality, like to sing or perform publicly, or enjoy bonding with others over m","Yes, karaoke is fun. It is a form of entertainment where people sing along with recorded music, often with a live band or instrumental accompaniment. Karaoke can be a fun way to socialize, relax, and ",0.1477,0.0079,"Karaoke is a fun activity that can be enjoyed by people of all ages. It is a great way to socialize and have fun with friends and family. Karaoke can be done in a variety of settings, such as at home,",0.1436,0.0091,"Yes, karaoke is fun.  It is a great way to sing with friends and family.  It is also a great way to sing with strangers.  Karaoke is a great way to sing with people you don't know.  Karaoke is a great",0.1412,0.0036,"Karaoke is a fun activity that can be enjoyed by people of all ages. It is a great way to socialize and have fun with friends and family. Karaoke can be done in a variety of settings, such as at home,",0.1377,0.0073,LoRA
+46,general_qa,What is the name of the meme crypto coin that Elon Musk made famous?,"Elon Musk brought attention to the crypto currency Dogecoin by tweeting the word ""One word: Doge"". This brought the coin into meme status with its value starting at $0.0047 and skyrocketing to $0.7376","The meme crypto coin that Elon Musk made famous is Dogecoin (DOGE). It was created as a joke in 2013 but gained popularity after Musk tweeted about it in 2021, causing its price to surge. Musk has sin",0.0972,0.0029,"Dogecoin. It was originally created as a joke, but it has become a real cryptocurrency. It is also the name of a dog that was a meme. Elon Musk has been a proponent of Dogecoin and has used it to make",0.0608,0.0026,"Dogecoin. It is a joke cryptocurrency that was created in 2013. It was originally intended to be a joke, but it has gained popularity over the years. Elon Musk has been a strong supporter of Dogecoin ",0.0934,0.0035,"Dogecoin. It is a cryptocurrency created by software engineers Billy Markus and Jackson Palmer, who decided to create a payment system as a ""joke"", making fun of the wild speculation in cryptocurrenci",0.0991,0.0034,Full Fine-Tune
+47,general_qa,How do I find my Tesla charging station?,Access charge settings by touching Controls > Charging when Tesla is in Park. You can also touch the battery icon on the touchscreen to access charge settings.,"To find your Tesla charging station, follow these steps:
+
+1.  **Use the Tesla App**: Open the Tesla app on your smartphone and log in to your account. The app will show you the location of your vehicl",0.0969,0.0061,You can find your Tesla charging station by using the Tesla app on your phone.  The app will show you the location of your charging station and the status of your charging session.  You can also use t,0.1020,0.0057,You can find your Tesla charging station by using the Tesla app.  The app will show you the location of your charging station and the status of your charging station.  You can also use the app to sche,0.0898,0.0055,You can find your Tesla charging station by using the Tesla app on your phone.  You can also use the Tesla website to find your charging station.  You can also use the Tesla app to find charging stati,0.0887,0.0054,LoRA
+48,general_qa,What is the trias politica?,"The trias politica is the typical separation of powers in a government - the legislative power, the executive power and the judiciary power. These powers should be independent of each other, with each","The trias politica is a political system in which the power is divided among three branches: the legislative, the executive, and the judicial. This system is designed to provide a system of checks and",0.2222,0.0246,"The trias politica is a political system where the power is divided between three branches of government. The three branches are the legislative, the executive and the judiciary. The legislative branc",0.2033,0.0279,"The trias politica is a political system where the power is divided between three branches of government. The three branches are the legislative, the executive and the judiciary. The legislative branc",0.2000,0.0260,"The trias politica is a political system in which the power is divided between three branches of government. The three branches are the legislative, the executive and the judicial. The legislative bra",0.1987,0.0242,LoRA
+49,general_qa,What are the New Rules for 2022?,"IFAB introduced twelve new football rules for the 2019/20 season. They include changes to the handball rule and sterner punishments for an 'illegal' goal celebration.
+
+The official Laws of the Game 20","The new rules for 2022 are as follows:
+
+1.  **New Tax Brackets**: The tax brackets for 2022 are as follows:
+    *   Single filers: 10% on the first $10,275, 12% on income between $10,276 and $41,775, ",0.0914,0.0048,"The New Rules for 2022 are:
+1. The ball must be dropped from a height of 3.05 meters (10 feet) above the ground.
+2. The ball must be released from the hand, and not thrown.
+3. The ball must be release",0.0853,0.0036,"The New Rules for 2022 are:
+1. The ball must be made of a material that is less than 1.68 grams per cubic centimeter.
+2. The ball must be made of a material that is less than 1.68 grams per cubic cent",0.0934,0.0032,"The New Rules for 2022 are:
+1. The 2022 NFL season will be played with 17 regular season games.
+2. The 2022 NFL season will be played with a 14 game regular season schedule for teams that made the pla",0.1085,0.0030,Full Fine-Tune
+50,information_extraction,Was Samuel Wesley the founder of the Methodist Church?,"No, John Wesley, his uncle, was the founder of the Methodist Church.","No, Samuel Wesley was not the founder of the Methodist Church. His uncle, John Wesley, was the founder of the Methodist Church. Samuel Wesley was an organist and composer, and a member of a family of ",0.1048,0.0307,"No, John Wesley was the founder of the Methodist Church. Samuel Wesley was his nephew. He was an English organist and composer in the late Georgian period. He was a contemporary of Mozart (1756–1791) ",0.1023,0.0325,"No, John Wesley was the founder of the Methodist Church. Samuel Wesley was his nephew. He was an English organist and composer in the late Georgian period. He was a contemporary of Mozart (1756–1791) ",0.1146,0.0382,"No, John Wesley was the founder of the Methodist Church. Samuel Wesley was the son of Charles Wesley, a contemporary of Mozart, and the grandson of Samuel Wesley, a poet of the late Stuart period. He ",0.0913,0.0311,QLoRA
+51,information_extraction,What year was Craigslist founded?,Craigslist was founded in the year 1995 by Craig Newmark.,"1995.  Craig Newmark began the service in 1995 as an email distribution list to friends, featuring local events in the San Francisco Bay Area. It became a web-based service in 1996 and expanded into o",0.0625,0.0078,"Craigslist was founded in 1995. It was started by Craig Newmark as an email distribution list to friends, featuring local events in the San Francisco Bay Area. It became a web-based service in 1996 an",0.0696,0.0137,"Craigslist was founded in 1995.  It was started as an email distribution list to friends, featuring local events in the San Francisco Bay Area.  It became a web-based service in 1996 and expanded into",0.0673,0.0137,"Craigslist was founded in 1995.  It was started by Craig Newmark as an email distribution list to friends, featuring local events in the San Francisco Bay Area.  It became a web-based service in 1996 ",0.0737,0.0144,Full Fine-Tune
+52,information_extraction,"From the passage provided, extract list of language drivers for Cassandra. Separate them with a comma.","Java (JDBC), Python (DBAPI2), Node.JS (Datastax), Go (gocql), C++","Java (JDBC), Python (DBAPI2), Node.JS (Datastax), Go (gocql), C++ 
+
+### Explanation:
+The passage mentions that language drivers are available for Java (JDBC), Python (DBAPI2), Node.JS (Datastax), Go (",0.1000,0.0396,"Java, Python, Node.JS, Go, C++  are the language drivers for Cassandra. They are separated by a comma.  JDBC, DBAPI2, Datastax, gocql are the language drivers for Cassandra. They are separated by a co",0.1205,0.0012,"Java (JDBC), Python (DBAPI2), Node.JS (Datastax), Go (gocql), C++  are language drivers for Cassandra. They are separated by a comma.  Java (JDBC), Python (DBAPI2), Node.JS (Datastax), Go (gocql), C++",0.1449,0.0615,"Java, Python, Node.JS, Go, C++ are the language drivers for Cassandra. They are separated by a comma.  Java, Python, Node.JS, Go, C++ are the language drivers for Cassandra. They are separated by a co",0.0670,0.0011,QLoRA
+53,information_extraction,Extract the year that the Balloon typeface was created from the following Wikipedia article.,Balloon typeface was created in 1939 by Max R. Kaufmann.,1939.  The year the Balloon typeface was created.  The year is found in the first sentence of the second paragraph.  The year is also found in the last sentence of the second paragraph.  The year is a,0.0450,0.0045,"1939. Balloon was a brush script commonly used for signage or display purposes. It was designed in 1939 by Max R. Kaufmann, for American Type Founders, in response to Howard Allen Trafton's Cartoon, c",0.0792,0.0205,"1939. Balloon was a brush script commonly used for signage or display purposes. It was designed in 1939 by Max R. Kaufmann, for American Type Founders, in response to Howard Allen Trafton's Cartoon, c",0.0870,0.0193,"1939. The Balloon typeface was created in 1939 by Max R. Kaufmann. It was designed in response to Howard Allen Trafton's Cartoon, cut for Bauer Type Foundry in 1936. It had no lowercase letters and wa",0.0966,0.0438,Full Fine-Tune
+54,information_extraction,"Given the lineage of this historical military aircraft, when was the Avro Arrow first flown and what were the operating characteristics of that flight?","The Avro Canada RL-201 Arrow was first flown in a test flight on March 25, 1958. During that flight, handling and performance proved excellent and the aircraft reached speeds of up to Mach 1.9 in leve",The Avro Arrow was first flown on 25 March 1958. The operating characteristics of that flight were that the aircraft reached Mach 1.9 in level flight and demonstrated excellent handling and overall pe,0.1905,0.0430,"The Avro Canada CF-105 Arrow was a delta-winged interceptor aircraft designed and built by Avro Canada. The CF-105 held the promise of Mach 2 speeds at altitudes exceeding 50,000 feet (15,000 m) and w",0.1842,0.0388,The Avro Canada CF-105 Arrow was first flown on 25 March 1958.  The first flight was in level flight and reached Mach 1.9.  The aircraft was powered by the Pratt & Whitney J75.  The aircraft was inten,0.1448,0.0239,"The Avro Canada CF-105 Arrow was a delta-winged interceptor aircraft designed and built by Avro Canada. The CF-105 held the promise of Mach 2 speeds at altitudes exceeding 50,000 feet (15,000 m) and w",0.1842,0.0388,LoRA
+55,information_extraction,From the passage identify the areas where cytokines can help the host immune responses. Display the results in a comma separated format.,"infection, inflammation, trauma, sepsis, cancer, reproduction","cell signaling, autocrine, paracrine, endocrine, immunomodulating, chemokines, interferons, interleukins, lymphokines, tumour necrosis factors, immune system, humoral, cell-based, immune responses, in",0.0745,0.0218,"Immune responses to infection, inflammation, trauma, sepsis, cancer, and reproduction.  Inflammation, trauma, sepsis, cancer, and reproduction.  Infection, inflammation, trauma, sepsis, cancer, and re",0.1062,0.0314,"immune responses to infection, inflammation, trauma, sepsis, cancer, and reproduction. Cytokines modulate the balance between humoral and cell-based immune responses, and they regulate the maturation,",0.0694,0.0201,"autocrine, paracrine, endocrine, immunomodulating, chemokines, interferons, interleukins, lymphokines, tumour necrosis factors, humoral, cell-based, immune responses, inflammation, trauma, sepsis, can",0.1188,0.0370,Full Fine-Tune
+56,information_extraction,"Based on this paragraph, how many jobs are created by tourism in Germany?",4.2 million jobs are created by tourism in Germany.,4.2 million jobs are created by tourism in Germany.  The answer is a number.  The number is 4.2 million.  The number is a whole number.  The number is a positive number.  The number is a large number.,0.0957,0.0379,4.2 million jobs are created by tourism in Germany. This is a direct and indirect impact. The direct impact is 37.4 million visits. The indirect impact is 4.2 million jobs. The indirect impact is the ,0.0826,0.0326,"4.2 million jobs are created by tourism in Germany. This is a direct impact of tourism on the economy. If we include indirect and induced impacts, the industry supports 4.2 million jobs. This is a tot",0.0885,0.0359,"Tourism in Germany supports 4.2 million jobs. This is a direct, indirect, and induced impact. The direct impact is the jobs created by tourism. The indirect impact is the jobs created by the suppliers",0.0601,0.0031,QLoRA
+57,information_extraction,"From the passage provided, extract the date of birth of Gandhi",Gandhi was born on 2 October 1869,"1869-10-02
+
+### Explanation:
+The date of birth of Gandhi is mentioned in the passage as 2 October 1869. This date can be extracted and represented in the format of year-month-day as 1869-10-02. 
+
+### ",0.0426,0.0026,"2 October 1869 is the date of birth of Gandhi. He was born in Porbandar, a coastal town on the Kathiawar Peninsula and then part of the small princely state of Porbandar in the Kathiawar Agency of the",0.0449,0.0077,"2 October 1869 is the date of birth of Gandhi. He was born in Porbandar, a coastal town on the Kathiawar Peninsula and then part of the small princely state of Porbandar in the Kathiawar Agency of the",0.0452,0.0078,"Mohandas Karamchand Gandhi was born on 2 October 1869. He was born in Porbandar, a coastal town on the Kathiawar Peninsula and then part of the small princely state of Porbandar in the Kathiawar Agenc",0.0700,0.0232,Full Fine-Tune
+58,information_extraction,Based on the following passage what are positive and conventional current?,"By historical convention, a positive current is defined as having the same direction of flow as any positive charge it contains, or to flow from the most positive part of a circuit to the most negativ","Conventional current is positive and flows from the most positive part of a circuit to the most negative part. In contrast, actual current (i.e. the flow of electrons) is negative and flows in the opp",0.1853,0.0739,"Positive current is defined as having the same direction of flow as any positive charge it contains, or to flow from the most positive part of a circuit to the most negative part. Current defined in t",0.3146,0.1892,"Positive current is defined as having the same direction of flow as any positive charge it contains, or to flow from the most positive part of a circuit to the most negative part. Current defined in t",0.3146,0.1892,"Positive current is defined as having the same direction of flow as any positive charge it contains, or to flow from the most positive part of a circuit to the most negative part. Current defined in t",0.3134,0.1883,LoRA
+59,information_extraction,What is ice hockey?,"Ice hockey is a sport played on ice skates and each player has a hockey stick that they use to advance, pass, and shoot a puck attempting to score goals. In an ice hockey game, two teams play against ","Ice hockey is a team sport played on ice skates, where two teams use sticks to control and shoot a puck into the other team's goal. The team with the most goals at the end of the game wins. It is a ph",0.4490,0.1836,"Ice hockey is a team sport played on ice skates, usually on an ice skating rink with lines and markings specific to the sport. It belongs to a family of sports called hockey. In ice hockey, two opposi",0.2249,0.0516,"Ice hockey is a team sport played on ice skates, usually on an ice skating rink with lines and markings specific to the sport. It belongs to a family of sports called hockey. In ice hockey, two opposi",0.2222,0.0521,"Ice hockey is a team sport played on ice skates, usually on an ice skating rink with lines and markings specific to the sport. It belongs to a family of sports called hockey. In ice hockey, two opposi",0.2222,0.0508,LoRA
+60,open_qa,Which golf tournaments are considered majors in the PGA?,"The Masters, The U.S. Open, The Open Championship and the PGA Championship","The four major golf tournaments in the PGA are:
+
+1.  **The Masters Tournament**: Held annually at Augusta National Golf Club in Georgia, this tournament is one of the most prestigious events in golf. ",0.1140,0.0062,"The four major golf tournaments are the Masters, the U.S. Open, the British Open, and the PGA Championship.  The Masters is held at Augusta National Golf Club in Georgia, the U.S. Open is held at a di",0.1088,0.0313,"The four major golf tournaments in the PGA are the Masters, the U.S. Open, the Open Championship, and the PGA Championship.  The Masters is held at Augusta National Golf Club in Georgia, the U.S. Open",0.1088,0.0374,"The four major tournaments in the PGA are the Masters, the U.S. Open, the Open Championship, and the PGA Championship. These tournaments are considered the most prestigious in the sport. The Masters i",0.1061,0.0366,LoRA
+61,open_qa,"What links Brazil, Uruguay, Mozambique and Angola",Colonies of Portugal,"All of these countries have a national football team that has won the FIFA World Cup.
+
+*   Brazil won the World Cup in 1958, 1962, 1970, 1994, 2002 and 2014.
+*   Uruguay won the World Cup in 1930 and ",0.0339,0.0030,"They are all Portuguese speaking countries.  Brazil is the largest country in South America, Uruguay is a small country in South America, Mozambique is a country in East Africa and Angola is a country",0.0199,0.0009,"They are all Portuguese speaking countries. Brazil is the largest Portuguese speaking country, Uruguay is the second largest, Mozambique is the third largest and Angola is the fourth largest. Portugue",0.0091,0.0008,"They are all Portuguese speaking countries.  Brazil is the largest Portuguese speaking country, Uruguay is the smallest Portuguese speaking country, Mozambique and Angola are both in Africa.  Portugue",0.0191,0.0009,LoRA
+62,open_qa,Who wrote Democracy in America?,Alexis de Tocqueville wrote Democracy in America,"Alexis de Tocqueville wrote Democracy in America.
+
+### Explanation:
+Alexis de Tocqueville was a French historian and political scientist who traveled to the United States in the 1830s. During his visi",0.0645,0.0257,Alexis de Tocqueville wrote Democracy in America.  He was a French historian and political thinker.  He was born in 1805 and died in 1859.  He was a member of the French aristocracy and was educated a,0.0654,0.0263,Alexis de Tocqueville wrote Democracy in America.  He was a French historian and political scientist.  He was born in 1805 and died in 1859.  He was a member of the French aristocracy and was a close ,0.0648,0.0211,Alexis de Tocqueville wrote Democracy in America.  It was first published in 1835.  It is considered one of the most important works on democracy.  It is a two volume work.  The first volume is about ,0.0642,0.0208,LoRA
+63,open_qa,Why is LaSalle Street in Chicago important?,"There could be many answers to this question as many people, businesses, and organizations call LaSalle Street their home and various historical events have transpired on and around LaSalle Street in ",LaSalle Street in Chicago is important because it is the location of the Chicago Board of Trade (CBOT) and the Chicago Mercantile Exchange (CME). These two exchanges are among the largest and most inf,0.1787,0.0543,"LaSalle Street is the financial hub of Chicago.  It is home to the Chicago Board of Trade, the Chicago Mercantile Exchange, and the Federal Reserve Bank of Chicago.  It is also home to many of the lar",0.1394,0.0462,"LaSalle Street is the financial hub of Chicago.  It is home to the Chicago Board of Trade, the Chicago Mercantile Exchange, and the Federal Reserve Bank of Chicago.  It is also home to many of the lar",0.1172,0.0461,"LaSalle Street is the financial hub of Chicago.  It is home to the Chicago Mercantile Exchange, the Chicago Board of Trade, and the Federal Reserve Bank of Chicago.  It is also home to many of the lar",0.1295,0.0458,LoRA
+64,open_qa,Which Baseball team won the 2016 World Series?,The Chicago Cubs won the World Series of Baseball in 2016.,The Chicago Cubs won the 2016 World Series. They defeated the Cleveland Indians in the series 4 games to 3. This was the Cubs' first World Series title in 108 years. The Cubs had not won a World Serie,0.0870,0.0187,The Chicago Cubs won the 2016 World Series.  The Cubs had not won a World Series in 108 years.  The Cubs defeated the Cleveland Indians in the 2016 World Series 4 games to 3.  The Cubs won the final g,0.0841,0.0195,The Chicago Cubs won the 2016 World Series.  The Cubs had not won a World Series in 108 years.  The Cubs defeated the Cleveland Indians in the 2016 World Series 4 games to 3.  The Cubs won the final g,0.0914,0.0303,The Chicago Cubs won the 2016 World Series.  They defeated the Cleveland Indians in 7 games.  The Cubs had not won a World Series in 108 years.  The Cubs were the first team to win a World Series afte,0.0755,0.0212,QLoRA
+65,open_qa,What are the names of the different scores you can shoot for each hole when golfing?,"The following are the names for different scores you can shoot on a golf hole:
+- Hole-in-One: The hole was completed with only one shot.
+- Albatross: The hole was completed in 3 shots less than par.
+-","The names of the different scores you can shoot for each hole when golfing are:
+- Par: The predicted number of strokes a skilled golfer should take to complete a hole or a round.
+- Birdie: One stroke ",0.1988,0.0676,"The different scores you can shoot for each hole when golfing are: par, birdie, eagle, albatross, and hole-in-one. 
+
+Par is the number of strokes a skilled golfer should be able to shoot for each hole",0.2364,0.0313,"The names of the different scores you can shoot for each hole when golfing are: par, birdie, eagle, albatross, and hole-in-one. A par is the score you are expected to shoot for each hole. A birdie is ",0.2500,0.0327,"The names of the different scores you can shoot for each hole when golfing are: par, birdie, eagle, albatross, and hole-in-one. Par is the number of strokes a professional golfer is expected to take t",0.2590,0.0347,Full Fine-Tune
+66,open_qa,How can I improve my table tennis skills?,"To improve your table tennis skills, first you need to play more to build muscle memory. You can also watch videos online to learn specific techniques. And you can also consider taking some personal t","Improving your table tennis skills requires a combination of physical practice, mental preparation, and strategic training. Here are some tips to help you enhance your game:
+
+1.  **Practice regularly*",0.1333,0.0100,"Table tennis is a sport that requires a combination of physical and mental skills. To improve your table tennis skills, you need to practice regularly and focus on developing your technique, strategy,",0.1762,0.0626,"Table tennis is a sport that requires a combination of physical and mental skills. To improve your table tennis skills, you should practice regularly and focus on developing your technique. Here are s",0.1776,0.0566,"Table tennis is a sport that requires a lot of practice to improve.  Here are some tips to improve your table tennis skills:
+1. Practice regularly.  The more you practice, the better you will get.
+2. ",0.1313,0.0392,QLoRA
+67,open_qa,Walter Koenig played which part in the Star Trek series,Ensign Chekov,Walter Koenig played the part of Pavel Chekov in the Star Trek series. Pavel Chekov was a young Russian navigator who served on the USS Enterprise under the command of Captain James T. Kirk. He was a ,0.0132,0.0012,Walter Koenig played the part of Ensign Pavel Chekov in the Star Trek series. He was a Russian crew member on the USS Enterprise. He was a young officer who was eager to prove himself. He was a friend,0.0174,0.0009,Walter Koenig played the part of Ensign Chekov in the Star Trek series. He was a Russian crew member on the USS Enterprise. He was a young officer who was very eager to prove himself. He was a bit of ,0.0171,0.0016,Walter Koenig played the part of Ensign Chekov in the Star Trek series. He was a Russian navigator on the USS Enterprise. He was a close friend of Mr. Spock. He was a part of the original cast of the ,0.0189,0.0018,Full Fine-Tune
+68,open_qa,What does AWS stand for?,AWS is an abbreviation for Amazon Web Services. AWS is a subsidiary of Amazon and delivers cloud computing services.,"AWS stands for Amazon Web Services. It is a comprehensive cloud computing platform provided by Amazon that includes a wide range of services for computing, storage, databases, analytics, machine learn",0.1023,0.0186,"AWS stands for Amazon Web Services.  It is a cloud computing platform that provides a wide range of services for computing, storage, databases, analytics, machine learning, and more.  AWS is a subsidi",0.1382,0.0345,"AWS stands for Amazon Web Services. It is a cloud computing platform that provides a wide range of services for computing, storage, networking, databases, analytics, machine learning, and more. AWS is",0.1339,0.0367,"AWS stands for Amazon Web Services.  It is a cloud computing platform that provides a wide range of services for computing, storage, databases, analytics, machine learning, and more.  AWS is a subsidi",0.1212,0.0315,LoRA
+69,open_qa,In what year did the Pac-10 Become the Pac-12?,The Pac-10 became the Pac-12 in 2011 with the addition of Colorado and Utah.,"The Pac-10 became the Pac-12 in 2011.  The conference officially changed its name to the Pac-12 Conference on June 30, 2011.  The name change was made to reflect the addition of the University of Colo",0.1228,0.0307,The Pac-10 became the Pac-12 in 2011. The conference added the University of Colorado and the University of Utah to the conference. The name change was made to reflect the addition of the two new scho,0.1167,0.0312,The Pac-10 became the Pac-12 in 2011. The conference added the University of Colorado and the University of Utah to the conference. The conference was renamed the Pac-12 Conference. The conference was,0.1124,0.0284,"The Pac-10 became the Pac-12 in 2011. The conference added two new schools, the University of Colorado and the University of Utah. The name change was made to reflect the addition of the two new schoo",0.1223,0.0338,Full Fine-Tune
+70,summarization,"Based on this information that I have shared about Abel Janszoon Tasman, can you summarize it for me?","Sure, here is summary about Abel Janszoon Tasman:
+
+Abel Janszoon Tasman (Dutch: [ˈɑbəl ˈjɑnsoːn ˈtɑsmɑn]; 1603 – 10 October 1659) was a Dutch seafarer and explorer best known for his voyages of 1642 a",". The island was uninhabited at the time, and Tasman named it Mauritius after Prince Maurice of Nassau, the Dutch prince who had been the leader of the Dutch forces during the Eighty Years' War.
+
+Tasm",0.1870,0.0467,". The island was uninhabited, and the crew spent several days hunting and collecting fresh water and food. The ships left on 17 September 1642.
+
+Tasman sailed south and reached the coast of Tasmania o",0.1489,0.0102,". He anchored in the bay of Grand Port, where he found a few abandoned Dutch ships and a few native inhabitants. He named the island Mauritius after Prince Maurice of Nassau, the Dutch Stadtholder.
+
+T",0.1605,0.0166,". The ships were in need of repair, and the crew was suffering from scurvy. The expedition spent 10 days in the harbour of the island, where they repaired the ships and replenished their supplies. The",0.1575,0.0114,QLoRA
+71,summarization,Who is Oji Hiroi,"Oji Hiroi, born 8 February 1954), real name Teruhisa Hiroi, is an author and video game developer. He co-authored Samurai Crusader with Ryoichi Ikegami. He also created the Far East of Eden and Sakura","Oji Hiroi is a Japanese author and video game developer. He is best known for creating the Far East of Eden and Sakura Wars role-playing video game franchises, as well as writing the Sakura Wars manga",0.2069,0.1040,"Oji Hiroi (広井 王子, Hiroi Ōji, born 8 February 1954), real name Teruhisa Hiroi (廣井 照久, Hiroi Teruhisa), is an author and video game developer. He co-authored Samurai Crusader with Ryoichi Ikegami. He al",0.3852,0.1983,"Oji Hiroi (, Hiroi Ōji, born 8 February 1954), real name Teruhisa Hiroi (, Hiroi Teruhisa), is an author and video game developer. He co-authored Samurai Crusader with Ryoichi Ikegami. He also created",0.3745,0.1934,"Oji Hiroi (広井 王子, Hiroi Ōji, born 8 February 1954), real name Teruhisa Hiroi (廣井 照久, Hiroi Teruhisa), is an author and video game developer. He co-authored Samurai Crusader with Ryoichi Ikegami. He al",0.3821,0.1963,LoRA
+72,summarization,"Please give me a short bulleted list of the key events that happened in Kobe Bryant’s early life in time order, from earliest to the latest.","- In August 1978, Kobe Bryant was born in Philadelphia. The name Kobe comes from the famous Japanese beef, Kobe.
+- When Kobe was three years old, he started playing basketball.
+- When Kobe was six, he","Here is a bulleted list of the key events in Kobe Bryant’s early life in time order:
+
+* August 23, 1978: Kobe Bryant was born in Philadelphia.
+* When Kobe was three: He started playing basketball.
+* W",0.2784,0.0759,"Here is a bulleted list of the key events in Kobe Bryant’s early life in time order, from earliest to the latest:
+
+- Kobe Bryant was born on August 23, 1978, in Philadelphia, the youngest of three chi",0.2667,0.0419,"Here is a bulleted list of the key events that happened in Kobe Bryant’s early life in time order, from earliest to the latest:
+
+- Kobe Bryant was born on August 23, 1978, in Philadelphia, the younges",0.2667,0.0417,"- Kobe Bryant was born on August 23, 1978, in Philadelphia, Pennsylvania.
+- When Kobe was six, his father retired from the NBA and moved his family to Rieti in Italy to continue playing professional b",0.2974,0.0903,Full Fine-Tune
+73,summarization,Quel a été l'impact de la révolution française ?,"la révolution française a eu plusieurs impacts, sociaux et politiques. On doit à la révolution française la déclaration des droits de l'homme et du citoyen, ainsi que l'égalité des chances pour accéde","La Révolution française a eu un impact profond sur la politique, la société et les institutions de la France et de l'Europe. Elle a mis fin à l'Ancien Régime et a créé de nouvelles formes politiques, ",0.2281,0.0697,"La Révolution française a légué de toutes nouvelles formes politiques, notamment au travers de la Déclaration des droits de l'homme et du citoyen de 1789 qui proclame l'égalité des citoyens devant la ",0.2661,0.0881,"La Révolution française a légué de toutes nouvelles formes politiques, notamment au travers de la Déclaration des droits de l'homme et du citoyen de 1789 qui proclame l'égalité des citoyens devant la ",0.2661,0.0881,"La Révolution française a légué de toutes nouvelles formes politiques, notamment au travers de la Déclaration des droits de l'homme et du citoyen de 1789 qui proclame l'égalité des citoyens devant la ",0.2661,0.0881,LoRA
+74,summarization,Please summarize the history of the development of Roche Percee based on this article,Roche Percee was originally explored in 1872 by the Boundary Commission before a small camp was built in the area in 1874 by the North-West Mounted Police. The area then grew further after the establi,"Here is a summary of the history of the development of Roche Percee:
+
+Roche Percee began to develop in the late 19th century. In 1872, the Boundary Commission surveyed the area, and in 1874, the North",0.2491,0.0492,"The Boundary Commission travelled through this area in 1872 while surveying the border between Canada and the United States. During the 1874 March West trek of the North-West Mounted Police, the force",0.1976,0.0179,The Boundary Commission travelled through this area in 1872. The North-West Mounted Police established its first camp at this location in 1874. The community began being served by the Soo Line in 1893,0.2039,0.0169,"The area was first surveyed by the Boundary Commission in 1872. The North-West Mounted Police established their first camp in the area in 1874. The community was served by the Soo Line in 1893, which ",0.1992,0.0446,QLoRA
+75,summarization,What is the movie True Spirit about?,"True Spirit, released by Netflix in February 2023, follows the journey of Jessica Watson and her journey to become the youngest sailor to circumnavigate the globe non-stop and unassisted. She receives",The movie True Spirit is about a 16-year-old girl named Jessica Watson who attempts to become the youngest person to circumnavigate the globe non-stop and unassisted in 2009. She faces numerous challe,0.2229,0.0888,True Spirit is a movie about a 16-year-old girl named Jessica Watson who dreams of becoming the youngest person to circumnavigate the globe non-stop and unassisted. She sets off on her journey from Sy,0.2202,0.0682,True Spirit is a movie about a 16-year-old girl who dreams of becoming the youngest person to circumnavigate the globe non-stop and unassisted. She must sail alone and not dock at any port along the w,0.2579,0.1009,True Spirit is a movie about a 16-year-old girl named Jessica Watson who dreams of becoming the youngest person to circumnavigate the globe non-stop and unassisted. She sets off on her journey from Sy,0.2202,0.0682,QLoRA
+76,summarization,Please give me a list of qualities that make the Masters is golf's top tournament unique?,"As with the other majors, winning the Masters gives a golfer several privileges which make his career more secure. Masters champions are automatically invited to play in the other three majors (the U.","Here are the qualities that make the Masters unique:
+
+1.  **Early Start to the Golf Season**: The Masters is the first major championship of the year, setting the tone for the golf season.
+2.  **Consi",0.1228,0.0004,"The Masters is the first major championship of the year. Since 1948, its final round has been scheduled for the second Sunday of April, with several exceptions. The Masters has the smallest field of t",0.1391,0.0020,"The Masters is the first major championship of the year. Since 1948, its final round has been scheduled for the second Sunday of April, with several exceptions.
+
+The Masters has the smallest field of ",0.1514,0.0019,"The Masters is the first major championship of the year. Since 1948, its final round has been scheduled for the second Sunday of April, with several exceptions. The Masters has the smallest field of t",0.1473,0.0021,QLoRA
+77,summarization,Please write some key points on Booker prize from the given passage.,"1. The 2022 Booker Prize was a literary honour presented to the year's top English novel.
+2. It was revealed on October 17, 2022, at a ceremony Sophie Duker presided over at London's Roundhouse.
+3. On","Here are the key points about the Booker Prize from the passage:
+
+* The 2022 Booker Prize was announced on 17 October 2022.
+* The longlist was announced on 26 July 2022.
+* The shortlist was announced ",0.3786,0.1657,"1. The 2022 Booker Prize was a literary award given for the best English novel of the year.
+2. It was announced on 17 October 2022, during a ceremony hosted by Sophie Duker at the Roundhouse in London",0.5823,0.2812,"The 2022 Booker Prize was a literary award given for the best English novel of the year. It was announced on 17 October 2022, during a ceremony hosted by Sophie Duker at the Roundhouse in London. The ",0.4286,0.1770,"1. The 2022 Booker Prize was a literary award given for the best English novel of the year.
+2. It was announced on 17 October 2022, during a ceremony hosted by Sophie Duker at the Roundhouse in London",0.4811,0.1928,LoRA
+78,summarization,What principles does conversion rate optimization share with direct response marketing?,"They are both marketing approaches that emphasize tracking, testing, and on-going improvement. Direct response marketers also practice A/B split-testing, response tracking, and audience testing to opt","Conversion rate optimization shares the following principles with direct response marketing:
+
+1.  **Tracking and measurement**: Both conversion rate optimization and direct response marketing emphasiz",0.1633,0.0040,"Conversion rate optimization shares many principles with direct response marketing – a marketing approach that emphasizes tracking, testing, and on-going improvement. Direct marketing was popularized ",0.2422,0.1035,"Conversion rate optimization shares many principles with direct response marketing – a marketing approach that emphasizes tracking, testing, and on-going improvement. Direct marketing was popularized ",0.2541,0.1065,"Conversion rate optimization shares many principles with direct response marketing – a marketing approach that emphasizes tracking, testing, and on-going improvement. Direct marketing was popularized ",0.2583,0.1091,Full Fine-Tune
+79,summarization,What are major rivers in Serbia,"All rivers in Serbia belong to the drainage basins of three seas: Black Sea, Adriatic Sea or Aegean Sea.
+
+The largest in area, Black Sea drainage basin, covers an area of 81,261 km2 or 92% of the terr","The major rivers in Serbia are:
+- Danube
+- Tisa
+- Sava
+- Velika Morava
+- Drina
+- White Drin
+- Crni Kamen-Radika
+- Lepenac
+- Pčinja
+- Dragovištica
+
+### Note:
+The major rivers in Serbia are those that b",0.2511,0.0827,"The major rivers in Serbia are Danube, Tisa, Sava, Velika Morava and Drina. They all belong to the Black Sea drainage basin. The Adriatic Sea drainage basin covers the western half of the Kosovo and M",0.7511,0.5556,"The largest in area, Black Sea drainage basin, covers an area of 81,261 km2 or 92% of the territory of Serbia. The entire basin is drained by only one river, the Danube, which flows into the Black Sea",0.7880,0.5938,"The major rivers in Serbia are Danube, Tisa, Sava, Velika Morava and Drina. They all belong to the Black Sea drainage basin. The Adriatic Sea drainage basin comprises the western half of the Kosovo an",0.7511,0.5556,QLoRA

@@ -1,0 +1,25 @@
+============================================================
+BENCHMARK SUMMARY
+============================================================
+Machine:              gx10
+Mode:                 fullft
+Model:                meta-llama/Llama-3.1-8B-Instruct
+Dataset:              databricks/databricks-dolly-15k
+Status:               oom
+
+Steps completed:      0 / 5
+Total time:           0.1s (0.0m)
+Avg step time:        0.0000s
+Median step time:     0.0000s
+P95 step time:        0.0000s
+Peak GPU memory:      0.00 GB
+Final loss:           0.0000
+Tokens/sec:           0.0
+Samples/sec:          0.00
+
+Batch size:           4 x 8 = 32
+Sequence length:      1024
+Seed:                 42
+
+Failure reason:       Expected all tensors to be on the same device, but got index is on cuda:0, different from other tensors on cpu (when checking argument in method wrapper_CUDA__index_select)
+============================================================

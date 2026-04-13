@@ -1,0 +1,8 @@
+machine_label,mode,status,total_time_sec,avg_step_time,median_step_time,peak_gpu_memory_gb,final_loss,tokens_per_sec,samples_per_sec,steps_completed,run_dir
+gx10,fullft,oom,0.14,0.0,0.0,0.0,0.0,0.0,0.0,0,gx10_fullft_20260404_224313
+gx10,fullft,success,183.25,36.2864,36.1847,93.59,1.6391,121.3,0.11,5,gx10_fullft_20260404_224612
+gx10,fullft,success,18350.76,36.4482,36.4537,93.59,1.2897,150.7,0.11,500,gx10_fullft_20260404_225659
+gx10,lora,success,172.07,33.909,33.9086,87.38,1.9394,129.8,0.24,5,gx10_lora_20260403_133254
+gx10,lora,success,17267.86,33.9329,33.9301,87.38,1.5124,161.9,0.24,500,gx10_lora_20260403_140352
+gx10,lora,success,17056.88,33.5005,33.4951,87.38,1.3773,164.0,0.24,500,gx10_lora_20260405_213220
+gx10,qlora,success,33230.72,66.2115,66.1967,12.45,1.6082,83.0,0.03,500,gx10_qlora_20260404_001959
