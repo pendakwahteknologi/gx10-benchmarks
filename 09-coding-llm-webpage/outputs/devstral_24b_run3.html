@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive 3D Solar System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+        @keyframes twinkle {
+            to { opacity: 0.6; transform: scale(1.5); }
+        }
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            perspective: 800px;
+        }
+        #solar-system {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-style: preserve-3d;
+            animation: rotateSystem 60s linear infinite;
+        }
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            transform-origin: center;
+            animation-timing-function: linear;
+        }
+        #sun {
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(255,214,0,1) 30%, rgba(255,69,0,0.8) 100%);
+            box-shadow: 0 0 15px rgba(255,214,0,0.8);
+            animation: sunRotate 10s linear infinite;
+        }
+        @keyframes rotateSystem {
+            to { transform: rotateY(360deg); }
+        }
+        @keyframes sunRotate {
+            to { transform: rotateZ(360deg); }
+        }
+        .planet.orbit {
+            border-radius: 50%;
+            border: 1px dashed #fff;
+            opacity: 0.2;
+        }
+        .planet.mercury { width: 4px; height: 4px; background: gray; animation-duration: 8s; transform: rotateY(0deg) translateZ(50px); }
+        .planet.venus   { width: 7px; height: 7px; background: yellow; animation-duration: 20s; transform: rotateY(45deg) translateZ(80px); }
+        .planet.earth   { width: 8px; height: 8px; background: blue; animation-duration: 36s; transform: rotateY(90deg) translateZ(120px); }
+        .planet.mars    { width: 5px; height: 5px; background: red; animation-duration: 68s; transform: rotateY(135deg) translateZ(160px); }
+        .planet.jupiter  { width: 20px; height: 20px; background: url('https://upload.wikimedia.org/wikipedia/commons/4/4e/Jupiter_from_Cassini.jpg'); animation-duration: 120s; transform: rotateY(180deg) translateZ(250px); }
+        .planet.saturn  { width: 16px; height: 16px; background: url('https://upload.wikimedia.org/wikipedia/commons/7/73/Saturn_during_Equinox.jpg'); animation-duration: 294s; transform: rotateY(225deg) translateZ(300px); }
+        .planet.uranus  { width: 14px; height: 14px; background: cyan; animation-duration: 84s; transform: rotateY(270deg) translateZ(360px); }
+        .planet.neptune { width: 13px; height: 13px; background: blue; animation-duration: 165s; transform: rotateY(315deg) translateZ(420px); }
+        #info-box {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 200px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        #planet-list {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="stars">
+    <div class="star" style="top: 10%; left: 20%;"></div>
+    <div class="star" style="top: 30%; left: 40%;"></div>
+    <div class="star" style="top: 60%; left: 70%;"></div>
+    <div class="star" style="top: 80%; left: 10%;"></div>
+</div>
+
+<div class="container">
+    <div id="solar-system">
+        <div id="sun" class="planet"></div>
+        <div class="planet orbit" style="width: 50px; height: 50px;"></div>
+        <div class="planet orbit" style="width: 80px; height: 80px;"></div>
+        <div class="planet orbit" style="width: 120px; height: 120px;"></div>
+        <div class="planet orbit" style="width: 160px; height: 160px;"></div>
+        <div class="planet orbit" style="width: 250px; height: 250px;"></div>
+        <div class="planet orbit" style="width: 300px; height: 300px;"></div>
+        <div class="planet orbit" style="width: 360px; height: 360px;"></div>
+        <div class="planet orbit" style="width: 420px; height: 420px;"></div>
+
+        <div class="planet mercury"></div>
+        <div class="planet venus"></div>
+        <div class="planet earth"></div>
+        <div class="planet mars"></div>
+        <div class="planet jupiter"></div>
+        <div class="planet saturn"></div>
+        <div class="planet uranus"></div>
+        <div class="planet neptune"></div>
+    </div>
+
+    <div id="info-box">
+        <h3>Planet Info</h3>
+        <p id="info-content"></p>
+    </div>
+
+    <div class="controls">
+        <button id="play-pause">Pause</button>
+        <label for="speed-control">Speed:</label>
+        <input type="range" id="speed-control" min="0.5" max="5" step="0.1" value="1">
+        <br><br>
+        <button id="view-toggle">Perspective View</button>
+    </div>
+
+    <div id="planet-list">
+        <h3>Planets</h3>
+        <ul>
+            <li data-planet="mercury">Mercury</li>
+            <li data-planet="venus">Venus</li>
+            <li data-planet="earth">Earth</li>
+            <li data-planet="mars">Mars</li>
+            <li data-planet="jupiter">Jupiter</li>
+            <li data-planet="saturn">Saturn</li>
+            <li data-planet="uranus">Uranus</li>
+            <li data-planet="neptune">Neptune</li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const solarSystem = document.getElementById('solar-system');
+    const playPauseBtn = document.getElementById('play-pause');
+    const speedControl = document.getElementById('speed-control');
+    const viewToggleBtn = document.getElementById('view-toggle');
+    const planetListItems = document.querySelectorAll('#planet-list ul li');
+    let isPaused = false;
+
+    function showInfo(planet) {
+        const infoContent = `
+            <strong>${planet.dataset.name}</strong><br>
+            Distance from Sun: ${planet.dataset.distance} million km<br>
+            Orbital Period: ${planet.dataset.period} days<br>
+            Fun Fact: ${planet.dataset.fact}
+        `;
+        document.getElementById('info-content').innerHTML = infoContent;
+        document.getElementById('info-box').style.display = 'block';
+    }
+
+    function hideInfo() {
+        document.getElementById('info-box').style.display = 'none';
+    }
+
+    planetListItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const planetClass = item.dataset.planet;
+            document.querySelectorAll('.planet').forEach(planet => planet.classList.remove('highlight'));
+            document.querySelector(`.${planetClass}`).classList.add('highlight');
+            showInfo(document.querySelector(`.${planetClass}`));
+        });
+    });
+
+    document.querySelectorAll('.planet').forEach(planet => {
+        planet.addEventListener('click', () => {
+            showInfo(planet);
+        });
+        planet.addEventListener('mouseover', () => {
+            planet.classList.add('highlight');
+        });
+        planet.addEventListener('mouseout', () => {
+            planet.classList.remove('highlight');
+        });
+    });
+
+    playPauseBtn.addEventListener('click', () => {
+        isPaused = !isPaused;
+        if (isPaused) {
+            solarSystem.style.animationPlayState = 'paused';
+            playPauseBtn.textContent = 'Play';
+        } else {
+            solarSystem.style.animationPlayState = 'running';
+            playPauseBtn.textContent = 'Pause';
+        }
+    });
+
+    speedControl.addEventListener('input', () => {
+        const speed = speedControl.value;
+        document.documentElement.style.setProperty('--speed-multiplier', speed);
+    });
+
+    viewToggleBtn.addEventListener('click', () => {
+        if (viewToggleBtn.textContent === 'Perspective View') {
+            document.body.classList.remove('top-down-view');
+            viewToggleBtn.textContent = 'Top-Down View';
+        } else {
+            document.body.classList.add('top-down-view');
+            viewToggleBtn.textContent = 'Perspective View';
+        }
+    });
+
+    // Initial planet data
+    const planetsData = [
+        { selector: '.mercury', name: 'Mercury', distance: '58', period: '88', fact: 'Mercury is the smallest planet in our solar system.' },
+        { selector: '.venus', name: 'Venus', distance: '108', period: '225', fact: 'Venus has the longest day of any planet in our solar system.' },
+        { selector: '.earth', name: 'Earth', distance: '150', period: '365', fact: 'Earth is the only known planet to support life.' },
+        { selector: '.mars', name: 'Mars', distance: '228', period: '687', fact: 'Mars has the largest volcano in our solar system, Olympus Mons.' },
+        { selector: '.jupiter', name: 'Jupiter', distance: '778', period: '4331', fact: 'Jupiter is twice as massive as all other planets combined.' },
+        { selector: '.saturn', name: 'Saturn', distance: '1,429', period: '10,756', fact: 'Saturn has the most extensive ring system of any planet in our solar system.' },
+        { selector: '.uranus', name: 'Uranus', distance: '2,871', period: '30,685', fact: 'Uranus rotates on its side, with an axial tilt of 98 degrees.' },
+        { selector: '.neptune', name: 'Neptune', distance: '4,498', period: '60,190', fact: 'Neptune has the strongest winds in our solar system.' }
+    ];
+
+    planetsData.forEach(data => {
+        const planet = document.querySelector(data.selector);
+        planet.dataset.name = data.name;
+        planet.dataset.distance = data.distance;
+        planet.dataset.period = data.period;
+        planet.dataset.fact = data.fact;
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+Build a single HTML file (no external dependencies) that creates an interactive 3D solar system visualization. Requirements:
+
+1. SOLAR SYSTEM: Sun at center with at least 8 planets orbiting at different speeds and distances. Each planet should have accurate relative sizes and colors (Mercury gray, Venus yellow, Earth blue-green, Mars red, Jupiter orange-striped, Saturn with rings, Uranus cyan, Neptune blue).
+
+2. 3D EFFECT: Use CSS 3D transforms or canvas to create a perspective view of the orbital plane. The system should look three-dimensional, not flat.
+
+3. ANIMATIONS: Planets must orbit the sun continuously with smooth animation. Inner planets faster, outer planets slower. Include a subtle rotation on the sun (glowing effect).
+
+4. INTERACTIVITY:
+   - Click any planet to show an info card with the planet name, distance from sun, orbital period, and a fun fact
+   - Hover over planets to highlight them and show the name
+   - Add a speed control slider (0.5x to 5x)
+   - Add a pause/play button
+   - Add a toggle between top-down view and perspective view
+
+5. VISUAL POLISH:
+   - Dark space background with twinkling stars (animated)
+   - Orbital path lines (subtle, dashed)
+   - Glow effect on the sun
+   - Smooth transitions on all interactions
+   - Planet shadows/lighting effect
+
+6. RESPONSIVE: Must work on both desktop and mobile screens.
+
+7. UI PANEL: A sleek side panel showing all planets as a list, clicking any name should highlight that planet and show its info.
+
+Output ONLY the complete HTML file content, starting with <!DOCTYPE html> and ending with </html>. No explanations before or after.

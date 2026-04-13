@@ -1,0 +1,23 @@
+{
+    "model": "devstral:24b",
+    "run": 3,
+    "timestamp": "2026-04-13T15:22:13+08:00",
+    "metrics": {
+        "total_duration_sec": 212.60,
+        "model_load_sec": .13,
+        "prompt_eval_sec": .072,
+        "generation_sec": 211.28,
+        "ttft_sec": .209,
+        "tokens_generated": 2965,
+        "tokens_per_sec": 14.03,
+        "prompt_tokens": 1606
+    },
+    "output": {
+        "html_size_bytes": 10372,
+        "html_lines": 258,
+        "has_doctype": 1,
+        "has_closing_html": 1,
+        "has_canvas": 0,
+        "has_script": 1
+    }
+}
