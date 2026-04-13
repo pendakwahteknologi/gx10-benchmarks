@@ -369,6 +369,25 @@ The prompt asks each model to build an interactive 3D solar system visualization
 | DeepCoder | 14B | 9 GB | 22.4 | 129s | 8.8 KB |
 | Devstral | 24B | 14 GB | 14.0 | 213s | 10.4 KB |
 
+### Generation Speed
+
+<div align="center">
+<img src="09-coding-llm-webpage/charts/generation_speed.png" width="700" alt="Generation speed comparison — Qwen3-Coder 71.1 tok/s vs DeepCoder 22.4 vs Devstral 14.0"/>
+<br><sub>Qwen3-Coder is 5x faster than Devstral and 3x faster than DeepCoder.</sub>
+</div>
+
+### Generation Time & VRAM Usage
+
+<div align="center">
+<img src="09-coding-llm-webpage/charts/generation_time.png" width="700" alt="Generation time — Qwen3-Coder 61s vs DeepCoder 129s vs Devstral 213s"/>
+<br><sub>Qwen3-Coder generates a full interactive webpage in just 61 seconds.</sub>
+</div>
+
+<div align="center">
+<img src="09-coding-llm-webpage/charts/vram_usage.png" width="700" alt="VRAM usage — all models well under the 128 GB limit"/>
+<br><sub>Even the largest model (30B, 18 GB) leaves 110 GB of headroom in the GB10's unified memory.</sub>
+</div>
+
 **Key findings:**
 - Qwen3-Coder is **5x faster** than Devstral and generates the richest output (550+ lines, most features implemented)
 - All 9 runs (3 models x 3 each) produced valid, runnable HTML
