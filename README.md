@@ -1,6 +1,6 @@
 <div align="center">
 
-# GX10 Benchmark Suite
+# ASUS Ascent GX10 Benchmark Suite
 
 ### 8 AI Benchmarks on the NVIDIA Grace Blackwell Superchip
 
