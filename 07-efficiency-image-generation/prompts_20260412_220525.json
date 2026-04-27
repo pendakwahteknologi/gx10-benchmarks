@@ -1,0 +1,50 @@
+{
+  "note": "Prompts used in benchmark run 20260412_220525. Prompts rotate by rep number.",
+  "image_prompts": [
+    "A majestic mountain landscape with a crystal clear lake reflecting the sunset, photorealistic",
+    "A futuristic city skyline at night with neon lights and flying vehicles, cinematic lighting",
+    "A serene Japanese garden with cherry blossoms falling over a stone path, soft natural light"
+  ],
+  "video_prompts": [
+    "A cat walking gracefully across a sunlit windowsill, smooth camera tracking, natural lighting",
+    "Ocean waves gently crashing on a tropical beach at golden hour, cinematic slow motion"
+  ],
+  "video_negative_prompt": "色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走，裸露，NSFW",
+  "mapping": {
+    "image_tests": {
+      "run_1": "image_prompts[0] (mountain landscape), seed=43",
+      "run_2": "image_prompts[1] (futuristic city), seed=44",
+      "run_3": "image_prompts[2] (Japanese garden), seed=45"
+    },
+    "video_tests": {
+      "run_1": "video_prompts[0] (cat on windowsill), seed=43",
+      "run_2": "video_prompts[1] (ocean waves), seed=44"
+    },
+    "warmup_image": "warmup test image, seed=1",
+    "warmup_video": "warmup test video of a ball bouncing, seed=1"
+  },
+  "sample_files": {
+    "z_turbo_512x512_s4_00001": {"run": "warmup_1", "prompt": "a test image of a sunset"},
+    "z_turbo_512x512_s4_00002": {"run": "warmup_2", "prompt": "a mountain landscape"},
+    "z_turbo_512x512_s4_00003": {"run": 1, "prompt": "A majestic mountain landscape with a crystal clear lake reflecting the sunset, photorealistic"},
+    "z_turbo_512x512_s4_00004": {"run": 2, "prompt": "A futuristic city skyline at night with neon lights and flying vehicles, cinematic lighting"},
+    "z_turbo_512x512_s4_00005": {"run": 3, "prompt": "A serene Japanese garden with cherry blossoms falling over a stone path, soft natural light"},
+    "z_turbo_768x768_s4_00001": {"run": 1, "prompt": "A majestic mountain landscape with a crystal clear lake reflecting the sunset, photorealistic"},
+    "z_turbo_768x768_s4_00002": {"run": 2, "prompt": "A futuristic city skyline at night with neon lights and flying vehicles, cinematic lighting"},
+    "z_turbo_768x768_s4_00003": {"run": 3, "prompt": "A serene Japanese garden with cherry blossoms falling over a stone path, soft natural light"},
+    "z_turbo_1024x1024_s4_00001": {"run": 1, "prompt": "A majestic mountain landscape with a crystal clear lake reflecting the sunset, photorealistic"},
+    "z_turbo_1024x1024_s4_00002": {"run": 2, "prompt": "A futuristic city skyline at night with neon lights and flying vehicles, cinematic lighting"},
+    "z_turbo_1024x1024_s4_00003": {"run": 3, "prompt": "A serene Japanese garden with cherry blossoms falling over a stone path, soft natural light"},
+    "z_turbo_1280x1280_s4_00001": {"run": 1, "prompt": "A majestic mountain landscape with a crystal clear lake reflecting the sunset, photorealistic"},
+    "z_turbo_1280x1280_s4_00002": {"run": 2, "prompt": "A futuristic city skyline at night with neon lights and flying vehicles, cinematic lighting"},
+    "z_turbo_1280x1280_s4_00003": {"run": 3, "prompt": "A serene Japanese garden with cherry blossoms falling over a stone path, soft natural light"},
+    "z_turbo_1024x1024_s8_00001": {"run": 1, "prompt": "A majestic mountain landscape with a crystal clear lake reflecting the sunset, photorealistic"},
+    "z_turbo_1024x1024_s8_00002": {"run": 2, "prompt": "A futuristic city skyline at night with neon lights and flying vehicles, cinematic lighting"},
+    "z_turbo_1024x1024_s8_00003": {"run": 3, "prompt": "A serene Japanese garden with cherry blossoms falling over a stone path, soft natural light"},
+    "wan22_480x480_f17_00001-00017": {"run": 1, "prompt": "A cat walking gracefully across a sunlit windowsill, smooth camera tracking, natural lighting"},
+    "wan22_480x480_f17_00018-00034": {"run": "warmup", "prompt": "warmup test video of a ball bouncing"},
+    "wan22_480x480_f17_00035-00051": {"run": 2, "prompt": "Ocean waves gently crashing on a tropical beach at golden hour, cinematic slow motion"},
+    "wan22_640x640_f33_00001-00033": {"run": 1, "prompt": "A cat walking gracefully across a sunlit windowsill, smooth camera tracking, natural lighting"},
+    "wan22_640x640_f33_00034-00066": {"run": 2, "prompt": "Ocean waves gently crashing on a tropical beach at golden hour, cinematic slow motion"}
+  }
+}

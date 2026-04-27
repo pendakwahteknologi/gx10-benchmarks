@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GX10 Benchmark #08: Voice STT & TTS</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+  :root {
+    --bg: #0f172a; --surface: #1e293b; --border: #334155;
+    --text: #e2e8f0; --text-dim: #94a3b8; --accent: #38bdf8;
+    --accent2: #a78bfa; --green: #4ade80; --orange: #fb923c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    line-height: 1.6; padding: 2rem;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  h2 {
+    font-size: 1.3rem; margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 0.8rem; color: var(--accent); }
+  .subtitle { color: var(--text-dim); margin-bottom: 2rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1rem 0; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.2rem;
+  }
+  .card-label { color: var(--text-dim); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .card-value { font-size: 1.5rem; font-weight: 700; margin-top: 0.3rem; }
+  .card-value.accent { color: var(--accent); }
+  .card-value.green { color: var(--green); }
+  .card-value.orange { color: var(--orange); }
+  .card-value.purple { color: var(--accent2); }
+  table {
+    width: 100%; border-collapse: collapse;
+    background: var(--surface); border-radius: 8px; overflow: hidden;
+    margin: 1rem 0;
+  }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: rgba(56,189,248,0.1); color: var(--accent); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; }
+  td { font-size: 0.9rem; }
+  tr:last-child td { border-bottom: none; }
+  .chart-container { background: var(--surface); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.5rem; }
+  .info-item { font-size: 0.9rem; }
+  .info-item span { color: var(--text-dim); }
+  details { margin: 1rem 0; }
+  summary {
+    cursor: pointer; font-weight: 600; color: var(--accent);
+    padding: 0.5rem; background: var(--surface); border-radius: 4px;
+  }
+  .footer { text-align: center; color: var(--text-dim); margin-top: 3rem; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>GX10 Benchmark #08: Voice STT & TTS</h1>
+  <p class="subtitle">
+    gx10-bea6 &mdash; NVIDIA GB10 &mdash;
+    20260413_011735
+  </p>
+
+  <h2>System</h2>
+  <div class="info-grid">
+    <div class="info-item"><span>OS:</span> Ubuntu 24.04.4 LTS</div>
+    <div class="info-item"><span>Kernel:</span> 6.17.0-1014-nvidia</div>
+    <div class="info-item"><span>Arch:</span> aarch64</div>
+    <div class="info-item"><span>CPU:</span> 20 cores</div>
+    <div class="info-item"><span>RAM:</span> 121.6 GB</div>
+    <div class="info-item"><span>GPU:</span> NVIDIA GB10</div>
+    <div class="info-item"><span>Driver:</span> 580.142</div>
+    <div class="info-item"><span>CUDA:</span> 13.0</div>
+  </div>
+
+  <h2>Models</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-label">STT Model</div>
+      <div class="card-value accent">Whisper large-v3</div>
+      <p style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-dim)">
+        Engine: faster-whisper (CTranslate2)<br>
+        Compute: int8<br>
+        Language: ms | Beam: 5<br>
+        Load time: 3.15s
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-label">TTS Model</div>
+      <div class="card-value purple">MMS-TTS Malay (facebook/mms-tts-zlm)</div>
+      <p style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-dim)">
+        Engine: HuggingFace Transformers (VitsModel)<br>
+        Sample rate: 16000 Hz<br>
+        Load time: 2.74s
+      </p>
+    </div>
+  </div>
+
+  <!-- Key Metrics -->
+  <h2>Key Metrics</h2>
+  <div class="grid" id="key-metrics"></div>
+
+  <!-- STT Results -->
+  <h2>STT: Whisper large-v3 Transcription</h2>
+
+  <div class="chart-container">
+    <canvas id="sttSpeedChart" height="100"></canvas>
+  </div>
+
+  <h3>Summary</h3>
+  <table>
+    <tr>
+      <th>Audio Duration</th><th>Mean Time</th><th>Std Dev</th>
+      <th>Speed</th><th>RTF</th><th>Power</th>
+    </tr>
+    <tr>
+            <td>3.63s</td>
+            <td>7.7908s</td>
+            <td>&plusmn;0.4492s</td>
+            <td>0.47x</td>
+            <td>2.1473</td>
+            <td>14.6W</td>
+        </tr><tr>
+            <td>10.88s</td>
+            <td>10.1217s</td>
+            <td>&plusmn;0.7075s</td>
+            <td>1.08x</td>
+            <td>0.9299</td>
+            <td>11.3W</td>
+        </tr><tr>
+            <td>21.77s</td>
+            <td>14.5958s</td>
+            <td>&plusmn;1.2219s</td>
+            <td>1.5x</td>
+            <td>0.6705</td>
+            <td>12.3W</td>
+        </tr><tr>
+            <td>43.54s</td>
+            <td>26.7345s</td>
+            <td>&plusmn;0.7775s</td>
+            <td>1.63x</td>
+            <td>0.6141</td>
+            <td>13.6W</td>
+        </tr><tr>
+            <td>87.07s</td>
+            <td>57.2864s</td>
+            <td>&plusmn;1.2754s</td>
+            <td>1.52x</td>
+            <td>0.6579</td>
+            <td>16.2W</td>
+        </tr><tr>
+            <td>217.69s</td>
+            <td>359.8448s</td>
+            <td>&plusmn;20.988s</td>
+            <td>0.61x</td>
+            <td>1.653</td>
+            <td>16.7W</td>
+        </tr>
+  </table>
+
+  <details>
+    <summary>All STT runs</summary>
+    <table>
+      <tr>
+        <th>Audio</th><th>Run</th><th>Time</th><th>Speed</th>
+        <th>RTF</th><th>Chars</th><th>Temp</th><th>Power</th>
+      </tr>
+      <tr>
+            <td>3.63s</td>
+            <td>1</td>
+            <td>8.3366s</td>
+            <td>0.44x</td>
+            <td>2.2978</td>
+            <td>55</td>
+            <td>52/43C</td>
+            <td>22.9W</td>
+        </tr><tr>
+            <td>3.63s</td>
+            <td>2</td>
+            <td>7.7994s</td>
+            <td>0.47x</td>
+            <td>2.1497</td>
+            <td>55</td>
+            <td>43/43C</td>
+            <td>10.5W</td>
+        </tr><tr>
+            <td>3.63s</td>
+            <td>3</td>
+            <td>7.2364s</td>
+            <td>0.5x</td>
+            <td>1.9945</td>
+            <td>55</td>
+            <td>43/44C</td>
+            <td>10.5W</td>
+        </tr><tr>
+            <td>10.88s</td>
+            <td>1</td>
+            <td>9.1337s</td>
+            <td>1.19x</td>
+            <td>0.8392</td>
+            <td>186</td>
+            <td>44/44C</td>
+            <td>12.3W</td>
+        </tr><tr>
+            <td>10.88s</td>
+            <td>2</td>
+            <td>10.4787s</td>
+            <td>1.04x</td>
+            <td>0.9627</td>
+            <td>186</td>
+            <td>44/45C</td>
+            <td>10.8W</td>
+        </tr><tr>
+            <td>10.88s</td>
+            <td>3</td>
+            <td>10.7527s</td>
+            <td>1.01x</td>
+            <td>0.9879</td>
+            <td>186</td>
+            <td>45/45C</td>
+            <td>10.8W</td>
+        </tr><tr>
+            <td>21.77s</td>
+            <td>1</td>
+            <td>15.9216s</td>
+            <td>1.37x</td>
+            <td>0.7314</td>
+            <td>337</td>
+            <td>48/46C</td>
+            <td>14.6W</td>
+        </tr><tr>
+            <td>21.77s</td>
+            <td>2</td>
+            <td>12.9731s</td>
+            <td>1.68x</td>
+            <td>0.596</td>
+            <td>337</td>
+            <td>46/47C</td>
+            <td>11.1W</td>
+        </tr><tr>
+            <td>21.77s</td>
+            <td>3</td>
+            <td>14.8928s</td>
+            <td>1.46x</td>
+            <td>0.6841</td>
+            <td>337</td>
+            <td>47/47C</td>
+            <td>11.2W</td>
+        </tr><tr>
+            <td>43.54s</td>
+            <td>1</td>
+            <td>27.4559s</td>
+            <td>1.59x</td>
+            <td>0.6306</td>
+            <td>397</td>
+            <td>53/48C</td>
+            <td>18.2W</td>
+        </tr><tr>
+            <td>43.54s</td>
+            <td>2</td>
+            <td>27.0923s</td>
+            <td>1.61x</td>
+            <td>0.6223</td>
+            <td>397</td>
+            <td>48/48C</td>
+            <td>11.3W</td>
+        </tr><tr>
+            <td>43.54s</td>
+            <td>3</td>
+            <td>25.6552s</td>
+            <td>1.7x</td>
+            <td>0.5893</td>
+            <td>397</td>
+            <td>48/49C</td>
+            <td>11.4W</td>
+        </tr><tr>
+            <td>87.07s</td>
+            <td>1</td>
+            <td>57.0334s</td>
+            <td>1.53x</td>
+            <td>0.655</td>
+            <td>1122</td>
+            <td>54/50C</td>
+            <td>25.1W</td>
+        </tr><tr>
+            <td>87.07s</td>
+            <td>2</td>
+            <td>58.9595s</td>
+            <td>1.48x</td>
+            <td>0.6771</td>
+            <td>1122</td>
+            <td>50/51C</td>
+            <td>11.7W</td>
+        </tr><tr>
+            <td>87.07s</td>
+            <td>3</td>
+            <td>55.8664s</td>
+            <td>1.56x</td>
+            <td>0.6416</td>
+            <td>1122</td>
+            <td>51/51C</td>
+            <td>11.8W</td>
+        </tr><tr>
+            <td>217.69s</td>
+            <td>1</td>
+            <td>337.014s</td>
+            <td>0.65x</td>
+            <td>1.5482</td>
+            <td>3855</td>
+            <td>56/52C</td>
+            <td>25.8W</td>
+        </tr><tr>
+            <td>217.69s</td>
+            <td>2</td>
+            <td>387.6861s</td>
+            <td>0.56x</td>
+            <td>1.7809</td>
+            <td>3816</td>
+            <td>52/53C</td>
+            <td>12.1W</td>
+        </tr><tr>
+            <td>217.69s</td>
+            <td>3</td>
+            <td>354.8343s</td>
+            <td>0.61x</td>
+            <td>1.63</td>
+            <td>4106</td>
+            <td>53/53C</td>
+            <td>12.2W</td>
+        </tr>
+    </table>
+  </details>
+
+  <!-- TTS Results -->
+  <h2>TTS: MMS-TTS Malay Synthesis</h2>
+
+  <div class="chart-container">
+    <canvas id="ttsChart" height="100"></canvas>
+  </div>
+
+  <h3>Summary</h3>
+  <table>
+    <tr>
+      <th>Text</th><th>Chars</th><th>Audio Out</th>
+      <th>Mean Time</th><th>Std Dev</th><th>Chars/s</th><th>RTF</th><th>Power</th>
+    </tr>
+    <tr>
+            <td>Short</td>
+            <td>25</td>
+            <td>2.288s</td>
+            <td>0.2214s</td>
+            <td>&plusmn;0.2254s</td>
+            <td>478.4</td>
+            <td>0.0975</td>
+            <td>10.9W</td>
+        </tr><tr>
+            <td>Medium</td>
+            <td>234</td>
+            <td>15.963s</td>
+            <td>0.1822s</td>
+            <td>&plusmn;0.0646s</td>
+            <td>1428.4</td>
+            <td>0.0114</td>
+            <td>17.7W</td>
+        </tr><tr>
+            <td>Long</td>
+            <td>558</td>
+            <td>38.331s</td>
+            <td>0.2926s</td>
+            <td>&plusmn;0.0168s</td>
+            <td>1913.5</td>
+            <td>0.0076</td>
+            <td>30.4W</td>
+        </tr><tr>
+            <td>Very Long</td>
+            <td>1199</td>
+            <td>77.499s</td>
+            <td>0.5946s</td>
+            <td>&plusmn;0.0026s</td>
+            <td>2016.5</td>
+            <td>0.0077</td>
+            <td>35.6W</td>
+        </tr>
+  </table>
+
+  <details>
+    <summary>All TTS runs</summary>
+    <table>
+      <tr>
+        <th>Text</th><th>Run</th><th>Chars</th><th>Audio</th>
+        <th>Time</th><th>Chars/s</th><th>RTF</th><th>Temp</th><th>Power</th>
+      </tr>
+      <tr>
+            <td>Short</td>
+            <td>1</td>
+            <td>25</td>
+            <td>2.256s</td>
+            <td>0.5364s</td>
+            <td>46.6</td>
+            <td>0.2377</td>
+            <td>41/41C</td>
+            <td>10.2W</td>
+        </tr><tr>
+            <td>Short</td>
+            <td>2</td>
+            <td>25</td>
+            <td>2.352s</td>
+            <td>0.1062s</td>
+            <td>235.4</td>
+            <td>0.0452</td>
+            <td>41/42C</td>
+            <td>10.9W</td>
+        </tr><tr>
+            <td>Short</td>
+            <td>3</td>
+            <td>25</td>
+            <td>2.256s</td>
+            <td>0.0217s</td>
+            <td>1153.1</td>
+            <td>0.0096</td>
+            <td>42/42C</td>
+            <td>11.6W</td>
+        </tr><tr>
+            <td>Medium</td>
+            <td>1</td>
+            <td>234</td>
+            <td>16.096s</td>
+            <td>0.2735s</td>
+            <td>855.5</td>
+            <td>0.017</td>
+            <td>42/42C</td>
+            <td>13.9W</td>
+        </tr><tr>
+            <td>Medium</td>
+            <td>2</td>
+            <td>234</td>
+            <td>16.048s</td>
+            <td>0.1381s</td>
+            <td>1694.6</td>
+            <td>0.0086</td>
+            <td>42/42C</td>
+            <td>17.9W</td>
+        </tr><tr>
+            <td>Medium</td>
+            <td>3</td>
+            <td>234</td>
+            <td>15.744s</td>
+            <td>0.1349s</td>
+            <td>1735.1</td>
+            <td>0.0086</td>
+            <td>42/42C</td>
+            <td>21.4W</td>
+        </tr><tr>
+            <td>Long</td>
+            <td>1</td>
+            <td>558</td>
+            <td>38.416s</td>
+            <td>0.316s</td>
+            <td>1765.7</td>
+            <td>0.0082</td>
+            <td>42/42C</td>
+            <td>26.9W</td>
+        </tr><tr>
+            <td>Long</td>
+            <td>2</td>
+            <td>558</td>
+            <td>37.664s</td>
+            <td>0.2777s</td>
+            <td>2009.6</td>
+            <td>0.0074</td>
+            <td>42/42C</td>
+            <td>31.0W</td>
+        </tr><tr>
+            <td>Long</td>
+            <td>3</td>
+            <td>558</td>
+            <td>38.912s</td>
+            <td>0.284s</td>
+            <td>1965.1</td>
+            <td>0.0073</td>
+            <td>42/48C</td>
+            <td>33.3W</td>
+        </tr><tr>
+            <td>Very Long</td>
+            <td>1</td>
+            <td>1199</td>
+            <td>76.688s</td>
+            <td>0.5964s</td>
+            <td>2010.2</td>
+            <td>0.0078</td>
+            <td>48/48C</td>
+            <td>35.1W</td>
+        </tr><tr>
+            <td>Very Long</td>
+            <td>2</td>
+            <td>1199</td>
+            <td>78.064s</td>
+            <td>0.5965s</td>
+            <td>2010.2</td>
+            <td>0.0076</td>
+            <td>48/50C</td>
+            <td>35.7W</td>
+        </tr><tr>
+            <td>Very Long</td>
+            <td>3</td>
+            <td>1199</td>
+            <td>77.744s</td>
+            <td>0.5909s</td>
+            <td>2029.1</td>
+            <td>0.0076</td>
+            <td>50/52C</td>
+            <td>35.9W</td>
+        </tr>
+    </table>
+  </details>
+
+  <div class="footer">
+    GX10 Benchmark Suite &mdash; Pendakwah Teknologi &mdash; Generated 20260413_011735
+  </div>
+</div>
+
+<script>
+// STT Speed chart
+const sttCtx = document.getElementById('sttSpeedChart').getContext('2d');
+new Chart(sttCtx, {
+  type: 'bar',
+  data: {
+    labels: ["3.63s", "10.88s", "21.77s", "43.54s", "87.07s", "217.69s"],
+    datasets: [
+      {
+        label: 'Speed (x realtime)',
+        data: [0.47, 1.08, 1.5, 1.63, 1.52, 0.61],
+        backgroundColor: 'rgba(56,189,248,0.7)',
+        borderColor: '#38bdf8',
+        borderWidth: 1,
+        yAxisID: 'y',
+      },
+      {
+        label: 'Time (s)',
+        data: [7.7908, 10.1217, 14.5958, 26.7345, 57.2864, 359.8448],
+        type: 'line',
+        borderColor: '#fb923c',
+        backgroundColor: 'rgba(251,146,60,0.2)',
+        yAxisID: 'y1',
+        tension: 0.3,
+        pointRadius: 5,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'STT: Transcription Speed vs Audio Duration', color: '#e2e8f0' },
+      legend: { labels: { color: '#94a3b8' } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
+      y: {
+        position: 'left',
+        title: { display: true, text: 'Speed (x realtime)', color: '#38bdf8' },
+        ticks: { color: '#38bdf8' }, grid: { color: '#334155' }
+      },
+      y1: {
+        position: 'right',
+        title: { display: true, text: 'Time (seconds)', color: '#fb923c' },
+        ticks: { color: '#fb923c' }, grid: { drawOnChartArea: false }
+      }
+    }
+  }
+});
+
+// TTS chart
+const ttsCtx = document.getElementById('ttsChart').getContext('2d');
+new Chart(ttsCtx, {
+  type: 'bar',
+  data: {
+    labels: ["Short", "Medium", "Long", "Very Long"],
+    datasets: [
+      {
+        label: 'Chars/sec',
+        data: [478.4, 1428.4, 1913.5, 2016.5],
+        backgroundColor: 'rgba(167,139,250,0.7)',
+        borderColor: '#a78bfa',
+        borderWidth: 1,
+        yAxisID: 'y',
+      },
+      {
+        label: 'Time (s)',
+        data: [0.2214, 0.1822, 0.2926, 0.5946],
+        type: 'line',
+        borderColor: '#4ade80',
+        backgroundColor: 'rgba(74,222,128,0.2)',
+        yAxisID: 'y1',
+        tension: 0.3,
+        pointRadius: 5,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'TTS: Synthesis Speed vs Text Length', color: '#e2e8f0' },
+      legend: { labels: { color: '#94a3b8' } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
+      y: {
+        position: 'left',
+        title: { display: true, text: 'Chars/sec', color: '#a78bfa' },
+        ticks: { color: '#a78bfa' }, grid: { color: '#334155' }
+      },
+      y1: {
+        position: 'right',
+        title: { display: true, text: 'Time (seconds)', color: '#4ade80' },
+        ticks: { color: '#4ade80' }, grid: { drawOnChartArea: false }
+      }
+    }
+  }
+});
+
+// Key metrics cards
+const sttData = [{"test": "stt_5s", "model": "whisper-large-v3", "type": "stt", "n_runs": "3", "input_chars": "", "input_duration_s": "3.63", "mean_time_s": "7.7908", "stddev_time_s": "0.4492", "min_time_s": "7.2364", "max_time_s": "8.3366", "mean_audio_duration_s": "", "mean_chars_per_sec": "", "mean_rtf": "2.1473", "mean_speed_x": "0.47", "mean_gpu_power_w": "14.6"}, {"test": "stt_15s", "model": "whisper-large-v3", "type": "stt", "n_runs": "3", "input_chars": "", "input_duration_s": "10.88", "mean_time_s": "10.1217", "stddev_time_s": "0.7075", "min_time_s": "9.1337", "max_time_s": "10.7527", "mean_audio_duration_s": "", "mean_chars_per_sec": "", "mean_rtf": "0.9299", "mean_speed_x": "1.08", "mean_gpu_power_w": "11.3"}, {"test": "stt_30s", "model": "whisper-large-v3", "type": "stt", "n_runs": "3", "input_chars": "", "input_duration_s": "21.77", "mean_time_s": "14.5958", "stddev_time_s": "1.2219", "min_time_s": "12.9731", "max_time_s": "15.9216", "mean_audio_duration_s": "", "mean_chars_per_sec": "", "mean_rtf": "0.6705", "mean_speed_x": "1.5", "mean_gpu_power_w": "12.3"}, {"test": "stt_60s", "model": "whisper-large-v3", "type": "stt", "n_runs": "3", "input_chars": "", "input_duration_s": "43.54", "mean_time_s": "26.7345", "stddev_time_s": "0.7775", "min_time_s": "25.6552", "max_time_s": "27.4559", "mean_audio_duration_s": "", "mean_chars_per_sec": "", "mean_rtf": "0.6141", "mean_speed_x": "1.63", "mean_gpu_power_w": "13.6"}, {"test": "stt_120s", "model": "whisper-large-v3", "type": "stt", "n_runs": "3", "input_chars": "", "input_duration_s": "87.07", "mean_time_s": "57.2864", "stddev_time_s": "1.2754", "min_time_s": "55.8664", "max_time_s": "58.9595", "mean_audio_duration_s": "", "mean_chars_per_sec": "", "mean_rtf": "0.6579", "mean_speed_x": "1.52", "mean_gpu_power_w": "16.2"}, {"test": "stt_300s", "model": "whisper-large-v3", "type": "stt", "n_runs": "3", "input_chars": "", "input_duration_s": "217.69", "mean_time_s": "359.8448", "stddev_time_s": "20.988", "min_time_s": "337.014", "max_time_s": "387.6861", "mean_audio_duration_s": "", "mean_chars_per_sec": "", "mean_rtf": "1.653", "mean_speed_x": "0.61", "mean_gpu_power_w": "16.7"}];
+const ttsData = [{"test": "tts_short", "model": "mms-tts-zlm", "type": "tts", "n_runs": "3", "input_chars": "25", "input_duration_s": "", "mean_time_s": "0.2214", "stddev_time_s": "0.2254", "min_time_s": "0.0217", "max_time_s": "0.5364", "mean_audio_duration_s": "2.288", "mean_chars_per_sec": "478.4", "mean_rtf": "0.0975", "mean_speed_x": "", "mean_gpu_power_w": "10.9"}, {"test": "tts_medium", "model": "mms-tts-zlm", "type": "tts", "n_runs": "3", "input_chars": "234", "input_duration_s": "", "mean_time_s": "0.1822", "stddev_time_s": "0.0646", "min_time_s": "0.1349", "max_time_s": "0.2735", "mean_audio_duration_s": "15.963", "mean_chars_per_sec": "1428.4", "mean_rtf": "0.0114", "mean_speed_x": "", "mean_gpu_power_w": "17.7"}, {"test": "tts_long", "model": "mms-tts-zlm", "type": "tts", "n_runs": "3", "input_chars": "558", "input_duration_s": "", "mean_time_s": "0.2926", "stddev_time_s": "0.0168", "min_time_s": "0.2777", "max_time_s": "0.316", "mean_audio_duration_s": "38.331", "mean_chars_per_sec": "1913.5", "mean_rtf": "0.0076", "mean_speed_x": "", "mean_gpu_power_w": "30.4"}, {"test": "tts_very_long", "model": "mms-tts-zlm", "type": "tts", "n_runs": "3", "input_chars": "1199", "input_duration_s": "", "mean_time_s": "0.5946", "stddev_time_s": "0.0026", "min_time_s": "0.5909", "max_time_s": "0.5965", "mean_audio_duration_s": "77.499", "mean_chars_per_sec": "2016.5", "mean_rtf": "0.0077", "mean_speed_x": "", "mean_gpu_power_w": "35.6"}];
+
+const metricsDiv = document.getElementById('key-metrics');
+const bestSTT = sttData.reduce((a, b) => parseFloat(a.mean_speed_x||0) > parseFloat(b.mean_speed_x||0) ? a : b, {});
+const bestTTS = ttsData.reduce((a, b) => parseFloat(a.mean_chars_per_sec||0) > parseFloat(b.mean_chars_per_sec||0) ? a : b, {});
+
+const metrics = [
+  { label: 'Best STT Speed', value: (bestSTT.mean_speed_x || '?') + 'x', cls: 'accent', sub: 'realtime (' + (bestSTT.input_duration_s||'?') + 's audio)' },
+  { label: 'Best TTS Speed', value: (bestTTS.mean_chars_per_sec || '?') + ' c/s', cls: 'purple', sub: bestTTS.test ? bestTTS.test.replace('tts_','').replace('_',' ') : '' },
+  { label: 'STT Load Time', value: '3.15s', cls: 'green', sub: 'Whisper large-v3' },
+  { label: 'TTS Load Time', value: '2.74s', cls: 'orange', sub: 'MMS-TTS Malay' },
+];
+
+metrics.forEach(m => {
+  metricsDiv.innerHTML += `
+    <div class="card">
+      <div class="card-label">${m.label}</div>
+      <div class="card-value ${m.cls}">${m.value}</div>
+      <div style="font-size:0.8rem;color:var(--text-dim);margin-top:0.3rem">${m.sub}</div>
+    </div>`;
+});
+</script>
+</body>
+</html>

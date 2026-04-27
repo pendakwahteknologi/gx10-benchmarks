@@ -1,0 +1,2 @@
+model,size,download_gb,tok_s,ttft_ms,total_time_s,tokens_generated,gpu_temp_c
+qwen2.5:1.5b,1.5B,,176.44,11.7,1.695321,256,58

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GX10 Benchmark #06: Embedding Throughput</title>
+<style>
+:root {
+    --primary: #1a73e8;
+    --primary-light: #4a90d9;
+    --accent: #34a853;
+    --warn: #ea4335;
+    --orange: #f9ab00;
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2333;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --gpu-color: #58a6ff;
+    --cpu-color: #f97583;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 14px;
+}
+.header {
+    background: linear-gradient(135deg, #1a1f35 0%, #0d1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+}
+.header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.25rem; }
+.header .subtitle { color: var(--text-dim); font-size: 0.85rem; }
+.header .timestamp { color: var(--text-dim); font-size: 0.75rem; margin-top: 0.5rem; }
+.container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+.nav {
+    display: flex; gap: 0.5rem; margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; flex-wrap: wrap;
+}
+.nav button {
+    background: transparent; border: none; color: var(--text-dim);
+    padding: 0.5rem 1rem; cursor: pointer; font-family: inherit;
+    font-size: 0.85rem; border-radius: 6px 6px 0 0; transition: all 0.2s;
+}
+.nav button:hover { color: var(--text); background: var(--surface); }
+.nav button.active {
+    color: var(--primary-light); border-bottom: 2px solid var(--primary);
+    background: var(--surface);
+}
+.panel { display: none; }
+.panel.active { display: block; }
+.stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem; margin-bottom: 1.5rem;
+}
+.stat-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.25rem;
+}
+.stat-label { color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-value { font-size: 1.8rem; font-weight: 700; margin: 0.25rem 0; }
+.stat-unit { color: var(--text-dim); font-size: 0.8rem; }
+.stat-value.gpu { color: var(--gpu-color); }
+.stat-value.cpu { color: var(--cpu-color); }
+.stat-value.green { color: var(--accent); }
+table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.85rem; }
+th, td { padding: 0.6rem 0.8rem; text-align: right; border-bottom: 1px solid var(--border); }
+th {
+    color: var(--text-dim); font-weight: 600; text-transform: uppercase;
+    font-size: 0.7rem; letter-spacing: 0.05em; background: var(--surface);
+    position: sticky; top: 0;
+}
+th:first-child, td:first-child { text-align: left; }
+tr:hover td { background: var(--surface2); }
+.device-cuda { color: var(--gpu-color); font-weight: 600; }
+.device-cpu { color: var(--cpu-color); font-weight: 600; }
+.best-row { background: rgba(52, 168, 83, 0.08); }
+.best-row td { border-left: 3px solid var(--accent); }
+.chart-container {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;
+}
+.chart-title { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
+.chart-subtitle { color: var(--text-dim); font-size: 0.75rem; margin-bottom: 1rem; }
+.bar-row { display: flex; align-items: center; margin-bottom: 0.5rem; gap: 0.5rem; }
+.bar-label { width: 160px; font-size: 0.8rem; text-align: right; flex-shrink: 0; color: var(--text-dim); }
+.bar-track { flex: 1; height: 28px; background: var(--surface2); border-radius: 4px; overflow: hidden; position: relative; }
+.bar-fill {
+    height: 100%; border-radius: 4px; display: flex; align-items: center;
+    padding: 0 8px; font-size: 0.75rem; font-weight: 600; color: #fff;
+    white-space: nowrap; min-width: fit-content; transition: width 0.3s;
+}
+.bar-fill.gpu { background: linear-gradient(90deg, #1a73e8, #58a6ff); }
+.bar-fill.cpu { background: linear-gradient(90deg, #b33a3a, #f97583); }
+.info-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem; margin-bottom: 1.5rem;
+}
+.info-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.25rem;
+}
+.info-card h3 { font-size: 0.85rem; color: var(--primary-light); margin-bottom: 0.75rem; }
+.info-row {
+    display: flex; justify-content: space-between; padding: 0.3rem 0;
+    border-bottom: 1px solid var(--border); font-size: 0.8rem;
+}
+.info-row:last-child { border-bottom: none; }
+.info-key { color: var(--text-dim); }
+.info-val { font-weight: 600; }
+.legend { display: flex; gap: 1.5rem; margin-bottom: 1rem; font-size: 0.8rem; }
+.legend-item { display: flex; align-items: center; gap: 0.4rem; }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+.legend-dot.gpu { background: var(--gpu-color); }
+.legend-dot.cpu { background: var(--cpu-color); }
+.footer {
+    text-align: center; padding: 2rem; color: var(--text-dim);
+    font-size: 0.75rem; border-top: 1px solid var(--border); margin-top: 2rem;
+}
+@media (max-width: 768px) {
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .info-grid { grid-template-columns: 1fr; }
+    .bar-label { width: 100px; font-size: 0.7rem; }
+    .nav { overflow-x: auto; flex-wrap: nowrap; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>GX10 Benchmark #06</h1>
+    <div class="subtitle">Embedding Throughput &mdash; Mesolitica Mistral-Embedding 191M</div>
+    <div class="timestamp">20260412_211752 &bull; 3 reps/config &bull; 66 total runs</div>
+</div>
+
+<div class="container">
+
+<div class="nav">
+    <button class="active" onclick="switchTab(this, 'overview')">Overview</button>
+    <button onclick="switchTab(this, 'gpu')">GPU Results</button>
+    <button onclick="switchTab(this, 'cpu')">CPU Results</button>
+    <button onclick="switchTab(this, 'charts')">Charts</button>
+    <button onclick="switchTab(this, 'raw')">Raw Data</button>
+    <button onclick="switchTab(this, 'system')">System Info</button>
+</div>
+
+<!-- OVERVIEW -->
+<div id="panel-overview" class="panel active">
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="stat-label">Peak GPU Throughput (mean)</div>
+            <div class="stat-value gpu">3,597.4</div>
+            <div class="stat-unit">chunks/sec (batch=128, n=5000)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Peak CPU Throughput (mean)</div>
+            <div class="stat-value cpu">97.8</div>
+            <div class="stat-unit">chunks/sec (batch=64, n=500)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">GPU Speedup</div>
+            <div class="stat-value green">36.8x</div>
+            <div class="stat-unit">over CPU</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">GPU Temperature</div>
+            <div class="stat-value">50&ndash;67</div>
+            <div class="stat-unit">&deg;C during test</div>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <div class="chart-title">Throughput by Batch Size (GPU, 5000 chunks)</div>
+        <div class="chart-subtitle">Mean chunks/sec &mdash; 3 repetitions per config</div>
+        <div class="legend"><div class="legend-item"><div class="legend-dot gpu"></div> GPU (CUDA)</div></div>
+        <div class="bar-row">  <div class="bar-label">batch=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:71.0%">2810.7</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">batch=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:87.6%">3464.7</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">batch=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:90.9%">3597.4</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">batch=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:88.3%">3494.9</div>  </div></div>
+    </div>
+
+    <div class="chart-container">
+        <div class="chart-title">GPU vs CPU Comparison (1000 chunks, batch=64)</div>
+        <div class="chart-subtitle">Mean chunks/sec &mdash; showing relative performance gap</div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot gpu"></div> GPU</div>
+            <div class="legend-item"><div class="legend-dot cpu"></div> CPU</div>
+        </div>
+        <div class="bar-row">  <div class="bar-label">GPU (CUDA)</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:87.0%">3397.7</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">CPU (ARM)</div>  <div class="bar-track">    <div class="bar-fill cpu" style="width:3.0%">97.3</div>  </div></div>
+    </div>
+</div>
+
+<!-- GPU RESULTS -->
+<div id="panel-gpu" class="panel">
+    <h2 style="margin-bottom:1rem; font-size:1.1rem;">GPU (CUDA) &mdash; Aggregated Results</h2>
+    <table>
+        <thead><tr>
+            <th>Chunks</th><th>Batch</th><th>Mean CPS</th><th>StdDev</th>
+            <th>Min</th><th>Max</th><th>Temp &deg;C</th><th>Mem MB</th><th>Power W</th>
+        </tr></thead>
+        <tbody><tr><td>100</td><td>32</td><td><strong>2127.9</strong></td><td>506.1</td><td>1598.9</td><td>2607.4</td><td>51</td><td>-1</td><td>20.4</td></tr>
+<tr><td>100</td><td>64</td><td><strong>3277.6</strong></td><td>90.4</td><td>3180.5</td><td>3359.4</td><td>53</td><td>-1</td><td>24.2</td></tr>
+<tr><td>100</td><td>128</td><td><strong>3193.0</strong></td><td>323.0</td><td>2821.3</td><td>3405.4</td><td>53</td><td>-1</td><td>28.2</td></tr>
+<tr><td>100</td><td>256</td><td><strong>3539.5</strong></td><td>87.5</td><td>3446.9</td><td>3620.9</td><td>54</td><td>-1</td><td>30.6</td></tr>
+<tr><td>500</td><td>32</td><td><strong>2681.0</strong></td><td>263.2</td><td>2386.0</td><td>2891.7</td><td>54</td><td>-1</td><td>34.0</td></tr>
+<tr><td>500</td><td>64</td><td><strong>3385.1</strong></td><td>70.7</td><td>3322.3</td><td>3461.7</td><td>54</td><td>-1</td><td>42.2</td></tr>
+<tr><td>500</td><td>128</td><td><strong>3103.3</strong></td><td>753.9</td><td>2232.8</td><td>3541.7</td><td>54</td><td>-1</td><td>43.6</td></tr>
+<tr><td>500</td><td>256</td><td><strong>3394.2</strong></td><td>20.2</td><td>3371.4</td><td>3409.8</td><td>54</td><td>-1</td><td>44.2</td></tr>
+<tr><td>1000</td><td>32</td><td><strong>2756.8</strong></td><td>67.8</td><td>2711.7</td><td>2834.8</td><td>57</td><td>-1</td><td>45.3</td></tr>
+<tr><td>1000</td><td>64</td><td><strong>3397.7</strong></td><td>6.4</td><td>3394.0</td><td>3405.0</td><td>60</td><td>-1</td><td>48.0</td></tr>
+<tr><td>1000</td><td>128</td><td><strong>3563.5</strong></td><td>46.2</td><td>3520.4</td><td>3612.2</td><td>62</td><td>-1</td><td>50.2</td></tr>
+<tr><td>1000</td><td>256</td><td><strong>3453.6</strong></td><td>50.2</td><td>3416.1</td><td>3510.6</td><td>63</td><td>-1</td><td>51.7</td></tr>
+<tr><td>5000</td><td>32</td><td><strong>2810.7</strong></td><td>66.7</td><td>2748.9</td><td>2881.4</td><td>62</td><td>-1</td><td>49.4</td></tr>
+<tr><td>5000</td><td>64</td><td><strong>3464.7</strong></td><td>10.8</td><td>3454.7</td><td>3476.1</td><td>63</td><td>-1</td><td>55.5</td></tr>
+<tr class="best-row"><td>5000</td><td>128</td><td><strong>3597.4</strong></td><td>22.7</td><td>3578.4</td><td>3622.6</td><td>65</td><td>-1</td><td>58.2</td></tr>
+<tr><td>5000</td><td>256</td><td><strong>3494.9</strong></td><td>13.8</td><td>3482.0</td><td>3509.5</td><td>67</td><td>-1</td><td>59.0</td></tr></tbody>
+    </table>
+</div>
+
+<!-- CPU RESULTS -->
+<div id="panel-cpu" class="panel">
+    <h2 style="margin-bottom:1rem; font-size:1.1rem;">CPU (ARM) &mdash; Aggregated Results</h2>
+    <table>
+        <thead><tr>
+            <th>Chunks</th><th>Batch</th><th>Mean CPS</th><th>StdDev</th>
+            <th>Min</th><th>Max</th><th>Temp &deg;C</th><th>Mem MB</th><th>Power W</th>
+        </tr></thead>
+        <tbody><tr><td>100</td><td>32</td><td><strong>66.2</strong></td><td>4.8</td><td>60.8</td><td>69.8</td><td>55</td><td>-1</td><td>12.8</td></tr>
+<tr><td>100</td><td>64</td><td><strong>95.8</strong></td><td>7.0</td><td>87.8</td><td>100.3</td><td>55</td><td>-1</td><td>12.7</td></tr>
+<tr><td>500</td><td>32</td><td><strong>73.3</strong></td><td>0.4</td><td>72.8</td><td>73.6</td><td>55</td><td>-1</td><td>12.8</td></tr>
+<tr class="best-row"><td>500</td><td>64</td><td><strong>97.8</strong></td><td>0.9</td><td>97.0</td><td>98.8</td><td>56</td><td>-1</td><td>12.8</td></tr>
+<tr><td>1000</td><td>32</td><td><strong>73.4</strong></td><td>0.4</td><td>73.1</td><td>73.9</td><td>56</td><td>-1</td><td>12.9</td></tr>
+<tr><td>1000</td><td>64</td><td><strong>97.3</strong></td><td>0.6</td><td>96.7</td><td>97.8</td><td>56</td><td>-1</td><td>12.9</td></tr></tbody>
+    </table>
+</div>
+
+<!-- CHARTS -->
+<div id="panel-charts" class="panel">
+    <div class="chart-container">
+        <div class="chart-title">GPU: Throughput by Configuration</div>
+        <div class="chart-subtitle">Mean chunks/sec &mdash; higher is better</div>
+        <div class="bar-row">  <div class="bar-label">100ch b=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:53.8%">2127.9</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">100ch b=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:82.8%">3277.6</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">100ch b=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:80.7%">3193.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">100ch b=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:89.4%">3539.5</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">500ch b=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:67.8%">2681.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">500ch b=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:85.5%">3385.1</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">500ch b=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:78.4%">3103.3</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">500ch b=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:85.8%">3394.2</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">1000ch b=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:69.7%">2756.8</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">1000ch b=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:85.9%">3397.7</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">1000ch b=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:90.1%">3563.5</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">1000ch b=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:87.3%">3453.6</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">5000ch b=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:71.0%">2810.7</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">5000ch b=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:87.6%">3464.7</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">5000ch b=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:90.9%">3597.4</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">5000ch b=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:88.3%">3494.9</div>  </div></div>
+    </div>
+    <div class="chart-container">
+        <div class="chart-title">GPU: Average Throughput by Batch Size</div>
+        <div class="chart-subtitle">Mean across all chunk counts &mdash; higher is better</div>
+        <div class="bar-row">  <div class="bar-label">batch=128 (avg)</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:85.0%">3364.3</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">batch=256 (avg)</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:87.7%">3470.6</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">batch=32 (avg)</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:65.6%">2594.1</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">batch=64 (avg)</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:85.4%">3381.3</div>  </div></div>
+    </div>
+    <div class="chart-container">
+        <div class="chart-title">GPU Temperature Profile</div>
+        <div class="chart-subtitle">Mean temperature per configuration (&deg;C)</div>
+        <div class="bar-row">  <div class="bar-label">100ch b=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:58.6%">51.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">100ch b=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:60.8%">53.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">100ch b=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:60.8%">53.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">100ch b=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:62.0%">54.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">500ch b=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:62.0%">54.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">500ch b=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:62.0%">54.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">500ch b=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:62.0%">54.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">500ch b=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:62.0%">54.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">1000ch b=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:65.4%">57.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">1000ch b=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:68.9%">60.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">1000ch b=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:71.2%">62.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">1000ch b=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:72.3%">63.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">5000ch b=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:71.2%">62.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">5000ch b=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:72.3%">63.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">5000ch b=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:74.6%">65.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">5000ch b=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:76.9%">67.0</div>  </div></div>
+    </div>
+    <div class="chart-container">
+        <div class="chart-title">GPU Power Draw</div>
+        <div class="chart-subtitle">Mean power per configuration (Watts)</div>
+        <div class="bar-row">  <div class="bar-label">100ch b=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:28.8%">20.4</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">100ch b=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:34.2%">24.2</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">100ch b=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:39.8%">28.2</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">100ch b=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:43.2%">30.6</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">500ch b=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:48.0%">34.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">500ch b=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:59.6%">42.2</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">500ch b=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:61.6%">43.6</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">500ch b=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:62.4%">44.2</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">1000ch b=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:64.0%">45.3</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">1000ch b=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:67.8%">48.0</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">1000ch b=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:70.9%">50.2</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">1000ch b=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:73.0%">51.7</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">5000ch b=32</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:69.8%">49.4</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">5000ch b=64</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:78.4%">55.5</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">5000ch b=128</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:82.2%">58.2</div>  </div></div>
+<div class="bar-row">  <div class="bar-label">5000ch b=256</div>  <div class="bar-track">    <div class="bar-fill gpu" style="width:83.3%">59.0</div>  </div></div>
+    </div>
+</div>
+
+<!-- RAW DATA -->
+<div id="panel-raw" class="panel">
+    <h2 style="margin-bottom:1rem; font-size:1.1rem;">All Individual Runs (66 rows)</h2>
+    <table>
+        <thead><tr>
+            <th>Run</th><th>Device</th><th>Chunks</th><th>Batch</th>
+            <th>Time (s)</th><th>Chunks/s</th><th>Temp &deg;C</th><th>Mem MB</th><th>Power W</th>
+        </tr></thead>
+        <tbody><tr><td>1</td><td class="device-cuda">CUDA</td><td>100</td><td>32</td><td>0.0459</td><td><strong>2177.3</strong></td><td>50</td><td>-1</td><td>18.9</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>100</td><td>32</td><td>0.0384</td><td><strong>2607.4</strong></td><td>50</td><td>-1</td><td>20.3</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>100</td><td>32</td><td>0.0625</td><td><strong>1598.9</strong></td><td>53</td><td>-1</td><td>21.9</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>100</td><td>64</td><td>0.0314</td><td><strong>3180.5</strong></td><td>53</td><td>-1</td><td>23.0</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>100</td><td>64</td><td>0.0298</td><td><strong>3359.4</strong></td><td>53</td><td>-1</td><td>24.2</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>100</td><td>64</td><td>0.0304</td><td><strong>3293.0</strong></td><td>53</td><td>-1</td><td>25.4</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>100</td><td>128</td><td>0.0354</td><td><strong>2821.3</strong></td><td>53</td><td>-1</td><td>27.0</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>100</td><td>128</td><td>0.0298</td><td><strong>3352.4</strong></td><td>53</td><td>-1</td><td>28.0</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>100</td><td>128</td><td>0.0294</td><td><strong>3405.4</strong></td><td>53</td><td>-1</td><td>29.7</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>100</td><td>256</td><td>0.0290</td><td><strong>3446.9</strong></td><td>54</td><td>-1</td><td>30.7</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>100</td><td>256</td><td>0.0282</td><td><strong>3550.7</strong></td><td>54</td><td>-1</td><td>30.9</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>100</td><td>256</td><td>0.0276</td><td><strong>3620.9</strong></td><td>54</td><td>-1</td><td>30.2</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>500</td><td>32</td><td>0.2096</td><td><strong>2386.0</strong></td><td>54</td><td>-1</td><td>31.0</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>500</td><td>32</td><td>0.1729</td><td><strong>2891.7</strong></td><td>54</td><td>-1</td><td>34.1</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>500</td><td>32</td><td>0.1808</td><td><strong>2765.3</strong></td><td>54</td><td>-1</td><td>36.8</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>500</td><td>64</td><td>0.1483</td><td><strong>3371.4</strong></td><td>54</td><td>-1</td><td>39.8</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>500</td><td>64</td><td>0.1444</td><td><strong>3461.7</strong></td><td>54</td><td>-1</td><td>43.2</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>500</td><td>64</td><td>0.1505</td><td><strong>3322.3</strong></td><td>54</td><td>-1</td><td>43.6</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>500</td><td>128</td><td>0.1412</td><td><strong>3541.7</strong></td><td>54</td><td>-1</td><td>43.7</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>500</td><td>128</td><td>0.1414</td><td><strong>3535.5</strong></td><td>54</td><td>-1</td><td>44.2</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>500</td><td>128</td><td>0.2239</td><td><strong>2232.8</strong></td><td>54</td><td>-1</td><td>42.9</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>500</td><td>256</td><td>0.1483</td><td><strong>3371.4</strong></td><td>54</td><td>-1</td><td>43.8</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>500</td><td>256</td><td>0.1470</td><td><strong>3401.4</strong></td><td>54</td><td>-1</td><td>44.3</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>500</td><td>256</td><td>0.1466</td><td><strong>3409.8</strong></td><td>54</td><td>-1</td><td>44.6</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>1000</td><td>32</td><td>0.3528</td><td><strong>2834.8</strong></td><td>54</td><td>-1</td><td>45.8</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>1000</td><td>32</td><td>0.3671</td><td><strong>2723.8</strong></td><td>59</td><td>-1</td><td>45.1</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>1000</td><td>32</td><td>0.3688</td><td><strong>2711.7</strong></td><td>59</td><td>-1</td><td>45.0</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>1000</td><td>64</td><td>0.2946</td><td><strong>3394.0</strong></td><td>59</td><td>-1</td><td>46.5</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>1000</td><td>64</td><td>0.2937</td><td><strong>3405.0</strong></td><td>61</td><td>-1</td><td>48.5</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>1000</td><td>64</td><td>0.2946</td><td><strong>3394.0</strong></td><td>61</td><td>-1</td><td>48.9</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>1000</td><td>128</td><td>0.2841</td><td><strong>3520.4</strong></td><td>61</td><td>-1</td><td>49.2</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>1000</td><td>128</td><td>0.2811</td><td><strong>3557.9</strong></td><td>62</td><td>-1</td><td>50.1</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>1000</td><td>128</td><td>0.2768</td><td><strong>3612.2</strong></td><td>62</td><td>-1</td><td>51.4</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>1000</td><td>256</td><td>0.2927</td><td><strong>3416.1</strong></td><td>62</td><td>-1</td><td>51.4</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>1000</td><td>256</td><td>0.2848</td><td><strong>3510.6</strong></td><td>63</td><td>-1</td><td>51.6</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>1000</td><td>256</td><td>0.2912</td><td><strong>3434.2</strong></td><td>63</td><td>-1</td><td>52.0</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>5000</td><td>32</td><td>1.7845</td><td><strong>2801.9</strong></td><td>61</td><td>-1</td><td>49.0</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>5000</td><td>32</td><td>1.8189</td><td><strong>2748.9</strong></td><td>61</td><td>-1</td><td>48.4</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>5000</td><td>32</td><td>1.7353</td><td><strong>2881.4</strong></td><td>63</td><td>-1</td><td>50.8</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>5000</td><td>64</td><td>1.4437</td><td><strong>3463.3</strong></td><td>63</td><td>-1</td><td>55.8</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>5000</td><td>64</td><td>1.4384</td><td><strong>3476.1</strong></td><td>62</td><td>-1</td><td>55.0</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>5000</td><td>64</td><td>1.4473</td><td><strong>3454.7</strong></td><td>64</td><td>-1</td><td>55.7</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>5000</td><td>128</td><td>1.3802</td><td><strong>3622.6</strong></td><td>65</td><td>-1</td><td>58.4</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>5000</td><td>128</td><td>1.3923</td><td><strong>3591.2</strong></td><td>66</td><td>-1</td><td>58.1</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>5000</td><td>128</td><td>1.3973</td><td><strong>3578.4</strong></td><td>64</td><td>-1</td><td>58.1</td></tr>
+<tr><td>1</td><td class="device-cuda">CUDA</td><td>5000</td><td>256</td><td>1.4314</td><td><strong>3493.1</strong></td><td>66</td><td>-1</td><td>59.2</td></tr>
+<tr><td>2</td><td class="device-cuda">CUDA</td><td>5000</td><td>256</td><td>1.4247</td><td><strong>3509.5</strong></td><td>67</td><td>-1</td><td>59.0</td></tr>
+<tr><td>3</td><td class="device-cuda">CUDA</td><td>5000</td><td>256</td><td>1.4360</td><td><strong>3482.0</strong></td><td>67</td><td>-1</td><td>58.7</td></tr>
+<tr><td>1</td><td class="device-cpu">CPU</td><td>100</td><td>32</td><td>1.6458</td><td><strong>60.8</strong></td><td>55</td><td>-1</td><td>12.8</td></tr>
+<tr><td>2</td><td class="device-cpu">CPU</td><td>100</td><td>32</td><td>1.4690</td><td><strong>68.1</strong></td><td>55</td><td>-1</td><td>12.7</td></tr>
+<tr><td>3</td><td class="device-cpu">CPU</td><td>100</td><td>32</td><td>1.4335</td><td><strong>69.8</strong></td><td>55</td><td>-1</td><td>12.8</td></tr>
+<tr><td>1</td><td class="device-cpu">CPU</td><td>100</td><td>64</td><td>0.9970</td><td><strong>100.3</strong></td><td>55</td><td>-1</td><td>12.7</td></tr>
+<tr><td>2</td><td class="device-cpu">CPU</td><td>100</td><td>64</td><td>1.0062</td><td><strong>99.4</strong></td><td>55</td><td>-1</td><td>12.7</td></tr>
+<tr><td>3</td><td class="device-cpu">CPU</td><td>100</td><td>64</td><td>1.1390</td><td><strong>87.8</strong></td><td>55</td><td>-1</td><td>12.7</td></tr>
+<tr><td>1</td><td class="device-cpu">CPU</td><td>500</td><td>32</td><td>6.7995</td><td><strong>73.5</strong></td><td>55</td><td>-1</td><td>12.8</td></tr>
+<tr><td>2</td><td class="device-cpu">CPU</td><td>500</td><td>32</td><td>6.7954</td><td><strong>73.6</strong></td><td>55</td><td>-1</td><td>12.8</td></tr>
+<tr><td>3</td><td class="device-cpu">CPU</td><td>500</td><td>32</td><td>6.8727</td><td><strong>72.8</strong></td><td>55</td><td>-1</td><td>12.8</td></tr>
+<tr><td>1</td><td class="device-cpu">CPU</td><td>500</td><td>64</td><td>5.1547</td><td><strong>97.0</strong></td><td>55</td><td>-1</td><td>12.8</td></tr>
+<tr><td>2</td><td class="device-cpu">CPU</td><td>500</td><td>64</td><td>5.0605</td><td><strong>98.8</strong></td><td>56</td><td>-1</td><td>12.8</td></tr>
+<tr><td>3</td><td class="device-cpu">CPU</td><td>500</td><td>64</td><td>5.1218</td><td><strong>97.6</strong></td><td>56</td><td>-1</td><td>12.9</td></tr>
+<tr><td>1</td><td class="device-cpu">CPU</td><td>1000</td><td>32</td><td>13.6555</td><td><strong>73.2</strong></td><td>56</td><td>-1</td><td>12.9</td></tr>
+<tr><td>2</td><td class="device-cpu">CPU</td><td>1000</td><td>32</td><td>13.6834</td><td><strong>73.1</strong></td><td>56</td><td>-1</td><td>12.9</td></tr>
+<tr><td>3</td><td class="device-cpu">CPU</td><td>1000</td><td>32</td><td>13.5388</td><td><strong>73.9</strong></td><td>56</td><td>-1</td><td>12.9</td></tr>
+<tr><td>1</td><td class="device-cpu">CPU</td><td>1000</td><td>64</td><td>10.3460</td><td><strong>96.7</strong></td><td>56</td><td>-1</td><td>12.9</td></tr>
+<tr><td>2</td><td class="device-cpu">CPU</td><td>1000</td><td>64</td><td>10.2286</td><td><strong>97.8</strong></td><td>56</td><td>-1</td><td>12.9</td></tr>
+<tr><td>3</td><td class="device-cpu">CPU</td><td>1000</td><td>64</td><td>10.2536</td><td><strong>97.5</strong></td><td>57</td><td>-1</td><td>13.0</td></tr></tbody>
+    </table>
+</div>
+
+<!-- SYSTEM INFO -->
+<div id="panel-system" class="panel">
+    <div class="info-grid">
+        <div class="info-card">
+            <h3>GPU</h3>
+            <div class="info-row"><span class="info-key">Name</span><span class="info-val">NVIDIA GB10</span></div>
+            <div class="info-row"><span class="info-key">Driver</span><span class="info-val">580.142</span></div>
+            <div class="info-row"><span class="info-key">CUDA</span><span class="info-val">13.0</span></div>
+            <div class="info-row"><span class="info-key">Compute</span><span class="info-val">SM 12.1</span></div>
+            <div class="info-row"><span class="info-key">VRAM</span><span class="info-val">[N/A] MB</span></div>
+        </div>
+        <div class="info-card">
+            <h3>CPU / System</h3>
+            <div class="info-row"><span class="info-key">CPU</span><span class="info-val">Cortex-X925</span></div>
+            <div class="info-row"><span class="info-key">Cores</span><span class="info-val">20</span></div>
+            <div class="info-row"><span class="info-key">RAM</span><span class="info-val">121.6 GB</span></div>
+            <div class="info-row"><span class="info-key">OS</span><span class="info-val">Ubuntu 24.04.4 LTS</span></div>
+            <div class="info-row"><span class="info-key">Kernel</span><span class="info-val">6.17.0-1014-nvidia</span></div>
+            <div class="info-row"><span class="info-key">Arch</span><span class="info-val">aarch64</span></div>
+        </div>
+        <div class="info-card">
+            <h3>Model</h3>
+            <div class="info-row"><span class="info-key">Name</span><span class="info-val">mesolitica/mistral-embedding-191m-8k-contrastive</span></div>
+            <div class="info-row"><span class="info-key">Parameters</span><span class="info-val">191M</span></div>
+            <div class="info-row"><span class="info-key">Embedding Dim</span><span class="info-val">768</span></div>
+            <div class="info-row"><span class="info-key">Max Seq Length</span><span class="info-val">8192</span></div>
+            <div class="info-row"><span class="info-key">Language</span><span class="info-val">Bahasa Melayu</span></div>
+        </div>
+        <div class="info-card">
+            <h3>Software</h3>
+            <div class="info-row"><span class="info-key">Python</span><span class="info-val">3.12.3</span></div>
+            <div class="info-row"><span class="info-key">PyTorch</span><span class="info-val">2.11.0+cu130</span></div>
+            <div class="info-row"><span class="info-key">Sentence Transformers</span><span class="info-val">5.4.0</span></div>
+        </div>
+    </div>
+    <div class="info-card" style="margin-bottom:1.5rem;">
+        <h3>Test Parameters</h3>
+        <div class="info-row"><span class="info-key">Repetitions</span><span class="info-val">3 per configuration</span></div>
+        <div class="info-row"><span class="info-key">Chunk Counts</span><span class="info-val">[100, 500, 1000, 5000]</span></div>
+        <div class="info-row"><span class="info-key">Batch Sizes</span><span class="info-val">[32, 64, 128, 256]</span></div>
+        <div class="info-row"><span class="info-key">Devices</span><span class="info-val">CUDA (GPU), CPU (ARM)</span></div>
+        <div class="info-row"><span class="info-key">CPU Max Chunks</span><span class="info-val">1000</span></div>
+        <div class="info-row"><span class="info-key">Warmup</span><span class="info-val">5 progressive rounds (16, 32, 64, 128, 256 chunks)</span></div>
+    </div>
+</div>
+
+</div>
+
+<div class="footer">
+    GX10 Benchmark #06: Embedding Throughput &bull; Pendakwah Teknologi &bull; Generated 20260412_211752
+</div>
+
+<script>
+function switchTab(btn, name) {
+    document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('.nav button').forEach(function(b) { b.classList.remove('active'); });
+    document.getElementById('panel-' + name).classList.add('active');
+    btn.classList.add('active');
+}
+</script>
+</body>
+</html>
