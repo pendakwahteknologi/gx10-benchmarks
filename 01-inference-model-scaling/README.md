@@ -26,7 +26,7 @@ Tests every popular model size from 1.5B to 72B on the NVIDIA GX10 Grace Blackwe
 | Qwen2.5 | 3B | 93.49 | 18.9ms | 3.0s | 53C |
 | Qwen2.5 | 7B | 43.20 | 34.7ms | 6.2s | 51C |
 | Qwen2.5 | 14B | 22.24 | 64.6ms | 11.9s | 50C |
-| Gemma 4 | 27B (MoE) | 55.03 | 30.1ms | 5.0s | 55C |
+| Gemma 4 | 8B (4B active) | 55.03 | 30.1ms | 5.0s | 55C |
 | Qwen2.5 | 32B | 10.00 | 134.1ms | 26.0s | 53C |
 | Qwen2.5 | 72B | 4.24 | 296.0ms | 61.2s | 59C |
 
@@ -36,10 +36,10 @@ Tests every popular model size from 1.5B to 72B on the NVIDIA GX10 Grace Blackwe
 
 2. **GPU stays cool throughout.** Temperatures range from 50-59C across all model sizes. No thermal throttling.
 
-3. **Gemma 4 27B MoE is faster than dense 14B.** Despite being a 27B parameter model, Gemma 4 only activates 3.8B parameters per inference (Mixture of Experts architecture), resulting in 55 tok/s — faster than the dense 14B Qwen2.5 at 22 tok/s.
+3. **Gemma 4 (E4B) is faster than dense 14B.** Gemma 4 E4B uses selective activation — ~8B total parameters with ~4B effective active per token (MatFormer / per-layer-embedding pattern) — reaching 55 tok/s, faster than the dense 14B Qwen2.5 at 22 tok/s.
 
 4. **Sweet spots by use case:**
-   - Real-time chat (40+ tok/s): up to 7B, or Gemma 4 27B MoE
+   - Real-time chat (40+ tok/s): up to 7B, or Gemma 4 E4B
    - Comfortable chat (20+ tok/s): up to 14B
    - Usable but noticeable delay: 32B at 10 tok/s
    - Batch/offline workloads: 72B at 4.2 tok/s

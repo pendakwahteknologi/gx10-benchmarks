@@ -12,9 +12,9 @@
 
 <table>
 <tr>
-<td><img src="07-image-video-generation/samples/z-image-turbo-1024x1024-4step-run1.png" width="270" alt="Mountain lake at sunset — generated in 24.3s"/></td>
-<td><img src="07-image-video-generation/samples/z-image-turbo-1024x1024-4step-run2.png" width="270" alt="Futuristic city at night — generated in 24.3s"/></td>
-<td><img src="07-image-video-generation/samples/z-image-turbo-1024x1024-4step-run3.png" width="270" alt="Japanese garden with cherry blossoms — generated in 24.3s"/></td>
+<td><img src="07-efficiency-image-generation/samples/z-image-turbo-1024x1024-4step-run1.png" width="270" alt="Mountain lake at sunset — generated in 24.3s"/></td>
+<td><img src="07-efficiency-image-generation/samples/z-image-turbo-1024x1024-4step-run2.png" width="270" alt="Futuristic city at night — generated in 24.3s"/></td>
+<td><img src="07-efficiency-image-generation/samples/z-image-turbo-1024x1024-4step-run3.png" width="270" alt="Japanese garden with cherry blossoms — generated in 24.3s"/></td>
 </tr>
 <tr>
 <td align="center"><sub>1024x1024 · 4 steps · 24.3s</sub></td>
@@ -51,7 +51,7 @@ NVIDIA GX10 Desktop AI Supercomputer
 | 02 | **Engine Comparison** | Ollama 43.7 tok/s vs llama.cpp 43.0 vs vLLM 12.5 | [Details](#02--inference-engine-comparison) |
 | 03 | **llama.cpp Multi-Quant** | 6,762 tok/s prompt processing (3B Q4) | [Details](#03--inference-llamacpp-multi-quantization) |
 | 04 | **Fine-Tuning** | Full FT of Llama 8B in 5h using 93.6 GB | [Details](#04--training-fine-tuning) |
-| 05 | **Token per Watt** | 2.62 tok/W peak · RM 0.058 per 1K tokens | [Details](#05--efficiency-token-per-watt) |
+| 05 | **Token per Watt** | 2.62 tok/W peak · RM 0.058 per 1M tokens | [Details](#05--efficiency-token-per-watt) |
 | 06 | **Embedding Throughput** | 3,597 chunks/s GPU · 36x faster than CPU | [Details](#06--inference-embedding-throughput) |
 | 07 | **Image & Video Gen** | 8.7 images/min · video at 0.56 fps | [Details](#07--image--video-generation) |
 | 08 | **Voice STT & TTS** | TTS: 2,017 chars/s · STT: 1.6x realtime | [Details](#08--voice-stt--tts) |
@@ -69,11 +69,11 @@ NVIDIA GX10 Desktop AI Supercomputer
 | Qwen2.5 | 3B | **93** | 19ms | 53C |
 | Qwen2.5 | 7B | **43** | 35ms | 51C |
 | Qwen2.5 | 14B | 22 | 65ms | 50C |
-| Gemma 4 MoE | 27B | **55** | 30ms | 55C |
+| Gemma 4 | 8B (4B active) | **55** | 30ms | 55C |
 | Qwen2.5 | 32B | 10 | 134ms | 53C |
 | Qwen2.5 | 72B | 4.2 | 296ms | 59C |
 
-<sub>Gemma 4 27B uses MoE (Mixture of Experts), so active parameters per token are lower — hence faster than the dense 14B.</sub>
+<sub>Gemma 4 (E4B) uses selective activation — ~4B effective active parameters per token despite ~8B total — so it runs faster than the dense 14B.</sub>
 
 <details>
 <summary>Raw data</summary>
@@ -237,10 +237,10 @@ See [`06-inference-embedding/results/embedding-throughput-summary.csv`](06-infer
 <td align="center"><strong>1280x1280</strong><br><sub>38.3 seconds</sub></td>
 </tr>
 <tr>
-<td><img src="07-image-video-generation/samples/z-image-turbo-512x512-4step-run1.png" width="180" alt="512x512"/></td>
-<td><img src="07-image-video-generation/samples/z-image-turbo-768x768-4step-run1.png" width="180" alt="768x768"/></td>
-<td><img src="07-image-video-generation/samples/z-image-turbo-1024x1024-4step-run1.png" width="180" alt="1024x1024"/></td>
-<td><img src="07-image-video-generation/samples/z-image-turbo-1280x1280-4step-run1.png" width="180" alt="1280x1280"/></td>
+<td><img src="07-efficiency-image-generation/samples/z-image-turbo-512x512-4step-run1.png" width="180" alt="512x512"/></td>
+<td><img src="07-efficiency-image-generation/samples/z-image-turbo-768x768-4step-run1.png" width="180" alt="768x768"/></td>
+<td><img src="07-efficiency-image-generation/samples/z-image-turbo-1024x1024-4step-run1.png" width="180" alt="1024x1024"/></td>
+<td><img src="07-efficiency-image-generation/samples/z-image-turbo-1280x1280-4step-run1.png" width="180" alt="1280x1280"/></td>
 </tr>
 </table>
 
@@ -252,8 +252,8 @@ See [`06-inference-embedding/results/embedding-throughput-summary.csv`](06-infer
 <td align="center"><strong>8 steps</strong> · 47.8s</td>
 </tr>
 <tr>
-<td><img src="07-image-video-generation/samples/z-image-turbo-1024x1024-4step-run1.png" width="350" alt="4-step generation"/></td>
-<td><img src="07-image-video-generation/samples/z-image-turbo-1024x1024-8step-run1.png" width="350" alt="8-step generation"/></td>
+<td><img src="07-efficiency-image-generation/samples/z-image-turbo-1024x1024-4step-run1.png" width="350" alt="4-step generation"/></td>
+<td><img src="07-efficiency-image-generation/samples/z-image-turbo-1024x1024-8step-run1.png" width="350" alt="8-step generation"/></td>
 </tr>
 </table>
 
@@ -263,9 +263,9 @@ See [`06-inference-embedding/results/embedding-throughput-summary.csv`](06-infer
 
 <table>
 <tr>
-<td><img src="07-image-video-generation/samples/z-image-turbo-1024x1024-4step-run2.png" width="270" alt="Futuristic city"/></td>
-<td><img src="07-image-video-generation/samples/z-image-turbo-1024x1024-4step-run3.png" width="270" alt="Cherry blossom garden"/></td>
-<td><img src="07-image-video-generation/samples/z-image-turbo-1024x1024-8step-run2.png" width="270" alt="City 8-step"/></td>
+<td><img src="07-efficiency-image-generation/samples/z-image-turbo-1024x1024-4step-run2.png" width="270" alt="Futuristic city"/></td>
+<td><img src="07-efficiency-image-generation/samples/z-image-turbo-1024x1024-4step-run3.png" width="270" alt="Cherry blossom garden"/></td>
+<td><img src="07-efficiency-image-generation/samples/z-image-turbo-1024x1024-8step-run2.png" width="270" alt="City 8-step"/></td>
 </tr>
 <tr>
 <td align="center"><sub>Futuristic city · 24.3s</sub></td>
@@ -294,9 +294,9 @@ See [`06-inference-embedding/results/embedding-throughput-summary.csv`](06-infer
 <td align="center"><strong>Frame 66</strong></td>
 </tr>
 <tr>
-<td><img src="07-image-video-generation/samples/wan22-t2v-640x640--33f-frame-001.png" width="270" alt="Video frame 1"/></td>
-<td><img src="07-image-video-generation/samples/wan22-t2v-640x640--33f-frame-034.png" width="270" alt="Video frame 34"/></td>
-<td><img src="07-image-video-generation/samples/wan22-t2v-640x640--33f-frame-066.png" width="270" alt="Video frame 66"/></td>
+<td><img src="07-efficiency-image-generation/samples/wan22-t2v-640x640--33f-frame-001.png" width="270" alt="Video frame 1"/></td>
+<td><img src="07-efficiency-image-generation/samples/wan22-t2v-640x640--33f-frame-034.png" width="270" alt="Video frame 34"/></td>
+<td><img src="07-efficiency-image-generation/samples/wan22-t2v-640x640--33f-frame-066.png" width="270" alt="Video frame 66"/></td>
 </tr>
 </table>
 
@@ -311,9 +311,9 @@ See [`06-inference-embedding/results/embedding-throughput-summary.csv`](06-infer
 <td align="center"><strong>Frame 51</strong></td>
 </tr>
 <tr>
-<td><img src="07-image-video-generation/samples/wan22-t2v-480x480--17f-frame-001.png" width="270" alt="Video frame 1"/></td>
-<td><img src="07-image-video-generation/samples/wan22-t2v-480x480--17f-frame-026.png" width="270" alt="Video frame 26"/></td>
-<td><img src="07-image-video-generation/samples/wan22-t2v-480x480--17f-frame-051.png" width="270" alt="Video frame 51"/></td>
+<td><img src="07-efficiency-image-generation/samples/wan22-t2v-480x480--17f-frame-001.png" width="270" alt="Video frame 1"/></td>
+<td><img src="07-efficiency-image-generation/samples/wan22-t2v-480x480--17f-frame-026.png" width="270" alt="Video frame 26"/></td>
+<td><img src="07-efficiency-image-generation/samples/wan22-t2v-480x480--17f-frame-051.png" width="270" alt="Video frame 51"/></td>
 </tr>
 </table>
 
@@ -353,7 +353,7 @@ faster-whisper with CTranslate2 on CPU (int8). Malay language, beam size 5.
 | 87.1s | 57.3s | **1.5x** | 0.66 |
 | 217.7s | 359.8s | 0.6x | 1.65 |
 
-<sub>CTranslate2 on aarch64 lacks CUDA wheels, so Whisper runs on CPU. GPU inference would be significantly faster. The 300s test shows degraded performance likely due to memory pressure at scale.</sub>
+<sub>CTranslate2 on aarch64 lacks CUDA wheels, so Whisper runs on CPU. GPU inference would be significantly faster. Throughput is consistent through ~90s of audio; the longest sample (217.7s) regresses to 0.6× realtime — root cause not isolated.</sub>
 
 ---
 
@@ -429,7 +429,7 @@ gx10-benchmarks/
 ├── 04-training-finetuning/            LoRA · QLoRA · Full FT · with charts
 ├── 05-efficiency-token-per-watt/      Power monitoring · cost analysis
 ├── 06-inference-embedding/            CPU vs GPU · batch size sweep
-├── 07-image-video-generation/         Z-Image-Turbo · Wan 2.2 T2V · samples
+├── 07-efficiency-image-generation/         Z-Image-Turbo · Wan 2.2 T2V · samples
 ├── 08-voice-stt-tts/                  Whisper STT · MMS-TTS · audio samples
 └── 09-coding-llm-webpage/            3 coding LLMs · webpage generation · live outputs
 ```
