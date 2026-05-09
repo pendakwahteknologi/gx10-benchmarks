@@ -1,0 +1,9 @@
+# Vision-Language benchmark prompts.
+# One prompt per line. Lines starting with # are comments.
+# Order matters — index 0 is "captioning", index 4 is "reasoning".
+
+Describe this image in detail.
+What is the main subject of this image?
+How many distinct objects or people can you identify in this image?
+Transcribe any text visible in this image.
+What is unusual or interesting about this image?

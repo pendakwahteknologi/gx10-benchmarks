@@ -1,0 +1,10 @@
+# Test images aren't redistributed via the repo — see test_images/README.md.
+test_images/*.jpg
+test_images/*.jpeg
+test_images/*.png
+test_images/*.webp
+!test_images/README.md
+
+# Python cruft
+__pycache__/
+*.pyc
