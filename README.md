@@ -56,6 +56,7 @@ NVIDIA GX10 Desktop AI Supercomputer
 | 07 | **Image & Video Gen** | 8.7 images/min · video at 0.56 fps | [Details](#07--image--video-generation) |
 | 08 | **Voice STT & TTS** | TTS: 2,017 chars/s · STT: 1.6x realtime | [Details](#08--voice-stt--tts) |
 | 09 | **Coding LLM Webpage** | Qwen3-Coder 71 tok/s · full webpage in 62s | [Details](#09--coding-llm-webpage-generation) |
+| 11 | **Long-Context Scaling** | Llama 3.1 8B · 128K input · 14.9 tok/s decode | [Details](11-long-context-scaling/README.md) |
 
 ---
 
