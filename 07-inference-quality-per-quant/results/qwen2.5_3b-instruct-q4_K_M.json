@@ -1,0 +1,2767 @@
+{
+  "model": "qwen2.5:3b-instruct-q4_K_M",
+  "humaneval": {
+    "n": 164,
+    "passed": 108,
+    "pass_rate": 0.6585365853658537,
+    "elapsed_s": 255.76626920700073
+  },
+  "gsm8k": {
+    "n": 200,
+    "passed": 153,
+    "pass_rate": 0.765,
+    "elapsed_s": 535.4837889671326
+  },
+  "humaneval_runs": [
+    {
+      "task": "HumanEval/0",
+      "passed": true,
+      "err": "",
+      "tokens": 160,
+      "tok_s": 101.13766261100658
+    },
+    {
+      "task": "HumanEval/1",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp_p3vkti_.py\", line 56, in <module>\n    check(separate_paren_groups)\n  File \"/tmp/tmp_p3vkti_.py\", line 45, in check\n    assert candidate('(()()) ((()",
+      "tokens": 243,
+      "tok_s": 100.52196522712244
+    },
+    {
+      "task": "HumanEval/2",
+      "passed": true,
+      "err": "",
+      "tokens": 91,
+      "tok_s": 101.82079777248498
+    },
+    {
+      "task": "HumanEval/3",
+      "passed": true,
+      "err": "",
+      "tokens": 54,
+      "tok_s": 102.55285252591959
+    },
+    {
+      "task": "HumanEval/4",
+      "passed": true,
+      "err": "",
+      "tokens": 176,
+      "tok_s": 101.18813730991062
+    },
+    {
+      "task": "HumanEval/5",
+      "passed": true,
+      "err": "",
+      "tokens": 153,
+      "tok_s": 101.27356512247079
+    },
+    {
+      "task": "HumanEval/6",
+      "passed": true,
+      "err": "",
+      "tokens": 108,
+      "tok_s": 101.81540698153185
+    },
+    {
+      "task": "HumanEval/7",
+      "passed": true,
+      "err": "",
+      "tokens": 57,
+      "tok_s": 102.2688724335243
+    },
+    {
+      "task": "HumanEval/8",
+      "passed": true,
+      "err": "",
+      "tokens": 163,
+      "tok_s": 101.14533558936743
+    },
+    {
+      "task": "HumanEval/9",
+      "passed": true,
+      "err": "",
+      "tokens": 142,
+      "tok_s": 101.13573954079395
+    },
+    {
+      "task": "HumanEval/10",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpspvftfrj.py\", line 56, in <module>\n    check(make_palindrome)\n  File \"/tmp/tmpspvftfrj.py\", line 52, in check\n    assert candidate('xyz') == 'xyzyx'\n",
+      "tokens": 311,
+      "tok_s": 100.83351208505027
+    },
+    {
+      "task": "HumanEval/11",
+      "passed": true,
+      "err": "",
+      "tokens": 173,
+      "tok_s": 101.41907682751841
+    },
+    {
+      "task": "HumanEval/12",
+      "passed": true,
+      "err": "",
+      "tokens": 78,
+      "tok_s": 102.02107049801549
+    },
+    {
+      "task": "HumanEval/13",
+      "passed": true,
+      "err": "",
+      "tokens": 93,
+      "tok_s": 101.80407761257827
+    },
+    {
+      "task": "HumanEval/14",
+      "passed": true,
+      "err": "",
+      "tokens": 77,
+      "tok_s": 101.90939318438289
+    },
+    {
+      "task": "HumanEval/15",
+      "passed": true,
+      "err": "",
+      "tokens": 84,
+      "tok_s": 101.70961019961406
+    },
+    {
+      "task": "HumanEval/16",
+      "passed": true,
+      "err": "",
+      "tokens": 24,
+      "tok_s": 103.9665455063649
+    },
+    {
+      "task": "HumanEval/17",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpzdik8qty.py\", line 49, in <module>\n    check(parse_music)\n  File \"/tmp/tmpzdik8qty.py\", line 44, in check\n    assert candidate('o o o o') == [4, 4, 4",
+      "tokens": 288,
+      "tok_s": 100.9741017879278
+    },
+    {
+      "task": "HumanEval/18",
+      "passed": true,
+      "err": "",
+      "tokens": 153,
+      "tok_s": 101.21346470028698
+    },
+    {
+      "task": "HumanEval/19",
+      "passed": true,
+      "err": "",
+      "tokens": 191,
+      "tok_s": 101.14434842905003
+    },
+    {
+      "task": "HumanEval/20",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpef0lwsju.py\", line 35, in <module>\n    check(find_closest_elements)\n  File \"/tmp/tmpef0lwsju.py\", line 28, in check\n    assert candidate([1.0, 2.0, 3",
+      "tokens": 227,
+      "tok_s": 100.96481151038348
+    },
+    {
+      "task": "HumanEval/21",
+      "passed": true,
+      "err": "",
+      "tokens": 84,
+      "tok_s": 101.52339013459849
+    },
+    {
+      "task": "HumanEval/22",
+      "passed": true,
+      "err": "",
+      "tokens": 52,
+      "tok_s": 102.47568545123823
+    },
+    {
+      "task": "HumanEval/23",
+      "passed": true,
+      "err": "",
+      "tokens": 47,
+      "tok_s": 102.12023465213592
+    },
+    {
+      "task": "HumanEval/24",
+      "passed": true,
+      "err": "",
+      "tokens": 80,
+      "tok_s": 101.82007222815555
+    },
+    {
+      "task": "HumanEval/25",
+      "passed": true,
+      "err": "",
+      "tokens": 173,
+      "tok_s": 101.23960137989576
+    },
+    {
+      "task": "HumanEval/26",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpe7tzsu74.py\", line 36, in <module>\n    check(remove_duplicates)\n  File \"/tmp/tmpe7tzsu74.py\", line 34, in check\n    assert candidate([1, 2, 3, 2, 4, ",
+      "tokens": 145,
+      "tok_s": 101.36733404188308
+    },
+    {
+      "task": "HumanEval/27",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpmsvjy2ir.py\", line 22, in <module>\n    check(flip_case)\n  File \"/tmp/tmpmsvjy2ir.py\", line 19, in check\n    assert candidate('Hello!') == 'hELLO!'\n  ",
+      "tokens": 97,
+      "tok_s": 101.64579878941467
+    },
+    {
+      "task": "HumanEval/28",
+      "passed": true,
+      "err": "",
+      "tokens": 62,
+      "tok_s": 102.02319969384615
+    },
+    {
+      "task": "HumanEval/29",
+      "passed": true,
+      "err": "",
+      "tokens": 99,
+      "tok_s": 101.38035809017101
+    },
+    {
+      "task": "HumanEval/30",
+      "passed": true,
+      "err": "",
+      "tokens": 131,
+      "tok_s": 101.34480243746349
+    },
+    {
+      "task": "HumanEval/31",
+      "passed": true,
+      "err": "",
+      "tokens": 183,
+      "tok_s": 101.24059421977339
+    },
+    {
+      "task": "HumanEval/32",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp2002uowh.py\", line 53, in <module>\n    check(find_zero)\n  File \"/tmp/tmp2002uowh.py\", line 50, in check\n    assert math.fabs(poly(coeffs, solution)) ",
+      "tokens": 320,
+      "tok_s": 100.87250511804552
+    },
+    {
+      "task": "HumanEval/33",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpevls69zq.py\", line 37, in <module>\n    check(sort_third)\n  File \"/tmp/tmpevls69zq.py\", line 29, in check\n    assert tuple(candidate([5, 3, -5, 2, -3,",
+      "tokens": 252,
+      "tok_s": 101.01486556888777
+    },
+    {
+      "task": "HumanEval/34",
+      "passed": true,
+      "err": "",
+      "tokens": 82,
+      "tok_s": 101.87926542703919
+    },
+    {
+      "task": "HumanEval/35",
+      "passed": true,
+      "err": "",
+      "tokens": 91,
+      "tok_s": 100.88126614866567
+    },
+    {
+      "task": "HumanEval/36",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpmnsw_m2s.py\", line 31, in <module>\n    check(fizz_buzz)\n  File \"/tmp/tmpmnsw_m2s.py\", line 22, in check\n    assert candidate(78) == 2\n           ^^^^",
+      "tokens": 118,
+      "tok_s": 101.2486714640558
+    },
+    {
+      "task": "HumanEval/37",
+      "passed": false,
+      "err": "  File \"/tmp/tmpdfk149t4.py\", line 14\n    l' = [evens[i // 2] if i % 2 == 0 else l[i] for i in range(len(l))]\n     ^\nSyntaxError: unterminated string literal (detected at line 14)\n",
+      "tokens": 191,
+      "tok_s": 101.13162823872617
+    },
+    {
+      "task": "HumanEval/38",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp5aeiis2s.py\", line 38, in <module>\n    check(decode_cyclic)\n  File \"/tmp/tmp5aeiis2s.py\", line 35, in check\n    assert candidate(encoded_str) == str\n",
+      "tokens": 260,
+      "tok_s": 100.94626755545522
+    },
+    {
+      "task": "HumanEval/39",
+      "passed": false,
+      "err": "TIMEOUT",
+      "tokens": 177,
+      "tok_s": 101.22630932698202
+    },
+    {
+      "task": "HumanEval/40",
+      "passed": true,
+      "err": "",
+      "tokens": 71,
+      "tok_s": 101.48691045413949
+    },
+    {
+      "task": "HumanEval/41",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp8icmoqn8.py\", line 17, in <module>\n    check(car_race_collision)\n  File \"/tmp/tmp8icmoqn8.py\", line 10, in check\n    assert candidate(2) == 4\n       ",
+      "tokens": 23,
+      "tok_s": 103.81409650451889
+    },
+    {
+      "task": "HumanEval/42",
+      "passed": true,
+      "err": "",
+      "tokens": 124,
+      "tok_s": 101.21017124185545
+    },
+    {
+      "task": "HumanEval/43",
+      "passed": true,
+      "err": "",
+      "tokens": 43,
+      "tok_s": 102.18466294234463
+    },
+    {
+      "task": "HumanEval/44",
+      "passed": true,
+      "err": "",
+      "tokens": 140,
+      "tok_s": 101.19720398023753
+    },
+    {
+      "task": "HumanEval/45",
+      "passed": true,
+      "err": "",
+      "tokens": 56,
+      "tok_s": 102.1614550806426
+    },
+    {
+      "task": "HumanEval/46",
+      "passed": true,
+      "err": "",
+      "tokens": 153,
+      "tok_s": 101.00465094663859
+    },
+    {
+      "task": "HumanEval/47",
+      "passed": true,
+      "err": "",
+      "tokens": 90,
+      "tok_s": 101.40400926574853
+    },
+    {
+      "task": "HumanEval/48",
+      "passed": true,
+      "err": "",
+      "tokens": 24,
+      "tok_s": 104.0589060817904
+    },
+    {
+      "task": "HumanEval/49",
+      "passed": true,
+      "err": "",
+      "tokens": 125,
+      "tok_s": 101.34632586096089
+    },
+    {
+      "task": "HumanEval/50",
+      "passed": true,
+      "err": "",
+      "tokens": 126,
+      "tok_s": 101.50531430509126
+    },
+    {
+      "task": "HumanEval/51",
+      "passed": true,
+      "err": "",
+      "tokens": 38,
+      "tok_s": 102.87540437072762
+    },
+    {
+      "task": "HumanEval/52",
+      "passed": true,
+      "err": "",
+      "tokens": 97,
+      "tok_s": 101.5699769769972
+    },
+    {
+      "task": "HumanEval/53",
+      "passed": true,
+      "err": "",
+      "tokens": 62,
+      "tok_s": 102.09337542779326
+    },
+    {
+      "task": "HumanEval/54",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp21574uhb.py\", line 19, in <module>\n    check(same_chars)\n  File \"/tmp/tmp21574uhb.py\", line 10, in check\n    assert candidate('eabcdzzzz', 'dddzzzzzz",
+      "tokens": 32,
+      "tok_s": 103.14899804754097
+    },
+    {
+      "task": "HumanEval/55",
+      "passed": true,
+      "err": "",
+      "tokens": 120,
+      "tok_s": 101.55131077113194
+    },
+    {
+      "task": "HumanEval/56",
+      "passed": true,
+      "err": "",
+      "tokens": 149,
+      "tok_s": 101.36695916018827
+    },
+    {
+      "task": "HumanEval/57",
+      "passed": true,
+      "err": "",
+      "tokens": 147,
+      "tok_s": 101.18721973695625
+    },
+    {
+      "task": "HumanEval/58",
+      "passed": true,
+      "err": "",
+      "tokens": 191,
+      "tok_s": 100.95931141267235
+    },
+    {
+      "task": "HumanEval/59",
+      "passed": true,
+      "err": "",
+      "tokens": 106,
+      "tok_s": 101.54293610089258
+    },
+    {
+      "task": "HumanEval/60",
+      "passed": true,
+      "err": "",
+      "tokens": 120,
+      "tok_s": 101.35784904008263
+    },
+    {
+      "task": "HumanEval/61",
+      "passed": true,
+      "err": "",
+      "tokens": 146,
+      "tok_s": 101.35596572616363
+    },
+    {
+      "task": "HumanEval/62",
+      "passed": true,
+      "err": "",
+      "tokens": 127,
+      "tok_s": 101.35136782445355
+    },
+    {
+      "task": "HumanEval/63",
+      "passed": true,
+      "err": "",
+      "tokens": 94,
+      "tok_s": 101.51817449206483
+    },
+    {
+      "task": "HumanEval/64",
+      "passed": true,
+      "err": "",
+      "tokens": 230,
+      "tok_s": 100.97241741214866
+    },
+    {
+      "task": "HumanEval/65",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpudiv3jg1.py\", line 31, in <module>\n    check(circular_shift)\n  File \"/tmp/tmpudiv3jg1.py\", line 23, in check\n    assert candidate(12, 2) == \"12\"\n    ",
+      "tokens": 146,
+      "tok_s": 101.36284630999157
+    },
+    {
+      "task": "HumanEval/66",
+      "passed": true,
+      "err": "",
+      "tokens": 135,
+      "tok_s": 101.39553948178384
+    },
+    {
+      "task": "HumanEval/67",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp8enaijjf.py\", line 20, in <module>\n    check(fruit_distribution)\n  File \"/tmp/tmp8enaijjf.py\", line 12, in check\n    assert candidate(\"5 apples and 6",
+      "tokens": 79,
+      "tok_s": 101.67621555627461
+    },
+    {
+      "task": "HumanEval/68",
+      "passed": true,
+      "err": "",
+      "tokens": 121,
+      "tok_s": 101.3762642229663
+    },
+    {
+      "task": "HumanEval/69",
+      "passed": true,
+      "err": "",
+      "tokens": 68,
+      "tok_s": 101.73036651201018
+    },
+    {
+      "task": "HumanEval/70",
+      "passed": false,
+      "err": "  File \"/tmp/tmp9t1ho0uz.py\", line 9\n    min_val = float('inf)\n                    ^\nSyntaxError: unterminated string literal (detected at line 9)\n",
+      "tokens": 151,
+      "tok_s": 101.37839633396759
+    },
+    {
+      "task": "HumanEval/71",
+      "passed": true,
+      "err": "",
+      "tokens": 108,
+      "tok_s": 101.53720980162454
+    },
+    {
+      "task": "HumanEval/72",
+      "passed": true,
+      "err": "",
+      "tokens": 49,
+      "tok_s": 102.38268879732422
+    },
+    {
+      "task": "HumanEval/73",
+      "passed": true,
+      "err": "",
+      "tokens": 71,
+      "tok_s": 101.49572578554965
+    },
+    {
+      "task": "HumanEval/74",
+      "passed": true,
+      "err": "",
+      "tokens": 76,
+      "tok_s": 101.48777919483354
+    },
+    {
+      "task": "HumanEval/75",
+      "passed": true,
+      "err": "",
+      "tokens": 123,
+      "tok_s": 101.54356874178875
+    },
+    {
+      "task": "HumanEval/76",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpyn67vzpg.py\", line 30, in <module>\n    check(is_simple_power)\n  File \"/tmp/tmpyn67vzpg.py\", line 16, in check\n    assert candidate(16, 2)== True, \"Th",
+      "tokens": 75,
+      "tok_s": 101.36400103076647
+    },
+    {
+      "task": "HumanEval/77",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpu3kzgior.py\", line 24, in <module>\n    check(iscube)\n  File \"/tmp/tmpu3kzgior.py\", line 14, in check\n    assert candidate(64) == True, \"Fourth test e",
+      "tokens": 49,
+      "tok_s": 102.17173508568062
+    },
+    {
+      "task": "HumanEval/78",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpfnqdzeny.py\", line 29, in <module>\n    check(hex_key)\n  File \"/tmp/tmpfnqdzeny.py\", line 26, in check\n    assert candidate([]) == 0\n           ^^^^^^",
+      "tokens": 109,
+      "tok_s": 101.43353861167498
+    },
+    {
+      "task": "HumanEval/79",
+      "passed": true,
+      "err": "",
+      "tokens": 97,
+      "tok_s": 101.34117438486518
+    },
+    {
+      "task": "HumanEval/80",
+      "passed": true,
+      "err": "",
+      "tokens": 184,
+      "tok_s": 101.19628873742647
+    },
+    {
+      "task": "HumanEval/81",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpselxrwcv.py\", line 41, in <module>\n    check(numerical_letter_grade)\n  File \"/tmp/tmpselxrwcv.py\", line 30, in check\n    assert candidate([4.0, 3, 1.",
+      "tokens": 202,
+      "tok_s": 100.99393819233879
+    },
+    {
+      "task": "HumanEval/82",
+      "passed": true,
+      "err": "",
+      "tokens": 139,
+      "tok_s": 101.15688338954982
+    },
+    {
+      "task": "HumanEval/83",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpcueg9onc.py\", line 32, in <module>\n    check(starts_one_ends)\n  File \"/tmp/tmpcueg9onc.py\", line 23, in check\n    assert candidate(2) == 18\n         ",
+      "tokens": 155,
+      "tok_s": 101.26370829603538
+    },
+    {
+      "task": "HumanEval/84",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmparm9z3zx.py\", line 36, in <module>\n    check(solve)\n  File \"/tmp/tmparm9z3zx.py\", line 26, in check\n    assert candidate(1000) == \"1\", \"Error\"\n      ",
+      "tokens": 191,
+      "tok_s": 100.75198645201225
+    },
+    {
+      "task": "HumanEval/85",
+      "passed": true,
+      "err": "",
+      "tokens": 85,
+      "tok_s": 101.62736363681894
+    },
+    {
+      "task": "HumanEval/86",
+      "passed": true,
+      "err": "",
+      "tokens": 53,
+      "tok_s": 102.44515833299336
+    },
+    {
+      "task": "HumanEval/87",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp2771yc7v.py\", line 42, in <module>\n    check(get_row)\n  File \"/tmp/tmp2771yc7v.py\", line 12, in check\n    assert candidate([\n           ^^^^^^^^^^^\nA",
+      "tokens": 74,
+      "tok_s": 101.59486292989274
+    },
+    {
+      "task": "HumanEval/88",
+      "passed": true,
+      "err": "",
+      "tokens": 87,
+      "tok_s": 101.50013572259815
+    },
+    {
+      "task": "HumanEval/89",
+      "passed": true,
+      "err": "",
+      "tokens": 132,
+      "tok_s": 101.14750046204868
+    },
+    {
+      "task": "HumanEval/90",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpjvzbmqww.py\", line 27, in <module>\n    check(next_smallest)\n  File \"/tmp/tmpjvzbmqww.py\", line 18, in check\n    assert candidate([1, 1]) == None\n    ",
+      "tokens": 55,
+      "tok_s": 102.37529331405685
+    },
+    {
+      "task": "HumanEval/91",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpubh3zrjp.py\", line 35, in <module>\n    check(is_bored)\n  File \"/tmp/tmpubh3zrjp.py\", line 26, in check\n    assert candidate(\"I love It !\") == 1, \"Tes",
+      "tokens": 166,
+      "tok_s": 101.09908512252643
+    },
+    {
+      "task": "HumanEval/92",
+      "passed": true,
+      "err": "",
+      "tokens": 87,
+      "tok_s": 101.65179196189622
+    },
+    {
+      "task": "HumanEval/93",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp3gjgnk4l.py\", line 37, in <module>\n    check(encode)\n  File \"/tmp/tmp3gjgnk4l.py\", line 28, in check\n    assert candidate('TEST') == 'tgst', \"This pr",
+      "tokens": 172,
+      "tok_s": 101.03417471032381
+    },
+    {
+      "task": "HumanEval/94",
+      "passed": true,
+      "err": "",
+      "tokens": 127,
+      "tok_s": 101.18282507398395
+    },
+    {
+      "task": "HumanEval/95",
+      "passed": true,
+      "err": "",
+      "tokens": 70,
+      "tok_s": 101.64027437792068
+    },
+    {
+      "task": "HumanEval/96",
+      "passed": true,
+      "err": "",
+      "tokens": 92,
+      "tok_s": 101.35871947368842
+    },
+    {
+      "task": "HumanEval/97",
+      "passed": true,
+      "err": "",
+      "tokens": 159,
+      "tok_s": 101.15972357391689
+    },
+    {
+      "task": "HumanEval/98",
+      "passed": true,
+      "err": "",
+      "tokens": 101,
+      "tok_s": 101.75519848998186
+    },
+    {
+      "task": "HumanEval/99",
+      "passed": true,
+      "err": "",
+      "tokens": 54,
+      "tok_s": 101.84466507967909
+    },
+    {
+      "task": "HumanEval/100",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpv2zehg02.py\", line 34, in <module>\n    check(make_a_pile)\n  File \"/tmp/tmpv2zehg02.py\", line 24, in check\n    assert candidate(3) == [3, 5, 7], \"Test",
+      "tokens": 183,
+      "tok_s": 101.00410264756192
+    },
+    {
+      "task": "HumanEval/101",
+      "passed": true,
+      "err": "",
+      "tokens": 36,
+      "tok_s": 103.05011214170828
+    },
+    {
+      "task": "HumanEval/102",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpfi2zuc2l.py\", line 34, in <module>\n    check(choose_num)\n  File \"/tmp/tmpfi2zuc2l.py\", line 23, in check\n    assert candidate(13, 12) == -1\n         ",
+      "tokens": 157,
+      "tok_s": 101.04354107195236
+    },
+    {
+      "task": "HumanEval/103",
+      "passed": true,
+      "err": "",
+      "tokens": 206,
+      "tok_s": 100.73952587639498
+    },
+    {
+      "task": "HumanEval/104",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpf0qn8uyp.py\", line 20, in <module>\n    check(unique_digits)\n  File \"/tmp/tmpf0qn8uyp.py\", line 11, in check\n    assert candidate([15, 33, 1422, 1]) =",
+      "tokens": 50,
+      "tok_s": 102.34976473105222
+    },
+    {
+      "task": "HumanEval/105",
+      "passed": true,
+      "err": "",
+      "tokens": 168,
+      "tok_s": 101.13618722472569
+    },
+    {
+      "task": "HumanEval/106",
+      "passed": true,
+      "err": "",
+      "tokens": 95,
+      "tok_s": 101.41998342991769
+    },
+    {
+      "task": "HumanEval/107",
+      "passed": true,
+      "err": "",
+      "tokens": 99,
+      "tok_s": 101.36584631454481
+    },
+    {
+      "task": "HumanEval/108",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpu84jk3wm.py\", line 26, in <module>\n    check(count_nums)\n  File \"/tmp/tmpu84jk3wm.py\", line 18, in check\n    assert candidate([12, 23, 34, -45, -56, ",
+      "tokens": 75,
+      "tok_s": 101.75611089642003
+    },
+    {
+      "task": "HumanEval/109",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpdva6wc7k.py\", line 31, in <module>\n    check(move_one_ball)\n  File \"/tmp/tmpdva6wc7k.py\", line 24, in check\n    assert candidate([3, 4, 5, 1, 2])==Tr",
+      "tokens": 174,
+      "tok_s": 100.76980935677715
+    },
+    {
+      "task": "HumanEval/110",
+      "passed": true,
+      "err": "",
+      "tokens": 304,
+      "tok_s": 100.89984174918607
+    },
+    {
+      "task": "HumanEval/111",
+      "passed": true,
+      "err": "",
+      "tokens": 278,
+      "tok_s": 100.9852062597537
+    },
+    {
+      "task": "HumanEval/112",
+      "passed": true,
+      "err": "",
+      "tokens": 229,
+      "tok_s": 100.9308346223042
+    },
+    {
+      "task": "HumanEval/113",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpifd3qnl_.py\", line 24, in <module>\n    check(odd_count)\n  File \"/tmp/tmpifd3qnl_.py\", line 12, in check\n    assert candidate(['1234567']) == [\"the nu",
+      "tokens": 94,
+      "tok_s": 101.17593473819835
+    },
+    {
+      "task": "HumanEval/114",
+      "passed": true,
+      "err": "",
+      "tokens": 147,
+      "tok_s": 101.217868681945
+    },
+    {
+      "task": "HumanEval/115",
+      "passed": true,
+      "err": "",
+      "tokens": 108,
+      "tok_s": 101.28028074668755
+    },
+    {
+      "task": "HumanEval/116",
+      "passed": true,
+      "err": "",
+      "tokens": 29,
+      "tok_s": 102.52241664129443
+    },
+    {
+      "task": "HumanEval/117",
+      "passed": true,
+      "err": "",
+      "tokens": 93,
+      "tok_s": 101.42305322770714
+    },
+    {
+      "task": "HumanEval/118",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmppxclsixu.py\", line 42, in <module>\n    check(get_closest_vowel)\n  File \"/tmp/tmppxclsixu.py\", line 24, in check\n    assert candidate(\"yogurt\") == \"u\"",
+      "tokens": 135,
+      "tok_s": 101.13380464123496
+    },
+    {
+      "task": "HumanEval/119",
+      "passed": true,
+      "err": "",
+      "tokens": 120,
+      "tok_s": 101.34983897892307
+    },
+    {
+      "task": "HumanEval/120",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpqktkmgjf.py\", line 22, in <module>\n    check(maximum)\n  File \"/tmp/tmpqktkmgjf.py\", line 7, in check\n    assert candidate([-3, -4, 5], 3) == [-4, -3,",
+      "tokens": 21,
+      "tok_s": 104.05144878388259
+    },
+    {
+      "task": "HumanEval/121",
+      "passed": true,
+      "err": "",
+      "tokens": 79,
+      "tok_s": 101.65120532318386
+    },
+    {
+      "task": "HumanEval/122",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpknwup2gv.py\", line 20, in <module>\n    check(add_elements)\n  File \"/tmp/tmpknwup2gv.py\", line 11, in check\n    assert candidate([1,-2,-3,41,57,76,87,",
+      "tokens": 56,
+      "tok_s": 101.92725584255949
+    },
+    {
+      "task": "HumanEval/123",
+      "passed": true,
+      "err": "",
+      "tokens": 115,
+      "tok_s": 101.2895083635826
+    },
+    {
+      "task": "HumanEval/124",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpribk724b.py\", line 64, in <module>\n    check(valid_date)\n  File \"/tmp/tmpribk724b.py\", line 32, in check\n    assert candidate('03-11-2000') == True\n ",
+      "tokens": 289,
+      "tok_s": 100.71360959141496
+    },
+    {
+      "task": "HumanEval/125",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpn0wz4bkt.py\", line 20, in <module>\n    check(split_words)\n  File \"/tmp/tmpn0wz4bkt.py\", line 13, in check\n    assert candidate(\"Hello world,!\") == [\"",
+      "tokens": 143,
+      "tok_s": 101.36461065088915
+    },
+    {
+      "task": "HumanEval/126",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpfxoqw0y_.py\", line 42, in <module>\n    check(is_sorted)\n  File \"/tmp/tmpfxoqw0y_.py\", line 38, in check\n    assert candidate([1, 2, 2, 3, 3, 4]) == T",
+      "tokens": 286,
+      "tok_s": 100.70353780225423
+    },
+    {
+      "task": "HumanEval/127",
+      "passed": true,
+      "err": "",
+      "tokens": 195,
+      "tok_s": 100.39897109486849
+    },
+    {
+      "task": "HumanEval/128",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpe5tx27nr.py\", line 37, in <module>\n    check(prod_signs)\n  File \"/tmp/tmpe5tx27nr.py\", line 24, in check\n    assert candidate([1, 2, 2, -4]) == -9\n  ",
+      "tokens": 107,
+      "tok_s": 101.36026229838164
+    },
+    {
+      "task": "HumanEval/129",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpknq3pc6z.py\", line 50, in <module>\n    check(minPath)\n  File \"/tmp/tmpknq3pc6z.py\", line 35, in check\n    assert candidate([[1, 2, 3], [4, 5, 6], [7,",
+      "tokens": 230,
+      "tok_s": 100.92377736190492
+    },
+    {
+      "task": "HumanEval/130",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpu40twwg0.py\", line 52, in <module>\n    check(tri)\n  File \"/tmp/tmpu40twwg0.py\", line 39, in check\n    assert candidate(3) == [1, 3, 2.0, 8.0]\n       ",
+      "tokens": 348,
+      "tok_s": 100.83695977643028
+    },
+    {
+      "task": "HumanEval/131",
+      "passed": true,
+      "err": "",
+      "tokens": 142,
+      "tok_s": 101.32272768078153
+    },
+    {
+      "task": "HumanEval/132",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp5fubovkx.py\", line 45, in <module>\n    check(is_nested)\n  File \"/tmp/tmp5fubovkx.py\", line 27, in check\n    assert candidate('[[]]') == True, \"This p",
+      "tokens": 196,
+      "tok_s": 101.14151748217584
+    },
+    {
+      "task": "HumanEval/133",
+      "passed": true,
+      "err": "",
+      "tokens": 185,
+      "tok_s": 100.83684206344526
+    },
+    {
+      "task": "HumanEval/134",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpl1keaxhb.py\", line 38, in <module>\n    check(check_if_last_char_is_a_letter)\n  File \"/tmp/tmpl1keaxhb.py\", line 23, in check\n    assert candidate(\"ap",
+      "tokens": 198,
+      "tok_s": 101.06291842364253
+    },
+    {
+      "task": "HumanEval/135",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp__s384bs.py\", line 33, in <module>\n    check(can_arrange)\n  File \"/tmp/tmp__s384bs.py\", line 24, in check\n    assert candidate([1,2,4,3,5])==3\n      ",
+      "tokens": 173,
+      "tok_s": 101.14209040463095
+    },
+    {
+      "task": "HumanEval/136",
+      "passed": true,
+      "err": "",
+      "tokens": 88,
+      "tok_s": 101.46462783612746
+    },
+    {
+      "task": "HumanEval/137",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpbfvv0t96.py\", line 42, in <module>\n    check(compare_one)\n  File \"/tmp/tmpbfvv0t96.py\", line 33, in check\n    assert candidate(1, \"2,3\") == \"2,3\"\n   ",
+      "tokens": 156,
+      "tok_s": 101.12252556899102
+    },
+    {
+      "task": "HumanEval/138",
+      "passed": true,
+      "err": "",
+      "tokens": 58,
+      "tok_s": 102.12911290995892
+    },
+    {
+      "task": "HumanEval/139",
+      "passed": true,
+      "err": "",
+      "tokens": 110,
+      "tok_s": 101.39039235094509
+    },
+    {
+      "task": "HumanEval/140",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpusg86fi7.py\", line 20, in <module>\n    check(fix_spaces)\n  File \"/tmp/tmpusg86fi7.py\", line 11, in check\n    assert candidate(\"Example\") == \"Example\"",
+      "tokens": 110,
+      "tok_s": 101.31451605686424
+    },
+    {
+      "task": "HumanEval/141",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp9891_lvq.py\", line 70, in <module>\n    check(file_name_check)\n  File \"/tmp/tmp9891_lvq.py\", line 38, in check\n    assert candidate(\"example.txt\") == ",
+      "tokens": 339,
+      "tok_s": 100.86477284782156
+    },
+    {
+      "task": "HumanEval/142",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp0tx1pkr0.py\", line 29, in <module>\n    check(sum_squares)\n  File \"/tmp/tmp0tx1pkr0.py\", line 14, in check\n    assert candidate([1,2,3]) == 6\n        ",
+      "tokens": 82,
+      "tok_s": 101.35799202866116
+    },
+    {
+      "task": "HumanEval/143",
+      "passed": true,
+      "err": "",
+      "tokens": 90,
+      "tok_s": 101.30588029824604
+    },
+    {
+      "task": "HumanEval/144",
+      "passed": true,
+      "err": "",
+      "tokens": 180,
+      "tok_s": 100.84049900457066
+    },
+    {
+      "task": "HumanEval/145",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpkcrnopcz.py\", line 21, in <module>\n    check(order_by_points)\n  File \"/tmp/tmpkcrnopcz.py\", line 10, in check\n    assert candidate([1, 11, -1, -11, -",
+      "tokens": 49,
+      "tok_s": 102.09099972934426
+    },
+    {
+      "task": "HumanEval/146",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpfkokuqol.py\", line 26, in <module>\n    check(specialFilter)\n  File \"/tmp/tmpfkokuqol.py\", line 15, in check\n    assert candidate([15, -73, 14, -15]) ",
+      "tokens": 75,
+      "tok_s": 101.65226720059606
+    },
+    {
+      "task": "HumanEval/147",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp8vzkclsh.py\", line 20, in <module>\n    check(get_max_triples)\n  File \"/tmp/tmp8vzkclsh.py\", line 15, in check\n    assert candidate(5) == 1\n          ",
+      "tokens": 138,
+      "tok_s": 101.07062709077225
+    },
+    {
+      "task": "HumanEval/148",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp_r0vfvow.py\", line 30, in <module>\n    check(bf)\n  File \"/tmp/tmp_r0vfvow.py\", line 19, in check\n    assert candidate(\"Earth\", \"Mercury\") == (\"Venus\"",
+      "tokens": 132,
+      "tok_s": 101.21176475432328
+    },
+    {
+      "task": "HumanEval/149",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpghpawizf.py\", line 19, in <module>\n    check(sorted_list_sum)\n  File \"/tmp/tmpghpawizf.py\", line 8, in check\n    assert candidate([\"aa\", \"a\", \"aaa\"])",
+      "tokens": 48,
+      "tok_s": 101.60447306580359
+    },
+    {
+      "task": "HumanEval/150",
+      "passed": true,
+      "err": "",
+      "tokens": 152,
+      "tok_s": 101.0996520020943
+    },
+    {
+      "task": "HumanEval/151",
+      "passed": true,
+      "err": "",
+      "tokens": 56,
+      "tok_s": 102.05918270215534
+    },
+    {
+      "task": "HumanEval/152",
+      "passed": true,
+      "err": "",
+      "tokens": 53,
+      "tok_s": 102.20820972094067
+    },
+    {
+      "task": "HumanEval/153",
+      "passed": true,
+      "err": "",
+      "tokens": 88,
+      "tok_s": 101.37610014985484
+    },
+    {
+      "task": "HumanEval/154",
+      "passed": true,
+      "err": "",
+      "tokens": 77,
+      "tok_s": 101.64462602175901
+    },
+    {
+      "task": "HumanEval/155",
+      "passed": true,
+      "err": "",
+      "tokens": 64,
+      "tok_s": 101.98611489004193
+    },
+    {
+      "task": "HumanEval/156",
+      "passed": true,
+      "err": "",
+      "tokens": 181,
+      "tok_s": 101.06075072501848
+    },
+    {
+      "task": "HumanEval/157",
+      "passed": true,
+      "err": "",
+      "tokens": 83,
+      "tok_s": 101.3977059267471
+    },
+    {
+      "task": "HumanEval/158",
+      "passed": true,
+      "err": "",
+      "tokens": 88,
+      "tok_s": 101.3798251565057
+    },
+    {
+      "task": "HumanEval/159",
+      "passed": true,
+      "err": "",
+      "tokens": 49,
+      "tok_s": 101.83061160647813
+    },
+    {
+      "task": "HumanEval/160",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmpr_bi8sv3.py\", line 27, in <module>\n    check(do_algebra)\n  File \"/tmp/tmpr_bi8sv3.py\", line 20, in check\n    assert candidate(['+', '*', '-'], [2, 3,",
+      "tokens": 113,
+      "tok_s": 101.3458082979964
+    },
+    {
+      "task": "HumanEval/161",
+      "passed": true,
+      "err": "",
+      "tokens": 181,
+      "tok_s": 100.94053805714707
+    },
+    {
+      "task": "HumanEval/162",
+      "passed": true,
+      "err": "",
+      "tokens": 46,
+      "tok_s": 102.15155513839821
+    },
+    {
+      "task": "HumanEval/163",
+      "passed": false,
+      "err": "Traceback (most recent call last):\n  File \"/tmp/tmp4t4u14z5.py\", line 35, in <module>\n    check(generate_integers)\n  File \"/tmp/tmp4t4u14z5.py\", line 26, in check\n    assert candidate(2, 10) == [2, 4,",
+      "tokens": 188,
+      "tok_s": 101.1641906722928
+    }
+  ],
+  "gsm8k_runs": [
+    {
+      "i": 0,
+      "passed": true,
+      "pred": "52",
+      "gold": "52",
+      "tokens": 196,
+      "tok_s": 100.91905947378592
+    },
+    {
+      "i": 1,
+      "passed": true,
+      "pred": "5",
+      "gold": "5",
+      "tokens": 232,
+      "tok_s": 100.95825955041539
+    },
+    {
+      "i": 2,
+      "passed": true,
+      "pred": "83",
+      "gold": "83",
+      "tokens": 239,
+      "tok_s": 100.9737019557372
+    },
+    {
+      "i": 3,
+      "passed": true,
+      "pred": "10",
+      "gold": "10",
+      "tokens": 234,
+      "tok_s": 101.07013818173237
+    },
+    {
+      "i": 4,
+      "passed": false,
+      "pred": "100",
+      "gold": "70",
+      "tokens": 245,
+      "tok_s": 100.99173675263388
+    },
+    {
+      "i": 5,
+      "passed": false,
+      "pred": "27",
+      "gold": "36",
+      "tokens": 274,
+      "tok_s": 100.90190791083306
+    },
+    {
+      "i": 6,
+      "passed": true,
+      "pred": "48",
+      "gold": "48",
+      "tokens": 194,
+      "tok_s": 101.04063489443347
+    },
+    {
+      "i": 7,
+      "passed": true,
+      "pred": "16",
+      "gold": "16",
+      "tokens": 267,
+      "tok_s": 100.80221106501317
+    },
+    {
+      "i": 8,
+      "passed": false,
+      "pred": "-2.5",
+      "gold": "8",
+      "tokens": 288,
+      "tok_s": 100.95681856342492
+    },
+    {
+      "i": 9,
+      "passed": true,
+      "pred": "48",
+      "gold": "48",
+      "tokens": 122,
+      "tok_s": 101.43453989272335
+    },
+    {
+      "i": 10,
+      "passed": true,
+      "pred": "90",
+      "gold": "90",
+      "tokens": 93,
+      "tok_s": 100.91610894972136
+    },
+    {
+      "i": 11,
+      "passed": true,
+      "pred": "10",
+      "gold": "10",
+      "tokens": 90,
+      "tok_s": 101.88427748749903
+    },
+    {
+      "i": 12,
+      "passed": true,
+      "pred": "2",
+      "gold": "2",
+      "tokens": 418,
+      "tok_s": 100.63390166175216
+    },
+    {
+      "i": 13,
+      "passed": true,
+      "pred": "45000",
+      "gold": "45000",
+      "tokens": 234,
+      "tok_s": 101.08238329187101
+    },
+    {
+      "i": 14,
+      "passed": true,
+      "pred": "18",
+      "gold": "18",
+      "tokens": 179,
+      "tok_s": 101.12977186789
+    },
+    {
+      "i": 15,
+      "passed": true,
+      "pred": "140",
+      "gold": "140",
+      "tokens": 115,
+      "tok_s": 101.26455468730241
+    },
+    {
+      "i": 16,
+      "passed": true,
+      "pred": "17",
+      "gold": "17",
+      "tokens": 377,
+      "tok_s": 100.53085866571642
+    },
+    {
+      "i": 17,
+      "passed": true,
+      "pred": "68",
+      "gold": "68",
+      "tokens": 157,
+      "tok_s": 101.25781242075125
+    },
+    {
+      "i": 18,
+      "passed": true,
+      "pred": "8",
+      "gold": "8",
+      "tokens": 165,
+      "tok_s": 101.11113861334081
+    },
+    {
+      "i": 19,
+      "passed": true,
+      "pred": "14",
+      "gold": "14",
+      "tokens": 183,
+      "tok_s": 100.9182169705235
+    },
+    {
+      "i": 20,
+      "passed": true,
+      "pred": "50",
+      "gold": "50",
+      "tokens": 287,
+      "tok_s": 100.58408367812679
+    },
+    {
+      "i": 21,
+      "passed": true,
+      "pred": "100",
+      "gold": "100",
+      "tokens": 229,
+      "tok_s": 100.88300608841409
+    },
+    {
+      "i": 22,
+      "passed": false,
+      "pred": "29",
+      "gold": "125",
+      "tokens": 476,
+      "tok_s": 100.76838386502887
+    },
+    {
+      "i": 23,
+      "passed": true,
+      "pred": "48",
+      "gold": "48",
+      "tokens": 317,
+      "tok_s": 100.68685731322893
+    },
+    {
+      "i": 24,
+      "passed": true,
+      "pred": "15400",
+      "gold": "15400",
+      "tokens": 314,
+      "tok_s": 100.97448202282254
+    },
+    {
+      "i": 25,
+      "passed": true,
+      "pred": "250",
+      "gold": "250",
+      "tokens": 203,
+      "tok_s": 100.97454281756248
+    },
+    {
+      "i": 26,
+      "passed": false,
+      "pred": "360",
+      "gold": "18",
+      "tokens": 463,
+      "tok_s": 100.82939253013176
+    },
+    {
+      "i": 27,
+      "passed": true,
+      "pred": "1490",
+      "gold": "1490",
+      "tokens": 294,
+      "tok_s": 100.8703329059622
+    },
+    {
+      "i": 28,
+      "passed": true,
+      "pred": "11",
+      "gold": "11",
+      "tokens": 166,
+      "tok_s": 101.2354071417057
+    },
+    {
+      "i": 29,
+      "passed": false,
+      "pred": "106.12",
+      "gold": "106",
+      "tokens": 440,
+      "tok_s": 100.73476648395616
+    },
+    {
+      "i": 30,
+      "passed": true,
+      "pred": "138",
+      "gold": "138",
+      "tokens": 309,
+      "tok_s": 100.94805799904222
+    },
+    {
+      "i": 31,
+      "passed": true,
+      "pred": "15",
+      "gold": "15",
+      "tokens": 220,
+      "tok_s": 101.00818774435932
+    },
+    {
+      "i": 32,
+      "passed": true,
+      "pred": "4",
+      "gold": "4",
+      "tokens": 151,
+      "tok_s": 101.12394571095746
+    },
+    {
+      "i": 33,
+      "passed": true,
+      "pred": "82",
+      "gold": "82",
+      "tokens": 186,
+      "tok_s": 101.06782235062607
+    },
+    {
+      "i": 34,
+      "passed": false,
+      "pred": "1",
+      "gold": "2",
+      "tokens": 357,
+      "tok_s": 100.8880531272328
+    },
+    {
+      "i": 35,
+      "passed": true,
+      "pred": "51",
+      "gold": "51",
+      "tokens": 249,
+      "tok_s": 101.04060095842756
+    },
+    {
+      "i": 36,
+      "passed": false,
+      "pred": "3",
+      "gold": "4",
+      "tokens": 140,
+      "tok_s": 101.3307956512097
+    },
+    {
+      "i": 37,
+      "passed": true,
+      "pred": "100",
+      "gold": "100",
+      "tokens": 166,
+      "tok_s": 101.09139069250884
+    },
+    {
+      "i": 38,
+      "passed": false,
+      "pred": "125",
+      "gold": "25",
+      "tokens": 293,
+      "tok_s": 100.9833260333475
+    },
+    {
+      "i": 39,
+      "passed": true,
+      "pred": "188",
+      "gold": "188",
+      "tokens": 196,
+      "tok_s": 101.25848043325425
+    },
+    {
+      "i": 40,
+      "passed": true,
+      "pred": "30",
+      "gold": "30",
+      "tokens": 243,
+      "tok_s": 101.17853709335827
+    },
+    {
+      "i": 41,
+      "passed": true,
+      "pred": "30",
+      "gold": "30",
+      "tokens": 166,
+      "tok_s": 101.41692704597179
+    },
+    {
+      "i": 42,
+      "passed": false,
+      "pred": "240",
+      "gold": "150",
+      "tokens": 208,
+      "tok_s": 101.20825248567941
+    },
+    {
+      "i": 43,
+      "passed": true,
+      "pred": "7.00",
+      "gold": "7",
+      "tokens": 209,
+      "tok_s": 101.29461683639578
+    },
+    {
+      "i": 44,
+      "passed": true,
+      "pred": "350",
+      "gold": "350",
+      "tokens": 398,
+      "tok_s": 101.00646534644237
+    },
+    {
+      "i": 45,
+      "passed": false,
+      "pred": "4.5",
+      "gold": "2",
+      "tokens": 318,
+      "tok_s": 101.2240846802673
+    },
+    {
+      "i": 46,
+      "passed": true,
+      "pred": "36",
+      "gold": "36",
+      "tokens": 130,
+      "tok_s": 101.39297846526618
+    },
+    {
+      "i": 47,
+      "passed": true,
+      "pred": "2",
+      "gold": "2",
+      "tokens": 512,
+      "tok_s": 100.89202207346872
+    },
+    {
+      "i": 48,
+      "passed": false,
+      "pred": "2",
+      "gold": "14",
+      "tokens": 166,
+      "tok_s": 101.24373611713565
+    },
+    {
+      "i": 49,
+      "passed": true,
+      "pred": "33",
+      "gold": "33",
+      "tokens": 173,
+      "tok_s": 101.31519343319566
+    },
+    {
+      "i": 50,
+      "passed": false,
+      "pred": "14",
+      "gold": "21",
+      "tokens": 222,
+      "tok_s": 101.30923262990437
+    },
+    {
+      "i": 51,
+      "passed": true,
+      "pred": "175",
+      "gold": "175",
+      "tokens": 282,
+      "tok_s": 101.18058286260221
+    },
+    {
+      "i": 52,
+      "passed": true,
+      "pred": "60",
+      "gold": "60",
+      "tokens": 231,
+      "tok_s": 101.32088906957244
+    },
+    {
+      "i": 53,
+      "passed": false,
+      "pred": "48",
+      "gold": "49",
+      "tokens": 139,
+      "tok_s": 101.50706524701592
+    },
+    {
+      "i": 54,
+      "passed": true,
+      "pred": "1800",
+      "gold": "1800",
+      "tokens": 266,
+      "tok_s": 101.17696077517193
+    },
+    {
+      "i": 55,
+      "passed": true,
+      "pred": "27",
+      "gold": "27",
+      "tokens": 215,
+      "tok_s": 101.19903797370343
+    },
+    {
+      "i": 56,
+      "passed": false,
+      "pred": "16.50",
+      "gold": "16",
+      "tokens": 191,
+      "tok_s": 101.3167366037003
+    },
+    {
+      "i": 57,
+      "passed": true,
+      "pred": "49",
+      "gold": "49",
+      "tokens": 233,
+      "tok_s": 101.3323946944056
+    },
+    {
+      "i": 58,
+      "passed": false,
+      "pred": "5",
+      "gold": "6",
+      "tokens": 223,
+      "tok_s": 101.25871636222394
+    },
+    {
+      "i": 59,
+      "passed": true,
+      "pred": "32",
+      "gold": "32",
+      "tokens": 236,
+      "tok_s": 101.16774034582006
+    },
+    {
+      "i": 60,
+      "passed": true,
+      "pred": "168",
+      "gold": "168",
+      "tokens": 310,
+      "tok_s": 101.10493322063842
+    },
+    {
+      "i": 61,
+      "passed": true,
+      "pred": "225",
+      "gold": "225",
+      "tokens": 252,
+      "tok_s": 101.26287918257813
+    },
+    {
+      "i": 62,
+      "passed": true,
+      "pred": "50",
+      "gold": "50",
+      "tokens": 266,
+      "tok_s": 101.18968118530442
+    },
+    {
+      "i": 63,
+      "passed": false,
+      "pred": "25",
+      "gold": "45",
+      "tokens": 378,
+      "tok_s": 101.08993680254825
+    },
+    {
+      "i": 64,
+      "passed": true,
+      "pred": "7",
+      "gold": "7",
+      "tokens": 218,
+      "tok_s": 101.34325868506357
+    },
+    {
+      "i": 65,
+      "passed": true,
+      "pred": "800",
+      "gold": "800",
+      "tokens": 338,
+      "tok_s": 101.20094790616385
+    },
+    {
+      "i": 66,
+      "passed": true,
+      "pred": "22",
+      "gold": "22",
+      "tokens": 221,
+      "tok_s": 101.21061473937463
+    },
+    {
+      "i": 67,
+      "passed": true,
+      "pred": "235",
+      "gold": "235",
+      "tokens": 229,
+      "tok_s": 101.20376374852854
+    },
+    {
+      "i": 68,
+      "passed": false,
+      "pred": "6",
+      "gold": "3",
+      "tokens": 342,
+      "tok_s": 101.1017904023829
+    },
+    {
+      "i": 69,
+      "passed": false,
+      "pred": "-14",
+      "gold": "2",
+      "tokens": 259,
+      "tok_s": 101.14528457635278
+    },
+    {
+      "i": 70,
+      "passed": true,
+      "pred": "3000",
+      "gold": "3000",
+      "tokens": 303,
+      "tok_s": 101.18429718006807
+    },
+    {
+      "i": 71,
+      "passed": true,
+      "pred": "300",
+      "gold": "300",
+      "tokens": 310,
+      "tok_s": 101.15970919914696
+    },
+    {
+      "i": 72,
+      "passed": true,
+      "pred": "20",
+      "gold": "20",
+      "tokens": 249,
+      "tok_s": 101.19418612870744
+    },
+    {
+      "i": 73,
+      "passed": true,
+      "pred": "130",
+      "gold": "130",
+      "tokens": 159,
+      "tok_s": 101.41650505590458
+    },
+    {
+      "i": 74,
+      "passed": true,
+      "pred": "1",
+      "gold": "1",
+      "tokens": 339,
+      "tok_s": 101.07624660573703
+    },
+    {
+      "i": 75,
+      "passed": true,
+      "pred": "8",
+      "gold": "8",
+      "tokens": 229,
+      "tok_s": 101.168188453578
+    },
+    {
+      "i": 76,
+      "passed": true,
+      "pred": "50",
+      "gold": "50",
+      "tokens": 235,
+      "tok_s": 101.24916078879096
+    },
+    {
+      "i": 77,
+      "passed": false,
+      "pred": "2",
+      "gold": "3",
+      "tokens": 300,
+      "tok_s": 101.10625482865358
+    },
+    {
+      "i": 78,
+      "passed": false,
+      "pred": "7",
+      "gold": "5",
+      "tokens": 123,
+      "tok_s": 101.48421757299425
+    },
+    {
+      "i": 79,
+      "passed": true,
+      "pred": "110",
+      "gold": "110",
+      "tokens": 233,
+      "tok_s": 101.19301847893485
+    },
+    {
+      "i": 80,
+      "passed": false,
+      "pred": "2300",
+      "gold": "1300",
+      "tokens": 486,
+      "tok_s": 100.94352376921182
+    },
+    {
+      "i": 81,
+      "passed": true,
+      "pred": "16",
+      "gold": "16",
+      "tokens": 106,
+      "tok_s": 101.67531110321534
+    },
+    {
+      "i": 82,
+      "passed": true,
+      "pred": "80",
+      "gold": "80",
+      "tokens": 188,
+      "tok_s": 101.20411051885718
+    },
+    {
+      "i": 83,
+      "passed": true,
+      "pred": "45",
+      "gold": "45",
+      "tokens": 353,
+      "tok_s": 101.10742628899065
+    },
+    {
+      "i": 84,
+      "passed": true,
+      "pred": "36",
+      "gold": "36",
+      "tokens": 175,
+      "tok_s": 101.34634137909448
+    },
+    {
+      "i": 85,
+      "passed": true,
+      "pred": "5",
+      "gold": "5",
+      "tokens": 342,
+      "tok_s": 101.11332885524476
+    },
+    {
+      "i": 86,
+      "passed": false,
+      "pred": "3",
+      "gold": "9",
+      "tokens": 211,
+      "tok_s": 101.26199935915744
+    },
+    {
+      "i": 87,
+      "passed": true,
+      "pred": "36",
+      "gold": "36",
+      "tokens": 148,
+      "tok_s": 101.43747498152628
+    },
+    {
+      "i": 88,
+      "passed": false,
+      "pred": "84",
+      "gold": "60",
+      "tokens": 201,
+      "tok_s": 101.25478700140734
+    },
+    {
+      "i": 89,
+      "passed": true,
+      "pred": "9",
+      "gold": "9",
+      "tokens": 188,
+      "tok_s": 101.2872440685231
+    },
+    {
+      "i": 90,
+      "passed": true,
+      "pred": "1",
+      "gold": "1",
+      "tokens": 194,
+      "tok_s": 101.20949177150268
+    },
+    {
+      "i": 91,
+      "passed": true,
+      "pred": "30",
+      "gold": "30",
+      "tokens": 344,
+      "tok_s": 101.14348371195364
+    },
+    {
+      "i": 92,
+      "passed": false,
+      "pred": "130000",
+      "gold": "70000",
+      "tokens": 326,
+      "tok_s": 101.1140983045153
+    },
+    {
+      "i": 93,
+      "passed": true,
+      "pred": "34",
+      "gold": "34",
+      "tokens": 264,
+      "tok_s": 101.14537571328509
+    },
+    {
+      "i": 94,
+      "passed": true,
+      "pred": "13",
+      "gold": "13",
+      "tokens": 269,
+      "tok_s": 101.12979443126757
+    },
+    {
+      "i": 95,
+      "passed": true,
+      "pred": "306",
+      "gold": "306",
+      "tokens": 149,
+      "tok_s": 101.38764479028359
+    },
+    {
+      "i": 96,
+      "passed": true,
+      "pred": "55",
+      "gold": "55",
+      "tokens": 190,
+      "tok_s": 101.30122370886555
+    },
+    {
+      "i": 97,
+      "passed": true,
+      "pred": "24",
+      "gold": "24",
+      "tokens": 254,
+      "tok_s": 101.10890993962329
+    },
+    {
+      "i": 98,
+      "passed": true,
+      "pred": "75",
+      "gold": "75",
+      "tokens": 251,
+      "tok_s": 101.23383242407263
+    },
+    {
+      "i": 99,
+      "passed": false,
+      "pred": "29",
+      "gold": "24",
+      "tokens": 212,
+      "tok_s": 101.31622333500613
+    },
+    {
+      "i": 100,
+      "passed": true,
+      "pred": "50",
+      "gold": "50",
+      "tokens": 349,
+      "tok_s": 101.08528164868642
+    },
+    {
+      "i": 101,
+      "passed": true,
+      "pred": "110",
+      "gold": "110",
+      "tokens": 206,
+      "tok_s": 101.21187801060873
+    },
+    {
+      "i": 102,
+      "passed": false,
+      "pred": "442",
+      "gold": "452",
+      "tokens": 349,
+      "tok_s": 101.16727465314452
+    },
+    {
+      "i": 103,
+      "passed": true,
+      "pred": "30",
+      "gold": "30",
+      "tokens": 250,
+      "tok_s": 101.1908237327696
+    },
+    {
+      "i": 104,
+      "passed": true,
+      "pred": "80",
+      "gold": "80",
+      "tokens": 124,
+      "tok_s": 101.55160151437221
+    },
+    {
+      "i": 105,
+      "passed": true,
+      "pred": "3",
+      "gold": "3",
+      "tokens": 369,
+      "tok_s": 101.00533821205285
+    },
+    {
+      "i": 106,
+      "passed": true,
+      "pred": "120",
+      "gold": "120",
+      "tokens": 205,
+      "tok_s": 101.25408888954017
+    },
+    {
+      "i": 107,
+      "passed": true,
+      "pred": "172",
+      "gold": "172",
+      "tokens": 447,
+      "tok_s": 101.05709524264391
+    },
+    {
+      "i": 108,
+      "passed": true,
+      "pred": "70",
+      "gold": "70",
+      "tokens": 246,
+      "tok_s": 101.20220889058831
+    },
+    {
+      "i": 109,
+      "passed": true,
+      "pred": "13",
+      "gold": "13",
+      "tokens": 218,
+      "tok_s": 101.16325496891784
+    },
+    {
+      "i": 110,
+      "passed": true,
+      "pred": "150",
+      "gold": "150",
+      "tokens": 184,
+      "tok_s": 101.31345254168188
+    },
+    {
+      "i": 111,
+      "passed": false,
+      "pred": "52",
+      "gold": "18",
+      "tokens": 229,
+      "tok_s": 101.1717384702714
+    },
+    {
+      "i": 112,
+      "passed": false,
+      "pred": "3",
+      "gold": "1",
+      "tokens": 343,
+      "tok_s": 101.07475283564497
+    },
+    {
+      "i": 113,
+      "passed": true,
+      "pred": "250",
+      "gold": "250",
+      "tokens": 256,
+      "tok_s": 101.24393010654234
+    },
+    {
+      "i": 114,
+      "passed": true,
+      "pred": "3",
+      "gold": "3",
+      "tokens": 145,
+      "tok_s": 101.39381596501168
+    },
+    {
+      "i": 115,
+      "passed": true,
+      "pred": "15",
+      "gold": "15",
+      "tokens": 204,
+      "tok_s": 101.30886283304395
+    },
+    {
+      "i": 116,
+      "passed": true,
+      "pred": "12",
+      "gold": "12",
+      "tokens": 188,
+      "tok_s": 101.23593209198359
+    },
+    {
+      "i": 117,
+      "passed": true,
+      "pred": "60",
+      "gold": "60",
+      "tokens": 147,
+      "tok_s": 101.67487014678689
+    },
+    {
+      "i": 118,
+      "passed": false,
+      "pred": "2",
+      "gold": "3",
+      "tokens": 340,
+      "tok_s": 101.10626562438986
+    },
+    {
+      "i": 119,
+      "passed": true,
+      "pred": "9",
+      "gold": "9",
+      "tokens": 327,
+      "tok_s": 101.07844234526033
+    },
+    {
+      "i": 120,
+      "passed": true,
+      "pred": "140000",
+      "gold": "140000",
+      "tokens": 312,
+      "tok_s": 101.13205173379896
+    },
+    {
+      "i": 121,
+      "passed": false,
+      "pred": "6",
+      "gold": "3",
+      "tokens": 264,
+      "tok_s": 101.20248575063538
+    },
+    {
+      "i": 122,
+      "passed": true,
+      "pred": "2400",
+      "gold": "2400",
+      "tokens": 306,
+      "tok_s": 101.1937954406646
+    },
+    {
+      "i": 123,
+      "passed": true,
+      "pred": "4",
+      "gold": "4",
+      "tokens": 148,
+      "tok_s": 101.58253802431042
+    },
+    {
+      "i": 124,
+      "passed": false,
+      "pred": "2",
+      "gold": "79",
+      "tokens": 385,
+      "tok_s": 101.01023309327083
+    },
+    {
+      "i": 125,
+      "passed": true,
+      "pred": "300",
+      "gold": "300",
+      "tokens": 245,
+      "tok_s": 101.23826735515271
+    },
+    {
+      "i": 126,
+      "passed": true,
+      "pred": "91",
+      "gold": "91",
+      "tokens": 256,
+      "tok_s": 101.19466112194554
+    },
+    {
+      "i": 127,
+      "passed": true,
+      "pred": "8",
+      "gold": "8",
+      "tokens": 202,
+      "tok_s": 101.28345400132062
+    },
+    {
+      "i": 128,
+      "passed": true,
+      "pred": "120",
+      "gold": "120",
+      "tokens": 207,
+      "tok_s": 101.24741273241915
+    },
+    {
+      "i": 129,
+      "passed": true,
+      "pred": "350",
+      "gold": "350",
+      "tokens": 272,
+      "tok_s": 101.12762574729308
+    },
+    {
+      "i": 130,
+      "passed": true,
+      "pred": "2600",
+      "gold": "2600",
+      "tokens": 258,
+      "tok_s": 101.25753284222144
+    },
+    {
+      "i": 131,
+      "passed": true,
+      "pred": "10",
+      "gold": "10",
+      "tokens": 203,
+      "tok_s": 101.35599973033314
+    },
+    {
+      "i": 132,
+      "passed": false,
+      "pred": "22",
+      "gold": "26",
+      "tokens": 307,
+      "tok_s": 101.12776387708587
+    },
+    {
+      "i": 133,
+      "passed": true,
+      "pred": "7",
+      "gold": "7",
+      "tokens": 284,
+      "tok_s": 101.12165175831817
+    },
+    {
+      "i": 134,
+      "passed": true,
+      "pred": "31",
+      "gold": "31",
+      "tokens": 215,
+      "tok_s": 101.248441935408
+    },
+    {
+      "i": 135,
+      "passed": false,
+      "pred": "3",
+      "gold": "975",
+      "tokens": 249,
+      "tok_s": 101.25612711042254
+    },
+    {
+      "i": 136,
+      "passed": true,
+      "pred": "20",
+      "gold": "20",
+      "tokens": 250,
+      "tok_s": 101.19281668154257
+    },
+    {
+      "i": 137,
+      "passed": true,
+      "pred": "120",
+      "gold": "120",
+      "tokens": 318,
+      "tok_s": 101.1983633000309
+    },
+    {
+      "i": 138,
+      "passed": true,
+      "pred": "220",
+      "gold": "220",
+      "tokens": 211,
+      "tok_s": 101.19881876096066
+    },
+    {
+      "i": 139,
+      "passed": true,
+      "pred": "87",
+      "gold": "87",
+      "tokens": 207,
+      "tok_s": 101.32220320972263
+    },
+    {
+      "i": 140,
+      "passed": true,
+      "pred": "300",
+      "gold": "300",
+      "tokens": 246,
+      "tok_s": 101.34241616688179
+    },
+    {
+      "i": 141,
+      "passed": true,
+      "pred": "30",
+      "gold": "30",
+      "tokens": 222,
+      "tok_s": 101.27875588212757
+    },
+    {
+      "i": 142,
+      "passed": false,
+      "pred": "11",
+      "gold": "17",
+      "tokens": 195,
+      "tok_s": 101.25985354766611
+    },
+    {
+      "i": 143,
+      "passed": true,
+      "pred": "16",
+      "gold": "16",
+      "tokens": 179,
+      "tok_s": 101.37800155463222
+    },
+    {
+      "i": 144,
+      "passed": true,
+      "pred": "7",
+      "gold": "7",
+      "tokens": 366,
+      "tok_s": 101.12744286555959
+    },
+    {
+      "i": 145,
+      "passed": true,
+      "pred": "81",
+      "gold": "81",
+      "tokens": 220,
+      "tok_s": 101.24926204072665
+    },
+    {
+      "i": 146,
+      "passed": false,
+      "pred": "7",
+      "gold": "5",
+      "tokens": 133,
+      "tok_s": 101.4079798825355
+    },
+    {
+      "i": 147,
+      "passed": true,
+      "pred": "9",
+      "gold": "9",
+      "tokens": 277,
+      "tok_s": 101.17012508369294
+    },
+    {
+      "i": 148,
+      "passed": true,
+      "pred": "10",
+      "gold": "10",
+      "tokens": 174,
+      "tok_s": 101.33971251370271
+    },
+    {
+      "i": 149,
+      "passed": false,
+      "pred": "42",
+      "gold": "24",
+      "tokens": 237,
+      "tok_s": 101.17416015211195
+    },
+    {
+      "i": 150,
+      "passed": false,
+      "pred": "5.05",
+      "gold": "5",
+      "tokens": 181,
+      "tok_s": 101.21379780266858
+    },
+    {
+      "i": 151,
+      "passed": true,
+      "pred": "50",
+      "gold": "50",
+      "tokens": 136,
+      "tok_s": 101.40330286095984
+    },
+    {
+      "i": 152,
+      "passed": true,
+      "pred": "48",
+      "gold": "48",
+      "tokens": 227,
+      "tok_s": 101.19712656599125
+    },
+    {
+      "i": 153,
+      "passed": true,
+      "pred": "25",
+      "gold": "25",
+      "tokens": 126,
+      "tok_s": 101.43494665522067
+    },
+    {
+      "i": 154,
+      "passed": true,
+      "pred": "96",
+      "gold": "96",
+      "tokens": 281,
+      "tok_s": 101.1260157286856
+    },
+    {
+      "i": 155,
+      "passed": false,
+      "pred": "50",
+      "gold": "25",
+      "tokens": 332,
+      "tok_s": 101.10841719475336
+    },
+    {
+      "i": 156,
+      "passed": false,
+      "pred": "210",
+      "gold": "180",
+      "tokens": 281,
+      "tok_s": 101.22980666150568
+    },
+    {
+      "i": 157,
+      "passed": true,
+      "pred": "21",
+      "gold": "21",
+      "tokens": 100,
+      "tok_s": 101.66515445171561
+    },
+    {
+      "i": 158,
+      "passed": true,
+      "pred": "1200",
+      "gold": "1200",
+      "tokens": 170,
+      "tok_s": 101.38357533097775
+    },
+    {
+      "i": 159,
+      "passed": true,
+      "pred": "255",
+      "gold": "255",
+      "tokens": 218,
+      "tok_s": 101.28889387996367
+    },
+    {
+      "i": 160,
+      "passed": true,
+      "pred": "4",
+      "gold": "4",
+      "tokens": 298,
+      "tok_s": 101.15848973417728
+    },
+    {
+      "i": 161,
+      "passed": true,
+      "pred": "10",
+      "gold": "10",
+      "tokens": 228,
+      "tok_s": 101.21139878818616
+    },
+    {
+      "i": 162,
+      "passed": true,
+      "pred": "700",
+      "gold": "700",
+      "tokens": 132,
+      "tok_s": 101.61543976769751
+    },
+    {
+      "i": 163,
+      "passed": true,
+      "pred": "38",
+      "gold": "38",
+      "tokens": 93,
+      "tok_s": 101.77552425171704
+    },
+    {
+      "i": 164,
+      "passed": true,
+      "pred": "32",
+      "gold": "32",
+      "tokens": 161,
+      "tok_s": 101.52802035416096
+    },
+    {
+      "i": 165,
+      "passed": false,
+      "pred": "20",
+      "gold": "30",
+      "tokens": 198,
+      "tok_s": 101.33581537158992
+    },
+    {
+      "i": 166,
+      "passed": true,
+      "pred": "16",
+      "gold": "16",
+      "tokens": 188,
+      "tok_s": 101.36741980332084
+    },
+    {
+      "i": 167,
+      "passed": true,
+      "pred": "40",
+      "gold": "40",
+      "tokens": 213,
+      "tok_s": 101.200271086544
+    },
+    {
+      "i": 168,
+      "passed": true,
+      "pred": "288",
+      "gold": "288",
+      "tokens": 263,
+      "tok_s": 101.23948190591202
+    },
+    {
+      "i": 169,
+      "passed": false,
+      "pred": "6500",
+      "gold": "1100",
+      "tokens": 288,
+      "tok_s": 101.03851458404603
+    },
+    {
+      "i": 170,
+      "passed": true,
+      "pred": "20",
+      "gold": "20",
+      "tokens": 172,
+      "tok_s": 101.29758334938452
+    },
+    {
+      "i": 171,
+      "passed": true,
+      "pred": "2",
+      "gold": "2",
+      "tokens": 252,
+      "tok_s": 101.22822206308619
+    },
+    {
+      "i": 172,
+      "passed": false,
+      "pred": "3120000",
+      "gold": "2880000",
+      "tokens": 345,
+      "tok_s": 101.14377885292117
+    },
+    {
+      "i": 173,
+      "passed": true,
+      "pred": "9",
+      "gold": "9",
+      "tokens": 217,
+      "tok_s": 101.25429669925038
+    },
+    {
+      "i": 174,
+      "passed": true,
+      "pred": "132",
+      "gold": "132",
+      "tokens": 186,
+      "tok_s": 101.38743996531481
+    },
+    {
+      "i": 175,
+      "passed": true,
+      "pred": "93",
+      "gold": "93",
+      "tokens": 235,
+      "tok_s": 101.22560351068795
+    },
+    {
+      "i": 176,
+      "passed": true,
+      "pred": "4",
+      "gold": "4",
+      "tokens": 180,
+      "tok_s": 101.29021637513044
+    },
+    {
+      "i": 177,
+      "passed": true,
+      "pred": "85",
+      "gold": "85",
+      "tokens": 247,
+      "tok_s": 101.20220313721757
+    },
+    {
+      "i": 178,
+      "passed": false,
+      "pred": "23.00",
+      "gold": "33",
+      "tokens": 296,
+      "tok_s": 101.10063783190131
+    },
+    {
+      "i": 179,
+      "passed": true,
+      "pred": "12",
+      "gold": "12",
+      "tokens": 303,
+      "tok_s": 101.12184170707285
+    },
+    {
+      "i": 180,
+      "passed": true,
+      "pred": "7200",
+      "gold": "7200",
+      "tokens": 200,
+      "tok_s": 101.19267984479272
+    },
+    {
+      "i": 181,
+      "passed": true,
+      "pred": "60",
+      "gold": "60",
+      "tokens": 155,
+      "tok_s": 101.48015071952452
+    },
+    {
+      "i": 182,
+      "passed": true,
+      "pred": "44",
+      "gold": "44",
+      "tokens": 189,
+      "tok_s": 101.34002716848917
+    },
+    {
+      "i": 183,
+      "passed": true,
+      "pred": "113",
+      "gold": "113",
+      "tokens": 366,
+      "tok_s": 100.91633732776226
+    },
+    {
+      "i": 184,
+      "passed": true,
+      "pred": "43500",
+      "gold": "43500",
+      "tokens": 347,
+      "tok_s": 100.98613499218571
+    },
+    {
+      "i": 185,
+      "passed": true,
+      "pred": "720",
+      "gold": "720",
+      "tokens": 201,
+      "tok_s": 101.30359195885673
+    },
+    {
+      "i": 186,
+      "passed": true,
+      "pred": "50",
+      "gold": "50",
+      "tokens": 322,
+      "tok_s": 101.14540327761955
+    },
+    {
+      "i": 187,
+      "passed": true,
+      "pred": "24",
+      "gold": "24",
+      "tokens": 219,
+      "tok_s": 101.36854975867865
+    },
+    {
+      "i": 188,
+      "passed": true,
+      "pred": "43",
+      "gold": "43",
+      "tokens": 242,
+      "tok_s": 101.1997861501319
+    },
+    {
+      "i": 189,
+      "passed": true,
+      "pred": "30",
+      "gold": "30",
+      "tokens": 241,
+      "tok_s": 101.24621402175875
+    },
+    {
+      "i": 190,
+      "passed": false,
+      "pred": "29",
+      "gold": "23",
+      "tokens": 346,
+      "tok_s": 101.13664883985327
+    },
+    {
+      "i": 191,
+      "passed": true,
+      "pred": "251",
+      "gold": "251",
+      "tokens": 286,
+      "tok_s": 101.176381287489
+    },
+    {
+      "i": 192,
+      "passed": true,
+      "pred": "35",
+      "gold": "35",
+      "tokens": 215,
+      "tok_s": 101.28564707834663
+    },
+    {
+      "i": 193,
+      "passed": false,
+      "pred": "160",
+      "gold": "50",
+      "tokens": 275,
+      "tok_s": 101.255314902065
+    },
+    {
+      "i": 194,
+      "passed": true,
+      "pred": "82",
+      "gold": "82",
+      "tokens": 139,
+      "tok_s": 101.53860172129524
+    },
+    {
+      "i": 195,
+      "passed": true,
+      "pred": "2100",
+      "gold": "2100",
+      "tokens": 446,
+      "tok_s": 101.02798315074143
+    },
+    {
+      "i": 196,
+      "passed": false,
+      "pred": "12",
+      "gold": "3",
+      "tokens": 249,
+      "tok_s": 101.28303811061195
+    },
+    {
+      "i": 197,
+      "passed": true,
+      "pred": "12",
+      "gold": "12",
+      "tokens": 231,
+      "tok_s": 101.34005868429072
+    },
+    {
+      "i": 198,
+      "passed": true,
+      "pred": "11",
+      "gold": "11",
+      "tokens": 187,
+      "tok_s": 101.32974427352832
+    },
+    {
+      "i": 199,
+      "passed": true,
+      "pred": "12",
+      "gold": "12",
+      "tokens": 215,
+      "tok_s": 101.20531214953071
+    }
+  ]
+}

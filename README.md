@@ -45,7 +45,7 @@ NVIDIA GX10 Desktop AI Supercomputer
 
 ## Suite Status
 
-> 9 done · 1 running · 2 queued · 2 planned. Canonical roster lives in [`BENCHMARKS.md`](BENCHMARKS.md). The README is updated as each benchmark transitions.
+> 9 done · 1 partial · 5 planned. Canonical roster lives in [`BENCHMARKS.md`](BENCHMARKS.md). The README is updated as each benchmark transitions.
 
 ## Results at a Glance
 
@@ -57,9 +57,9 @@ NVIDIA GX10 Desktop AI Supercomputer
 | 04 | Inference | **Embedding Throughput** | DONE | 3,597 chunks/s GPU · 36× faster than CPU |
 | 05 | Inference | **Coding LLM Webpage** | DONE | Qwen3-Coder 71 tok/s · full webpage in 62s |
 | 06 | Inference | **Long-Context Scaling** | DONE | Llama 3.1 8B · 128K input · 14.9 tok/s decode |
-| 07 | Inference | **Quality per Quant** | RUNNING | HumanEval + GSM8K × Q4/Q5/Q8 × 3B–14B |
-| 08 | Inference | **Model Breadth** | QUEUED | Llama 3.x + Gemma 3 family, 1B → 70B |
-| 09 | Inference | **vLLM Concurrency** | QUEUED | concurrent users 1 → 128 |
+| 07 | Inference | **Quality per Quant** | PARTIAL | 7B Q4 hits HumanEval 0.841 / GSM8K 0.895 (5 of 9 cells done) |
+| 08 | Inference | **Model Breadth** | PLANNED | Llama 3.x + Gemma 3 family, 1B → 70B |
+| 09 | Inference | **vLLM Concurrency** | PLANNED | concurrent users 1 → 128 |
 | 10 | Training | **Fine-Tuning** | DONE | Full FT of Llama 8B in 5h using 93.6 GB |
 | 11 | Efficiency | **Token per Watt** | DONE | 2.62 tok/W peak · RM 0.058 per 1M tokens |
 | 12 | Efficiency | **Multi-Model Concurrent** | PLANNED | 3 models loaded simultaneously |
@@ -291,23 +291,54 @@ See [`06-inference-long-context-scaling/README.md`](06-inference-long-context-sc
 
 ---
 
-## 07 — Inference: Quality per Quant — *Running*
+## 07 — Inference: Quality per Quant — *Partial (5 of 9 cells)*
 
-> **Status: actively running on GX10.** HumanEval-164 (code) and GSM8K-200 (math) accuracy across the full Qwen 2.5 quantization grid: 3B / 7B / 14B × Q4_K_M / Q5_K_M / Q8_0. Tests how aggressive quantization affects task accuracy on the same model family.
+> HumanEval-164 (code) and GSM8K-200 (math) pass rates across the Qwen 2.5 quantisation grid: **3B / 7B / 14B × Q4_K_M / Q5_K_M / Q8_0**. Run was stopped after the 7B-Q5 cell completed; the 14B family and 7B Q8_0 are still pending.
 
-Early results (3B family complete): HumanEval 0.66 → 0.71 and GSM8K 0.77 → 0.82 from Q4_K_M to Q8_0. Full grid lands here when the run finishes (~3.5–4.5 hours).
+### HumanEval-164 (pass rate)
+
+| Size | Q4_K_M | Q5_K_M | Q8_0 |
+|------|-------:|-------:|-----:|
+| 3B   | 0.659  | 0.683  | 0.707 |
+| 7B   | **0.841** | 0.829 | — |
+| 14B  | —      | —      | —    |
+
+### GSM8K-200 (pass rate)
+
+| Size | Q4_K_M | Q5_K_M | Q8_0 |
+|------|-------:|-------:|-----:|
+| 3B   | 0.765  | 0.820  | 0.820 |
+| 7B   | **0.895** | 0.885 | — |
+| 14B  | —      | —      | —    |
+
+<div align="center">
+<img src="07-inference-quality-per-quant/charts/humaneval_pass_rate.png" width="700" alt="HumanEval pass rate by size and quant"/>
+<br><sub>7B Q4_K_M already beats 3B Q8_0 by 13 points on HumanEval.</sub>
+</div>
+
+<div align="center">
+<img src="07-inference-quality-per-quant/charts/gsm8k_pass_rate.png" width="700" alt="GSM8K pass rate by size and quant"/>
+<br><sub>3B sees a clear Q4 → Q5 jump on GSM8K; at 7B the Q4-vs-Q5 gap is within noise.</sub>
+</div>
+
+**Key findings (partial):**
+- **Stepping up a size class beats stepping up a quant.** 7B Q4 (0.841 / 0.895) beats 3B Q8 (0.707 / 0.820) by 13+ points on HumanEval and 7+ on GSM8K — and the 7B-Q4 model is roughly the same memory footprint as 3B-Q8.
+- **Quantisation matters more at smaller sizes.** 3B picks up 5 points HE / 5.5 GSM going Q4 → Q8. At 7B the Q4-to-Q5 difference is 0.012 / 0.010 — single-judge noise.
+- **Practical takeaway:** when memory is fixed, prefer the bigger model at lower quant.
+
+The runner is idempotent — see [`07-inference-quality-per-quant/README.md`](07-inference-quality-per-quant/README.md) for the resume command. The remaining 4 cells take ~3–4 hours.
 
 ---
 
-## 08 — Inference: Model Breadth — *Queued*
+## 08 — Inference: Model Breadth — *Planned*
 
 > Companion to bench 01: tok/s and TTFT for the **Llama 3.x and Gemma 3 families** at every published size (1B → 70B). Mirrors bench 01's methodology so the two can be read side by side as a complete model-family map.
 
-Models queued: `llama3.2:1b`, `llama3.2:3b`, `llama3.1:8b`, `gemma3:1b-it`, `gemma3:4b-it`, `gemma3:12b-it`, `gemma3:27b-it`, `llama3.3:70b`.
+Models targeted: `llama3.2:1b`, `llama3.2:3b`, `llama3.1:8b`, `gemma3:1b-it`, `gemma3:4b-it`, `gemma3:12b-it`, `gemma3:27b-it`, `llama3.3:70b`.
 
 ---
 
-## 09 — Inference: vLLM Concurrency — *Queued*
+## 09 — Inference: vLLM Concurrency — *Planned*
 
 > Same model (Qwen 2.5 7B), one engine (vLLM in Docker — `scitrera/dgx-spark-vllm:0.15.1-t4`, custom-built for SM 12.1), concurrency swept **1 → 128**. Captures aggregate throughput, per-request p50/p95 latency, and where the GX10 plateaus.
 

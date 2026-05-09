@@ -2,19 +2,19 @@
 
 Canonical numbering and roster for every benchmark in this repo. The README is generated from this list — when a benchmark moves between statuses (RUNNING → DONE, PLANNED → RUNNING, etc.), update the **Status** column here and refresh the README.
 
-**Last updated:** 2026-05-09
+**Last updated:** 2026-05-09 (after pipeline stopped on user request)
 
 ## Category Counts
 
 | Category | Count | Status mix |
 |----------|------:|-----------|
-| Inference | 9 | 6 done · 1 running · 2 queued |
+| Inference | 9 | 6 done · 1 partial · 2 planned |
 | Training | 1 | 1 done |
 | Efficiency | 2 | 1 done · 1 planned |
 | Generation | 1 | 1 done |
 | Voice | 1 | 1 done |
 | Multimodal | 1 | 1 planned |
-| **Total** | **15** | **9 done · 1 running · 2 queued · 2 planned** |
+| **Total** | **15** | **9 done · 1 partial · 5 planned** |
 
 The inference roster is **locked at 9** — no further inference benchmarks are planned. New ideas go into existing categories or open a new one.
 
@@ -28,9 +28,9 @@ The inference roster is **locked at 9** — no further inference benchmarks are 
 | 04 | `04-inference-embedding-throughput/`     | Inference   | Embedding Throughput — Mesolitica Mistral 191M, GPU vs CPU | DONE |
 | 05 | `05-inference-coding-llm-webpage/`       | Inference   | Coding LLM — Qwen3-Coder + DeepCoder + Devstral, webpage gen | DONE |
 | 06 | `06-inference-long-context-scaling/`     | Inference   | Long-Context Scaling — Qwen 2.5 7B + Llama 3.1 8B, 1K → 128K | DONE |
-| 07 | `07-inference-quality-per-quant/`        | Inference   | Quality per Quant — HumanEval-164 + GSM8K-200 across Q4/Q5/Q8 × 3B–14B | RUNNING |
-| 08 | `08-inference-model-breadth/`            | Inference   | Model Breadth — Llama 3.x + Gemma 3, 1B → 70B tok/s + TTFT | QUEUED |
-| 09 | `09-inference-vllm-concurrency/`         | Inference   | vLLM Concurrency — concurrency 1 → 128, aggregate tok/s, p50/p95 | QUEUED |
+| 07 | `07-inference-quality-per-quant/`        | Inference   | Quality per Quant — HumanEval-164 + GSM8K-200 across Q4/Q5/Q8 × 3B–14B (5 of 9 cells done) | PARTIAL |
+| 08 | `08-inference-model-breadth/`            | Inference   | Model Breadth — Llama 3.x + Gemma 3, 1B → 70B tok/s + TTFT | PLANNED |
+| 09 | `09-inference-vllm-concurrency/`         | Inference   | vLLM Concurrency — concurrency 1 → 128, aggregate tok/s, p50/p95 | PLANNED |
 | 10 | `10-training-finetuning/`                | Training    | Fine-Tuning — LoRA / QLoRA / Full FT on Llama 3.1 8B | DONE |
 | 11 | `11-efficiency-token-per-watt/`          | Efficiency  | Token per Watt — power monitoring, RM cost per 1M tokens | DONE |
 | 12 | `12-efficiency-multi-model-concurrent/`  | Efficiency  | Multi-Model Concurrent Serving — 3 models loaded simultaneously, cross-tenant | PLANNED |
@@ -41,6 +41,7 @@ The inference roster is **locked at 9** — no further inference benchmarks are 
 ## Status Legend
 
 - **DONE** — results published in this repo
+- **PARTIAL** — some cells run and published; remaining cells documented as pending. The runner is idempotent so a future resume will fill them in.
 - **RUNNING** — actively in progress on GX10 (results land in this repo when complete)
 - **QUEUED** — scheduled to run after the current job completes
 - **PLANNED** — committed to add but not yet started
